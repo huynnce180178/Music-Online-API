@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Song Deletion Notification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .content {
+            padding: 30px;
+            background: #ffffff;
+        }
+        .reason-box {
+            background: #ffebee;
+            border-left: 4px solid #d32f2f;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .reason-box h3 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+        .song-details {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .song-details h3 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+        .support-info {
+            background: #e8f4ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .support-info h3 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+        .contact-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #d32f2f;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
+        }
+        .warning {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #666;
+            font-size: 0.9em;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        .divider {
+            height: 1px;
+            background: #dee2e6;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Song Deletion Notification</h2>
+        </div>
+        <div class="content">
+            <p>Dear <strong th:text="${artistName}">Artist</strong>,</p>
+
+            <p>Your song has been deleted by our administrators due to policy violations.</p>
+
+            <div class="song-details">
+                <h3>Song Information</h3>
+                <p><strong>Song Title:</strong> "<span th:text="${songTitle}">Song Title</span>"</p>
+                <p><strong>Genre:</strong> <span th:text="${genre}">Genre</span></p>
+                <div class="divider"></div>
+                <p><strong>Action Taken:</strong> Song Deleted</p>
+                <p class="timestamp">
+                    <strong>Deletion Time:</strong> <span th:text="${deletionTime}">Deletion time</span>
+                </p>
+            </div>
+
+            <div class="reason-box">
+                <h3>Reason for Deletion:</h3>
+                <p th:text="${reason}">Deletion reason</p>
+            </div>
+
+            <p class="warning">Please note that repeated violations may result in account restrictions.</p>
+
+            <div class="support-info">
+                <h3>Need Assistance?</h3>
+                <p>If you believe this was done in error or would like to request a review, our support team is here to help.</p>
+                <p>You can reach us through:</p>
+                <ul>
+                    <li>Email: <a href="mailto:apimusiconline@gmail.com">apimusiconline@gmail.com</a></li>
+                    <li>Response Time: Within 24 hours</li>
+                </ul>
+                <a href="mailto:apimusiconline@gmail.com" class="contact-button">Contact Support</a>
+            </div>
+
+            <p>Best regards,<br>
+            <strong>Music Online Administration Team</strong></p>
+        </div>
+        <div class="footer">
+            <p>This is an automated message, please do not reply directly to this email.</p>
+            <p>&copy; 2025 Music Online. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

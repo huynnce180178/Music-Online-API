@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Advertisement Rejection Notification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .content {
+            padding: 30px;
+            background: #ffffff;
+        }
+        .ad-details {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .ad-details h3 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+        .reason-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .reason-box h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .support-info {
+            background: #e8f4ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .support-info h3 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+        .contact-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #d32f2f;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
+        }
+        .timestamp {
+            color: #666;
+            font-size: 0.9em;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        .divider {
+            height: 1px;
+            background: #dee2e6;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Advertisement Rejection Notification</h2>
+        </div>
+        <div class="content">
+            <p>Dear <strong th:text="${artistName}">Artist</strong>,</p>
+            <p>We regret to inform you that your advertisement titled <b th:text="${adTitle}">Ad Title</b> has been <b>rejected</b> and will not be displayed on the system.</p>
+            <div class="ad-details">
+                <h3>Advertisement Information</h3>
+                <p><strong>Ad Title:</strong> <span th:text="${adTitle}">Ad Title</span></p>
+                <div class="divider"></div>
+                <p class="timestamp">
+                    <strong>Rejection Time:</strong> <span th:text="${rejectionTime}">Time</span>
+                </p>
+            </div>
+            <div class="reason-box">
+                <h3>Reason for Rejection:</h3>
+                <p th:text="${reason}">Reason</p>
+            </div>
+            <div class="support-info">
+                <h3>Need Assistance?</h3>
+                <p>If you believe this was done in error or would like to appeal the decision, our support team is here to help.</p>
+                <ul>
+                    <li>Email: <a href="mailto:apimusiconline@gmail.com">apimusiconline@gmail.com</a></li>
+                    <li>Response Time: Within 24 hours</li>
+                </ul>
+                <a href="mailto:apimusiconline@gmail.com" class="contact-button">Contact Support</a>
+            </div>
+            <p>Best regards,<br>
+            <strong>Music Online Administration Team</strong></p>
+        </div>
+        <div class="footer">
+            <p>This is an automated message, please do not reply directly to this email.</p>
+            <p>&copy; 2025 Music Online. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,87 @@
+spring:
+  application:
+    name: base_spring_boot
+  datasource:
+    url: jdbc:mysql://musicdb-musiconline.mysql.database.azure.com:3306/music_online?useSSL=true&requireSSL=true&verifyServerCertificate=false&useUnicode=true&characterEncoding=utf-8&characterSetResults=utf8mb4
+    username: huynn@musicdb-musiconline
+    password: MusicOnline@2025
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  jooq:
+    sql-dialect: org.hibernate.dialect.MySQL8Dialect
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 100MB
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 595464417696-ofilfvbcr9rpju2l0s1o8dv9am4o7mgk.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+          facebook:
+            client-id: 1123138156342530
+            client-secret: 01f45764aa898bb33fd3c794d0434687
+            scope:
+              - email
+              - public_profile
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://openidconnect.googleapis.com/v1/userinfo
+            user-name-attribute: sub
+          facebook:
+            authorization-uri: https://www.facebook.com/v12.0/dialog/oauth
+            token-uri: https://graph.facebook.com/v12.0/oauth/access_token
+            user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
+            user-name-attribute: id
+jwt:
+  secret:
+    key: Ascmkkqdnmsdfrtgsyuhidj21ue120938219321ndsad
+  expired:
+
+    access: 864000000
+open:
+  api:
+    title: Music Online API Documentation
+    version: 1.0
+    description: API Documentation
+    serverUrl: http://localhost:8080
+    serverName: Local Server
+cloudinary:
+  cloud:
+    name: dlnef19ub
+  api:
+    key: 346958916391329
+    secret: XJsAPEwlMq8290MQK9emsCCGnVM
+
+paypal:
+  client:
+    id: AVeSk5AfbEo1vgP7rODbJ4uFTzpUAf6OB8iOL5ib2cPU3sWBsUDoDNzBQJIH6Gt5SBLNwrvHEDAvP44m
+    secret: EFTi6mSdtDdFOIvoHsf6wJUGOfNJXZwgs6kZJ-_97HVNPOreyohmIsbfjwghyE3XqHb2bF1sYD5rlV7a
+  mode: sandbox
+
+gemini:
+  api:
+    key: AIzaSyBEx5h9rxQ4AVlhCc5-oozqs4Oc102DwAw
+vosk:
+  model:
+    vn: models/vosk-model-vn-0.4
+    en: models/vosk-model-en-us-0.22-lgraph
