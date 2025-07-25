@@ -14,6 +14,15 @@ java {
     }
 }
 
+jar {
+    enabled = false
+}
+
+bootJar {
+    archiveFileName = 'music-online-api.jar'
+    mainClass = 'com.ra.base_spring_boot.BaseSpringBootApplication'
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
