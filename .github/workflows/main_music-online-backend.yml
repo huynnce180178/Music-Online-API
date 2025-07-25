@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read # Required for actions/checkout
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -51,11 +51,11 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: Move JAR to root for deployment
-        run: mv **/*.jar app.jar
+        run: mv **/base_spring_boot-0.0.1-SNAPSHOT.jar app.jar
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'music-online-backend'
           slot-name: 'Production'
-          package: app.jar
+          package: 'app.jar'
