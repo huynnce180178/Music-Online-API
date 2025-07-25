@@ -1,5 +1,6 @@
 server:
   port: ${PORT:8080}
+
 spring:
   application:
     name: base_spring_boot
@@ -19,8 +20,6 @@ spring:
         format_sql: true
         show_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
-  jooq:
-    sql-dialect: org.hibernate.dialect.MySQL8Dialect
   servlet:
     multipart:
       enabled: true
@@ -54,12 +53,13 @@ spring:
             token-uri: https://graph.facebook.com/v12.0/oauth/access_token
             user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
             user-name-attribute: id
+
 jwt:
   secret:
     key: Ascmkkqdnmsdfrtgsyuhidj21ue120938219321ndsad
   expired:
-
     access: 864000000
+
 open:
   api:
     title: Music Online API Documentation
@@ -67,6 +67,7 @@ open:
     description: API Documentation
     serverUrl: https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net
     serverName: Local Server
+
 cloudinary:
   cloud:
     name: dlnef19ub
@@ -83,6 +84,7 @@ paypal:
 gemini:
   api:
     key: AIzaSyBEx5h9rxQ4AVlhCc5-oozqs4Oc102DwAw
+
 vosk:
   model:
     vn: models/vosk-model-vn-0.4
