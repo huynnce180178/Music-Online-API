@@ -65,7 +65,7 @@ open:
     title: Music Online API Documentation
     version: 1.0
     description: API Documentation
-    serverUrl: http://localhost:8080
+    serverUrl: https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net
     serverName: Local Server
 cloudinary:
   cloud:
