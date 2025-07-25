@@ -1,1388 +1,183 @@
-2025-07-25T23:36:49.920+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication using Java 17.0.12 with PID 15720 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
-2025-07-25T23:36:49.924+07:00 DEBUG 15720 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
-2025-07-25T23:36:49.926+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-25T23:36:50.048+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-07-25T23:36:50.049+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-07-25T23:36:52.425+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-25T23:36:52.875+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 415 ms. Found 24 JPA repository interfaces.
-2025-07-25T23:36:55.161+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-07-25T23:36:55.224+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-07-25T23:36:55.224+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
-2025-07-25T23:36:55.485+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-07-25T23:36:55.487+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5437 ms
-2025-07-25T23:36:56.007+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-25T23:36:56.188+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-07-25T23:36:56.267+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-25T23:36:57.281+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-25T23:36:57.319+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-07-25T23:36:58.894+07:00  WARN 15720 --- [base_spring_boot] [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 3159, SQLState: HY000
-2025-07-25T23:36:58.894+07:00 ERROR 15720 --- [base_spring_boot] [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : Connections using insecure transport are prohibited while --require_secure_transport=ON.
-2025-07-25T23:36:58.898+07:00  WARN 15720 --- [base_spring_boot] [restartedMain] o.h.e.j.e.i.JdbcEnvironmentInitiator     : HHH000342: Could not obtain connection to query metadata
-
-org.hibernate.exception.GenericJDBCException: unable to obtain isolated JDBC connection [Connections using insecure transport are prohibited while --require_secure_transport=ON.] [n/a]
-	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:63) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:116) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:292) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:124) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:78) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:130) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:238) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:215) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:221) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:189) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:171) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1431) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1502) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.13.jar:6.1.13]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.1.13.jar:6.1.13]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.13.jar:6.1.13]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.13.jar:6.1.13]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:682) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:509) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1355) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1185) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1705) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1454) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:782) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:237) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1212) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:782) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:237) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1212) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:211) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:174) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:169) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:154) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:266) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:240) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4412) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:437) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:107) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:516) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:222) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:619) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352) ~[spring-boot-3.3.4.jar:3.3.4]
-	at com.ra.base_spring_boot.BaseSpringBootApplication.main(BaseSpringBootApplication.java:14) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.3.4.jar:3.3.4]
-Caused by: java.sql.SQLException: Connections using insecure transport are prohibited while --require_secure_transport=ON.
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:130) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:815) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:438) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:189) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111) ~[HikariCP-5.1.0.jar:na]
-	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:439) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:61) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	... 126 common frames omitted
-
-2025-07-25T23:36:58.942+07:00  WARN 15720 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-25T23:36:58.942+07:00  WARN 15720 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-07-25T23:37:01.510+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-07-25T23:37:01.545+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-07-25T23:37:02.634+07:00  WARN 15720 --- [base_spring_boot] [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 3159, SQLState: HY000
-2025-07-25T23:37:02.634+07:00 ERROR 15720 --- [base_spring_boot] [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : Connections using insecure transport are prohibited while --require_secure_transport=ON.
-2025-07-25T23:37:02.634+07:00 ERROR 15720 --- [base_spring_boot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [Connections using insecure transport are prohibited while --require_secure_transport=ON.] [n/a]
-2025-07-25T23:37:02.634+07:00 ERROR 15720 --- [base_spring_boot] [restartedMain] o.s.b.web.embedded.tomcat.TomcatStarter  : Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtTokenFilter' defined in file [D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main\com\ra\base_spring_boot\security\jwt\JwtTokenFilter.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'myUserDetailsService' defined in file [D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main\com\ra\base_spring_boot\security\principle\MyUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'IUserRepository' defined in com.ra.base_spring_boot.repository.IUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
-2025-07-25T23:37:02.682+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-07-25T23:37:02.682+07:00  WARN 15720 --- [base_spring_boot] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
-2025-07-25T23:37:02.714+07:00  INFO 15720 --- [base_spring_boot] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-07-25T23:37:02.745+07:00 ERROR 15720 --- [base_spring_boot] [restartedMain] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.context.ApplicationContextException: Unable to start web server
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:165) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:619) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352) ~[spring-boot-3.3.4.jar:3.3.4]
-	at com.ra.base_spring_boot.BaseSpringBootApplication.main(BaseSpringBootApplication.java:14) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.3.4.jar:3.3.4]
-Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:147) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:107) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:516) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:222) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:188) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162) ~[spring-boot-3.3.4.jar:3.3.4]
-	... 13 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtTokenFilter' defined in file [D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main\com\ra\base_spring_boot\security\jwt\JwtTokenFilter.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'myUserDetailsService' defined in file [D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main\com\ra\base_spring_boot\security\principle\MyUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'IUserRepository' defined in com.ra.base_spring_boot.repository.IUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:795) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:237) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1212) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:211) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:174) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:169) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:154) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:266) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:240) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:52) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4412) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:437) ~[tomcat-embed-core-10.1.30.jar:10.1.30]
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:128) ~[spring-boot-3.3.4.jar:3.3.4]
-	... 18 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'myUserDetailsService' defined in file [D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main\com\ra\base_spring_boot\security\principle\MyUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'IUserRepository' defined in com.ra.base_spring_boot.repository.IUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:795) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:237) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1212) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:782) ~[spring-beans-6.1.13.jar:6.1.13]
-	... 59 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'IUserRepository' defined in com.ra.base_spring_boot.repository.IUserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1705) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1454) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:782) ~[spring-beans-6.1.13.jar:6.1.13]
-	... 73 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaSharedEM_entityManagerFactory': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:682) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:509) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1355) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1185) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365) ~[spring-beans-6.1.13.jar:6.1.13]
-	... 87 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [Connections using insecure transport are prohibited while --require_secure_transport=ON.] [n/a]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1806) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365) ~[spring-beans-6.1.13.jar:6.1.13]
-	... 99 common frames omitted
-Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [Connections using insecure transport are prohibited while --require_secure_transport=ON.] [n/a]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:421) ~[spring-orm-6.1.13.jar:6.1.13]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.1.13.jar:6.1.13]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802) ~[spring-beans-6.1.13.jar:6.1.13]
-	... 106 common frames omitted
-Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [Connections using insecure transport are prohibited while --require_secure_transport=ON.] [n/a]
-	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:63) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:74) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:39) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcConnection(ImprovedExtractionContextImpl.java:63) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.tool.schema.internal.exec.ImprovedExtractionContextImpl.getJdbcDatabaseMetaData(ImprovedExtractionContextImpl.java:70) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.tool.schema.extract.internal.InformationExtractorJdbcDatabaseMetaDataImpl.processTableResultSet(InformationExtractorJdbcDatabaseMetaDataImpl.java:65) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.getTables(AbstractInformationExtractorImpl.java:570) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.getTablesInformation(DatabaseInformationImpl.java:122) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:72) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:240) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:119) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:280) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:322) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:457) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1506) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.1.13.jar:6.1.13]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.1.13.jar:6.1.13]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.1.13.jar:6.1.13]
-	... 110 common frames omitted
-Caused by: java.sql.SQLException: Connections using insecure transport are prohibited while --require_secure_transport=ON.
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:130) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:815) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:438) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:189) ~[mysql-connector-j-8.3.0.jar:8.3.0]
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:550) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:98) ~[HikariCP-5.1.0.jar:na]
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111) ~[HikariCP-5.1.0.jar:na]
-	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:439) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:46) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
-	... 131 common frames omitted
-
-2025-07-25T23:45:54.072+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication using Java 17.0.12 with PID 16808 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
-2025-07-25T23:45:54.075+07:00 DEBUG 16808 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
-2025-07-25T23:45:54.077+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-25T23:45:54.180+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-07-25T23:45:54.180+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-07-25T23:45:55.720+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-25T23:45:55.892+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 157 ms. Found 24 JPA repository interfaces.
-2025-07-25T23:45:57.513+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-07-25T23:45:57.541+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-07-25T23:45:57.542+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
-2025-07-25T23:45:57.665+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-07-25T23:45:57.667+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3485 ms
-2025-07-25T23:45:58.008+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-25T23:45:58.109+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-07-25T23:45:58.169+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-25T23:45:58.712+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-25T23:45:58.882+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-07-25T23:45:59.905+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61db7036
-2025-07-25T23:45:59.907+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-07-25T23:46:00.048+07:00  WARN 16808 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-25T23:46:00.049+07:00  WARN 16808 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-07-25T23:46:02.210+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-07-25T23:46:06.126+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-25T23:46:06.405+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-07-25T23:46:07.134+07:00 DEBUG 16808 --- [base_spring_boot] [restartedMain] c.r.b.security.jwt.JwtTokenFilter        : Filter 'jwtTokenFilter' configured for use
-2025-07-25T23:46:08.298+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2025-07-25T23:46:08.299+07:00  WARN 16808 --- [base_spring_boot] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-2025-07-25T23:46:10.170+07:00  WARN 16808 --- [base_spring_boot] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'searchController': Invocation of init method failed
-2025-07-25T23:46:10.174+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-07-25T23:46:10.179+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-07-25T23:46:10.457+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-07-25T23:46:10.462+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-07-25T23:46:10.476+07:00  INFO 16808 --- [base_spring_boot] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-07-25T23:46:10.501+07:00 ERROR 16808 --- [base_spring_boot] [restartedMain] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'searchController': Invocation of init method failed
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:222) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:422) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1798) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352) ~[spring-boot-3.3.4.jar:3.3.4]
-	at com.ra.base_spring_boot.BaseSpringBootApplication.main(BaseSpringBootApplication.java:14) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.3.4.jar:3.3.4]
-Caused by: java.lang.RuntimeException: java.io.IOException: Failed to create a model
-	at com.ra.base_spring_boot.controller.guest.SearchController.initModels(SearchController.java:42) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:401) ~[spring-beans-6.1.13.jar:6.1.13]
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:219) ~[spring-beans-6.1.13.jar:6.1.13]
-	... 23 common frames omitted
-Caused by: java.io.IOException: Failed to create a model
-	at org.vosk.Model.<init>(Model.java:14) ~[vosk-0.3.38.jar:na]
-	at com.ra.base_spring_boot.controller.guest.SearchController.initModels(SearchController.java:39) ~[main/:na]
-	... 30 common frames omitted
-
-2025-07-25T23:47:18.976+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication using Java 17.0.12 with PID 16692 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
-2025-07-25T23:47:18.978+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
-2025-07-25T23:47:18.980+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-25T23:47:19.065+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-07-25T23:47:19.065+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-07-25T23:47:20.334+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-25T23:47:20.481+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 134 ms. Found 24 JPA repository interfaces.
-2025-07-25T23:47:21.289+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-07-25T23:47:21.300+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-07-25T23:47:21.301+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
-2025-07-25T23:47:21.356+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-07-25T23:47:21.357+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2290 ms
-2025-07-25T23:47:21.529+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-25T23:47:21.584+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-07-25T23:47:21.618+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-25T23:47:21.842+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-25T23:47:21.880+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-07-25T23:47:22.598+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a1282b2
-2025-07-25T23:47:22.601+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-07-25T23:47:22.697+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-25T23:47:22.700+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-07-25T23:47:24.340+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-07-25T23:47:28.681+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-25T23:47:28.920+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-07-25T23:47:29.526+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.security.jwt.JwtTokenFilter        : Filter 'jwtTokenFilter' configured for use
-2025-07-25T23:47:30.765+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2025-07-25T23:47:30.766+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-2025-07-25T23:47:31.938+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
-2025-07-25T23:47:32.081+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-25T23:47:32.131+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:36.073+07:00  INFO 16692 --- [base_spring_boot] [MessageBroker-2] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 3, active threads = 1, queued tasks = 1, completed tasks = 1]
+2025-07-26T00:00:45.766+07:00  INFO 16692 --- [base_spring_boot] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 9 class path changes (0 additions, 0 deletions, 9 modifications)
+2025-07-26T00:00:45.770+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-22] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2025-07-26T00:00:45.770+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-22] org.springframework.web.SimpLogging      : clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2025-07-26T00:00:45.770+07:00  INFO 16692 --- [base_spring_boot] [Thread-22] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2025-07-26T00:00:45.771+07:00  INFO 16692 --- [base_spring_boot] [Thread-22] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@543ef2ce]]
+2025-07-26T00:00:45.771+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-22] org.springframework.web.SimpLogging      : clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@543ef2ce]
+2025-07-26T00:00:45.771+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-22] org.springframework.web.SimpLogging      : brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@543ef2ce]
+2025-07-26T00:00:45.771+07:00  INFO 16692 --- [base_spring_boot] [Thread-22] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2025-07-26T00:00:45.771+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-22] org.springframework.web.SimpLogging      : clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-07-26T00:00:45.771+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-22] org.springframework.web.SimpLogging      : brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-07-26T00:00:45.938+07:00  INFO 16692 --- [base_spring_boot] [Thread-22] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-26T00:00:45.938+07:00  INFO 16692 --- [base_spring_boot] [Thread-22] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2025-07-26T00:00:46.305+07:00  INFO 16692 --- [base_spring_boot] [Thread-22] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2025-07-26T00:00:46.424+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication using Java 17.0.12 with PID 16692 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
+2025-07-26T00:00:46.424+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
+2025-07-26T00:00:46.424+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-07-26T00:00:46.749+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-26T00:00:46.810+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 24 JPA repository interfaces.
+2025-07-26T00:00:46.977+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-26T00:00:46.978+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-26T00:00:46.978+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2025-07-26T00:00:47.011+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-07-26T00:00:47.011+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 586 ms
+2025-07-26T00:00:47.075+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-26T00:00:47.076+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-26T00:00:47.082+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-26T00:00:47.082+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2025-07-26T00:00:47.501+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2bbdba68
+2025-07-26T00:00:47.501+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2025-07-26T00:00:47.501+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-26T00:00:47.501+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-07-26T00:00:48.048+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-26T00:00:52.088+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-26T00:00:52.188+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.security.jwt.JwtTokenFilter        : Filter 'jwtTokenFilter' configured for use
+2025-07-26T00:00:53.060+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-07-26T00:00:53.061+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-07-26T00:00:53.890+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+2025-07-26T00:00:53.966+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-26T00:00:53.996+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.a.AdminAlbumController:
 	
-2025-07-25T23:47:32.131+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.996+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.a.AdminSongController:
 	
-2025-07-25T23:47:32.131+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.996+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.AdvertisementController:
 	
-2025-07-25T23:47:32.132+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.996+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.AlbumController:
 	
-2025-07-25T23:47:32.132+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.996+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.AuthController:
 	
-2025-07-25T23:47:32.132+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.BannerController:
 	
-2025-07-25T23:47:32.132+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.CommentController:
 	
-2025-07-25T23:47:32.132+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.CommentReportController:
 	
-2025-07-25T23:47:32.132+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.DownloadController:
 	
-2025-07-25T23:47:32.132+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.FollowController:
 	
-2025-07-25T23:47:32.133+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.GenreController:
 	
-2025-07-25T23:47:32.133+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.g.GuestAlbumController:
 	
-2025-07-25T23:47:32.133+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.g.GuestArtistController:
 	
-2025-07-25T23:47:32.133+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.g.GuestGenreController:
 	
-2025-07-25T23:47:32.133+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.g.GuestHomePageController:
 	
-2025-07-25T23:47:32.134+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.g.GuestSongController:
 	
-2025-07-25T23:47:32.134+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.g.SearchController:
 	
-2025-07-25T23:47:32.135+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.997+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.LoginController:
 	
-2025-07-25T23:47:32.135+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.MoodSongController:
 	
-2025-07-25T23:47:32.135+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.NotificationController:
 	
-2025-07-25T23:47:32.135+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.NotificationWebSocketController:
 	
-2025-07-25T23:47:32.135+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.P.PaymentController:
 	
-2025-07-25T23:47:32.135+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.P.PaypalController:
 	
-2025-07-25T23:47:32.135+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.P.VnpayController:
 	
-2025-07-25T23:47:32.135+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.P.ZalopayController:
 	
-2025-07-25T23:47:32.135+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.PlayController:
 	
-2025-07-25T23:47:32.135+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.PlaylistController:
 	
-2025-07-25T23:47:32.136+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.ProfileController:
 	
-2025-07-25T23:47:32.136+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.ReactionController:
 	
-2025-07-25T23:47:32.136+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.RoleController:
 	
-2025-07-25T23:47:32.136+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.998+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.SongController:
 	
-2025-07-25T23:47:32.136+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.999+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.SongHistoryController:
 	
-2025-07-25T23:47:32.136+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.999+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.StatisticController:
 	
-2025-07-25T23:47:32.136+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.999+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.SubscriptionController:
 	
-2025-07-25T23:47:32.136+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.999+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.SubscriptionPlanController:
 	
-2025-07-25T23:47:32.137+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.999+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.UserController:
 	
-2025-07-25T23:47:32.137+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:53.999+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	c.r.b.c.WishlistController:
 	
-2025-07-25T23:47:32.141+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:54.000+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	o.s.b.a.w.s.e.BasicErrorController:
 	
-2025-07-25T23:47:32.142+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:54.000+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	o.s.w.a.MultipleOpenApiWebMvcResource:
 	
-2025-07-25T23:47:32.152+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:54.000+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	o.s.w.a.OpenApiWebMvcResource:
 	
-2025-07-25T23:47:32.152+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:54.001+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	o.s.w.u.SwaggerWelcomeWebMvc:
 	
-2025-07-25T23:47:32.152+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+2025-07-26T00:00:54.001+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
 	o.s.w.u.SwaggerConfigResource:
 	
-2025-07-25T23:47:32.370+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 211 mappings in 'requestMappingHandlerMapping'
-2025-07-25T23:47:32.429+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
-2025-07-25T23:47:32.597+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-25T23:47:32.628+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-25T23:47:32.857+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-07-25T23:47:32.911+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-07-25T23:47:32.912+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2025-07-25T23:47:32.912+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2025-07-25T23:47:32.913+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2025-07-25T23:47:32.913+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2fa88248]
-2025-07-25T23:47:32.913+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2fa88248]
-2025-07-25T23:47:32.913+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2fa88248]]
-2025-07-25T23:47:32.913+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2025-07-25T23:47:32.914+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:47:32.914+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:47:32.925+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Started BaseSpringBootApplication in 14.6 seconds (process running for 16.689)
-2025-07-25T23:48:32.893+07:00  INFO 16692 --- [base_spring_boot] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 1, completed tasks = 0]
-2025-07-25T23:49:04.140+07:00  INFO 16692 --- [base_spring_boot] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2025-07-25T23:49:04.159+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-5] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2025-07-25T23:49:04.159+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-5] org.springframework.web.SimpLogging      : clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2025-07-25T23:49:04.160+07:00  INFO 16692 --- [base_spring_boot] [Thread-5] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2025-07-25T23:49:04.160+07:00  INFO 16692 --- [base_spring_boot] [Thread-5] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2fa88248]]
-2025-07-25T23:49:04.160+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-5] org.springframework.web.SimpLogging      : clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2fa88248]
-2025-07-25T23:49:04.160+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-5] org.springframework.web.SimpLogging      : brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2fa88248]
-2025-07-25T23:49:04.160+07:00  INFO 16692 --- [base_spring_boot] [Thread-5] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2025-07-25T23:49:04.160+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-5] org.springframework.web.SimpLogging      : clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:49:04.160+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-5] org.springframework.web.SimpLogging      : brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:49:04.298+07:00  INFO 16692 --- [base_spring_boot] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-07-25T23:49:04.305+07:00  INFO 16692 --- [base_spring_boot] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-07-25T23:49:04.605+07:00  INFO 16692 --- [base_spring_boot] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-07-25T23:49:04.751+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication using Java 17.0.12 with PID 16692 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
-2025-07-25T23:49:04.752+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
-2025-07-25T23:49:04.752+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-25T23:49:05.062+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-25T23:49:05.145+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82 ms. Found 24 JPA repository interfaces.
-2025-07-25T23:49:05.316+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-07-25T23:49:05.317+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-07-25T23:49:05.318+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
-2025-07-25T23:49:05.346+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-07-25T23:49:05.346+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 592 ms
-2025-07-25T23:49:05.398+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-25T23:49:05.404+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-25T23:49:05.404+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-25T23:49:05.404+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2025-07-25T23:49:05.845+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2c37e0e
-2025-07-25T23:49:05.845+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2025-07-25T23:49:05.845+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-25T23:49:05.845+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-07-25T23:49:06.264+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-07-25T23:49:10.390+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-25T23:49:10.518+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.security.jwt.JwtTokenFilter        : Filter 'jwtTokenFilter' configured for use
-2025-07-25T23:49:11.539+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2025-07-25T23:49:11.539+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-2025-07-25T23:49:12.527+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
-2025-07-25T23:49:12.591+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-25T23:49:12.626+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.a.AdminAlbumController:
-	
-2025-07-25T23:49:12.639+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.a.AdminSongController:
-	
-2025-07-25T23:49:12.640+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AdvertisementController:
-	
-2025-07-25T23:49:12.640+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AlbumController:
-	
-2025-07-25T23:49:12.641+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AuthController:
-	
-2025-07-25T23:49:12.641+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.BannerController:
-	
-2025-07-25T23:49:12.641+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.CommentController:
-	
-2025-07-25T23:49:12.641+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.CommentReportController:
-	
-2025-07-25T23:49:12.641+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.DownloadController:
-	
-2025-07-25T23:49:12.641+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.FollowController:
-	
-2025-07-25T23:49:12.641+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.GenreController:
-	
-2025-07-25T23:49:12.641+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestAlbumController:
-	
-2025-07-25T23:49:12.641+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestArtistController:
-	
-2025-07-25T23:49:12.641+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestGenreController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestHomePageController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestSongController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.SearchController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.LoginController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.MoodSongController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.NotificationController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.NotificationWebSocketController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.PaymentController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.PaypalController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.VnpayController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.ZalopayController:
-	
-2025-07-25T23:49:12.642+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.PlayController:
-	
-2025-07-25T23:49:12.643+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.PlaylistController:
-	
-2025-07-25T23:49:12.643+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.ProfileController:
-	
-2025-07-25T23:49:12.643+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.ReactionController:
-	
-2025-07-25T23:49:12.643+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.RoleController:
-	
-2025-07-25T23:49:12.644+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SongController:
-	
-2025-07-25T23:49:12.644+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SongHistoryController:
-	
-2025-07-25T23:49:12.644+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.StatisticController:
-	
-2025-07-25T23:49:12.645+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SubscriptionController:
-	
-2025-07-25T23:49:12.645+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SubscriptionPlanController:
-	
-2025-07-25T23:49:12.645+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.UserController:
-	
-2025-07-25T23:49:12.645+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.WishlistController:
-	
-2025-07-25T23:49:12.646+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.b.a.w.s.e.BasicErrorController:
-	
-2025-07-25T23:49:12.646+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.a.MultipleOpenApiWebMvcResource:
-	
-2025-07-25T23:49:12.646+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.a.OpenApiWebMvcResource:
-	
-2025-07-25T23:49:12.646+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.u.SwaggerWelcomeWebMvc:
-	
-2025-07-25T23:49:12.646+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.u.SwaggerConfigResource:
-	
-2025-07-25T23:49:12.706+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 212 mappings in 'requestMappingHandlerMapping'
-2025-07-25T23:49:12.727+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
-2025-07-25T23:49:12.885+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-25T23:49:12.901+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-25T23:49:13.048+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-07-25T23:49:13.075+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-07-25T23:49:13.075+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2025-07-25T23:49:13.075+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2025-07-25T23:49:13.075+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2025-07-25T23:49:13.075+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6ef71ff]
-2025-07-25T23:49:13.075+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6ef71ff]
-2025-07-25T23:49:13.075+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6ef71ff]]
-2025-07-25T23:49:13.076+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2025-07-25T23:49:13.076+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:49:13.076+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:49:13.082+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Started BaseSpringBootApplication in 8.365 seconds (process running for 116.847)
-2025-07-25T23:49:13.085+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2025-07-25T23:50:13.074+07:00  INFO 16692 --- [base_spring_boot] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 1, completed tasks = 0]
-2025-07-25T23:57:32.848+07:00  INFO 16692 --- [base_spring_boot] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 353 class path changes (0 additions, 353 deletions, 0 modifications)
-2025-07-25T23:57:32.854+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-7] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2025-07-25T23:57:32.854+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-7] org.springframework.web.SimpLogging      : clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2025-07-25T23:57:32.854+07:00  INFO 16692 --- [base_spring_boot] [Thread-7] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2025-07-25T23:57:32.854+07:00  INFO 16692 --- [base_spring_boot] [Thread-7] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6ef71ff]]
-2025-07-25T23:57:32.854+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-7] org.springframework.web.SimpLogging      : clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6ef71ff]
-2025-07-25T23:57:32.855+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-7] org.springframework.web.SimpLogging      : brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6ef71ff]
-2025-07-25T23:57:32.855+07:00  INFO 16692 --- [base_spring_boot] [Thread-7] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2025-07-25T23:57:32.855+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-7] org.springframework.web.SimpLogging      : clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:57:32.855+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-7] org.springframework.web.SimpLogging      : brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:57:33.014+07:00  INFO 16692 --- [base_spring_boot] [Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-07-25T23:57:33.017+07:00  INFO 16692 --- [base_spring_boot] [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
-2025-07-25T23:57:33.305+07:00  INFO 16692 --- [base_spring_boot] [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
-2025-07-25T23:57:54.032+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication using Java 17.0.12 with PID 16692 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
-2025-07-25T23:57:54.033+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
-2025-07-25T23:57:54.033+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-25T23:57:54.092+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [com.ra.base_spring_boot.services.album.AlbumServiceImpl]
-2025-07-25T23:57:54.100+07:00 ERROR 16692 --- [base_spring_boot] [restartedMain] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [com.ra.base_spring_boot.services.album.AlbumServiceImpl]
-	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:251) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:189) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:314) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:246) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:197) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:165) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:417) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:290) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:789) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:607) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352) ~[spring-boot-3.3.4.jar:3.3.4]
-	at com.ra.base_spring_boot.BaseSpringBootApplication.main(BaseSpringBootApplication.java:14) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.3.4.jar:3.3.4]
-Caused by: java.io.FileNotFoundException: class path resource [com/ra/base_spring_boot/services/album/AlbumService.class] cannot be opened because it does not exist
-	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:215) ~[spring-core-6.1.13.jar:6.1.13]
-	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:54) ~[spring-core-6.1.13.jar:6.1.13]
-	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:48) ~[spring-core-6.1.13.jar:6.1.13]
-	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103) ~[spring-core-6.1.13.jar:6.1.13]
-	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.createMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:86) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.getMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:73) ~[spring-boot-3.3.4.jar:3.3.4]
-	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:81) ~[spring-core-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:630) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getInterfaces(ConfigurationClassParser.java:956) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassParser.processInterfaces(ConfigurationClassParser.java:396) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:342) ~[spring-context-6.1.13.jar:6.1.13]
-	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:246) ~[spring-context-6.1.13.jar:6.1.13]
-	... 23 common frames omitted
-
-2025-07-25T23:58:09.216+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication using Java 17.0.12 with PID 16692 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
-2025-07-25T23:58:09.217+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
-2025-07-25T23:58:09.218+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-25T23:58:10.097+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-25T23:58:10.236+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 139 ms. Found 24 JPA repository interfaces.
-2025-07-25T23:58:10.848+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-07-25T23:58:10.851+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-07-25T23:58:10.852+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
-2025-07-25T23:58:10.922+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
-2025-07-25T23:58:10.922+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1694 ms
-2025-07-25T23:58:11.032+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-25T23:58:11.037+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-25T23:58:11.052+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-25T23:58:11.054+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
-2025-07-25T23:58:11.465+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7856fdbc
-2025-07-25T23:58:11.466+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
-2025-07-25T23:58:11.467+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-25T23:58:11.468+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-07-25T23:58:12.099+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-07-25T23:58:15.939+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-25T23:58:16.116+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.security.jwt.JwtTokenFilter        : Filter 'jwtTokenFilter' configured for use
-2025-07-25T23:58:17.240+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2025-07-25T23:58:17.242+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-2025-07-25T23:58:18.319+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
-2025-07-25T23:58:18.452+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-25T23:58:18.488+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.a.AdminAlbumController:
-	
-2025-07-25T23:58:18.489+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.a.AdminSongController:
-	
-2025-07-25T23:58:18.489+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AdvertisementController:
-	
-2025-07-25T23:58:18.489+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AlbumController:
-	
-2025-07-25T23:58:18.490+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AuthController:
-	
-2025-07-25T23:58:18.490+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.BannerController:
-	
-2025-07-25T23:58:18.490+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.CommentController:
-	
-2025-07-25T23:58:18.491+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.CommentReportController:
-	
-2025-07-25T23:58:18.491+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.DownloadController:
-	
-2025-07-25T23:58:18.491+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.FollowController:
-	
-2025-07-25T23:58:18.492+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.GenreController:
-	
-2025-07-25T23:58:18.492+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestAlbumController:
-	
-2025-07-25T23:58:18.492+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestArtistController:
-	
-2025-07-25T23:58:18.492+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestGenreController:
-	
-2025-07-25T23:58:18.492+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestHomePageController:
-	
-2025-07-25T23:58:18.492+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestSongController:
-	
-2025-07-25T23:58:18.493+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.SearchController:
-	
-2025-07-25T23:58:18.493+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.LoginController:
-	
-2025-07-25T23:58:18.493+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.MoodSongController:
-	
-2025-07-25T23:58:18.493+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.NotificationController:
-	
-2025-07-25T23:58:18.493+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.NotificationWebSocketController:
-	
-2025-07-25T23:58:18.493+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.PaymentController:
-	
-2025-07-25T23:58:18.493+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.PaypalController:
-	
-2025-07-25T23:58:18.493+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.VnpayController:
-	
-2025-07-25T23:58:18.493+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.ZalopayController:
-	
-2025-07-25T23:58:18.494+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.PlayController:
-	
-2025-07-25T23:58:18.494+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.PlaylistController:
-	
-2025-07-25T23:58:18.495+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.ProfileController:
-	
-2025-07-25T23:58:18.495+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.ReactionController:
-	
-2025-07-25T23:58:18.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.RoleController:
-	
-2025-07-25T23:58:18.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SongController:
-	
-2025-07-25T23:58:18.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SongHistoryController:
-	
-2025-07-25T23:58:18.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.StatisticController:
-	
-2025-07-25T23:58:18.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SubscriptionController:
-	
-2025-07-25T23:58:18.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SubscriptionPlanController:
-	
-2025-07-25T23:58:18.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.UserController:
-	
-2025-07-25T23:58:18.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.WishlistController:
-	
-2025-07-25T23:58:18.500+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.b.a.w.s.e.BasicErrorController:
-	
-2025-07-25T23:58:18.501+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.a.MultipleOpenApiWebMvcResource:
-	
-2025-07-25T23:58:18.502+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.a.OpenApiWebMvcResource:
-	
-2025-07-25T23:58:18.502+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.u.SwaggerWelcomeWebMvc:
-	
-2025-07-25T23:58:18.502+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.u.SwaggerConfigResource:
-	
-2025-07-25T23:58:18.650+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 212 mappings in 'requestMappingHandlerMapping'
-2025-07-25T23:58:18.709+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
-2025-07-25T23:58:18.864+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-25T23:58:18.884+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-25T23:58:19.116+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-07-25T23:58:19.148+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-07-25T23:58:19.149+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2025-07-25T23:58:19.149+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2025-07-25T23:58:19.149+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2025-07-25T23:58:19.149+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3e61949f]
-2025-07-25T23:58:19.149+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3e61949f]
-2025-07-25T23:58:19.149+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3e61949f]]
-2025-07-25T23:58:19.149+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2025-07-25T23:58:19.149+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:58:19.149+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:58:19.158+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Started BaseSpringBootApplication in 10.041 seconds (process running for 662.923)
-2025-07-25T23:58:19.160+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2025-07-25T23:59:08.447+07:00  INFO 16692 --- [base_spring_boot] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 353 class path changes (0 additions, 353 deletions, 0 modifications)
-2025-07-25T23:59:08.454+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-11] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2025-07-25T23:59:08.454+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-11] org.springframework.web.SimpLogging      : clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2025-07-25T23:59:08.454+07:00  INFO 16692 --- [base_spring_boot] [Thread-11] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2025-07-25T23:59:08.454+07:00  INFO 16692 --- [base_spring_boot] [Thread-11] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3e61949f]]
-2025-07-25T23:59:08.454+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-11] org.springframework.web.SimpLogging      : clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3e61949f]
-2025-07-25T23:59:08.454+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-11] org.springframework.web.SimpLogging      : brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3e61949f]
-2025-07-25T23:59:08.454+07:00  INFO 16692 --- [base_spring_boot] [Thread-11] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2025-07-25T23:59:08.454+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-11] org.springframework.web.SimpLogging      : clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:59:08.454+07:00 DEBUG 16692 --- [base_spring_boot] [Thread-11] org.springframework.web.SimpLogging      : brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:59:08.588+07:00  INFO 16692 --- [base_spring_boot] [Thread-11] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-07-25T23:59:08.589+07:00  INFO 16692 --- [base_spring_boot] [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
-2025-07-25T23:59:08.990+07:00  INFO 16692 --- [base_spring_boot] [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
-2025-07-25T23:59:26.931+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication using Java 17.0.12 with PID 16692 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
-2025-07-25T23:59:26.931+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
-2025-07-25T23:59:26.931+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-25T23:59:27.479+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-25T23:59:27.619+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 139 ms. Found 24 JPA repository interfaces.
-2025-07-25T23:59:27.942+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-07-25T23:59:27.943+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-07-25T23:59:27.943+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
-2025-07-25T23:59:27.994+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
-2025-07-25T23:59:27.994+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1061 ms
-2025-07-25T23:59:28.087+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-25T23:59:28.098+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-25T23:59:28.109+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-25T23:59:28.110+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
-2025-07-25T23:59:28.586+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6d836475
-2025-07-25T23:59:28.586+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
-2025-07-25T23:59:28.587+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-25T23:59:28.587+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-07-25T23:59:29.221+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-07-25T23:59:33.037+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-25T23:59:33.182+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] c.r.b.security.jwt.JwtTokenFilter        : Filter 'jwtTokenFilter' configured for use
-2025-07-25T23:59:33.469+07:00  WARN 316 --- [base_spring_boot] [Test worker] ory$DuplicateJsonObjectContextCustomizer : 
-
-Found multiple occurrences of org.json.JSONObject on the class path:
-
-	jar:file:/C:/Users/HuyNguyen/.gradle/caches/modules-2/files-2.1/org.json/json/20240303/ebb88e8fb5122b7506d5cf1d69f1ccdb790d22a/json-20240303.jar!/org/json/JSONObject.class
-	jar:file:/C:/Users/HuyNguyen/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
-
-You may wish to exclude one of them to ensure predictable runtime behavior
-
-2025-07-25T23:59:33.499+07:00  INFO 316 --- [base_spring_boot] [Test worker] c.r.b.BaseSpringBootApplicationTests     : Starting BaseSpringBootApplicationTests using Java 17.0.12 with PID 316 (started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
-2025-07-25T23:59:33.500+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] c.r.b.BaseSpringBootApplicationTests     : Running with Spring Boot v3.3.4, Spring v6.1.13
-2025-07-25T23:59:33.502+07:00  INFO 316 --- [base_spring_boot] [Test worker] c.r.b.BaseSpringBootApplicationTests     : No active profile set, falling back to 1 default profile: "default"
-2025-07-25T23:59:33.573+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@4ce14f05
-2025-07-25T23:59:34.341+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2025-07-25T23:59:34.342+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-2025-07-25T23:59:35.344+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
-2025-07-25T23:59:35.467+07:00  WARN 16692 --- [base_spring_boot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-25T23:59:35.495+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.a.AdminAlbumController:
-	
-2025-07-25T23:59:35.495+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.a.AdminSongController:
-	
-2025-07-25T23:59:35.495+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AdvertisementController:
-	
-2025-07-25T23:59:35.495+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AlbumController:
-	
-2025-07-25T23:59:35.495+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AuthController:
-	
-2025-07-25T23:59:35.495+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.BannerController:
-	
-2025-07-25T23:59:35.495+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.CommentController:
-	
-2025-07-25T23:59:35.495+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.CommentReportController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.DownloadController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.FollowController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.GenreController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestAlbumController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestArtistController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestGenreController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestHomePageController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestSongController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.SearchController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.LoginController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.MoodSongController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.NotificationController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.NotificationWebSocketController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.PaymentController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.PaypalController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.VnpayController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.ZalopayController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.PlayController:
-	
-2025-07-25T23:59:35.496+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.PlaylistController:
-	
-2025-07-25T23:59:35.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.ProfileController:
-	
-2025-07-25T23:59:35.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.ReactionController:
-	
-2025-07-25T23:59:35.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.RoleController:
-	
-2025-07-25T23:59:35.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SongController:
-	
-2025-07-25T23:59:35.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SongHistoryController:
-	
-2025-07-25T23:59:35.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.StatisticController:
-	
-2025-07-25T23:59:35.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SubscriptionController:
-	
-2025-07-25T23:59:35.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SubscriptionPlanController:
-	
-2025-07-25T23:59:35.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.UserController:
-	
-2025-07-25T23:59:35.497+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.WishlistController:
-	
-2025-07-25T23:59:35.498+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.b.a.w.s.e.BasicErrorController:
-	
-2025-07-25T23:59:35.498+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.a.MultipleOpenApiWebMvcResource:
-	
-2025-07-25T23:59:35.499+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.a.OpenApiWebMvcResource:
-	
-2025-07-25T23:59:35.499+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.u.SwaggerWelcomeWebMvc:
-	
-2025-07-25T23:59:35.499+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.u.SwaggerConfigResource:
-	
-2025-07-25T23:59:35.635+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 212 mappings in 'requestMappingHandlerMapping'
-2025-07-25T23:59:35.684+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
-2025-07-25T23:59:35.816+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-25T23:59:35.835+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-25T23:59:36.044+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-07-25T23:59:36.075+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-07-25T23:59:36.076+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2025-07-25T23:59:36.076+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2025-07-25T23:59:36.076+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2025-07-25T23:59:36.076+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@543ef2ce]
-2025-07-25T23:59:36.076+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@543ef2ce]
-2025-07-25T23:59:36.076+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@543ef2ce]]
-2025-07-25T23:59:36.077+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2025-07-25T23:59:36.077+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:59:36.077+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-25T23:59:36.087+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Started BaseSpringBootApplication in 9.172 seconds (process running for 739.852)
-2025-07-25T23:59:36.091+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2025-07-25T23:59:37.378+07:00  INFO 316 --- [base_spring_boot] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-25T23:59:37.909+07:00  INFO 316 --- [base_spring_boot] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 460 ms. Found 24 JPA repository interfaces.
-2025-07-25T23:59:41.111+07:00  INFO 316 --- [base_spring_boot] [Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-25T23:59:41.360+07:00  INFO 316 --- [base_spring_boot] [Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-07-25T23:59:41.541+07:00  INFO 316 --- [base_spring_boot] [Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-25T23:59:42.236+07:00  INFO 316 --- [base_spring_boot] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-25T23:59:42.272+07:00  INFO 316 --- [base_spring_boot] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-07-25T23:59:42.944+07:00  INFO 316 --- [base_spring_boot] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7cdb05aa
-2025-07-25T23:59:42.946+07:00  INFO 316 --- [base_spring_boot] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-07-25T23:59:43.031+07:00  WARN 316 --- [base_spring_boot] [Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-25T23:59:43.033+07:00  WARN 316 --- [base_spring_boot] [Test worker] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-07-25T23:59:46.034+07:00  INFO 316 --- [base_spring_boot] [Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-07-25T23:59:50.028+07:00  INFO 316 --- [base_spring_boot] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-25T23:59:51.414+07:00  INFO 316 --- [base_spring_boot] [Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-07-25T23:59:55.481+07:00  INFO 316 --- [base_spring_boot] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2025-07-25T23:59:55.484+07:00  WARN 316 --- [base_spring_boot] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-2025-07-25T23:59:58.260+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
-2025-07-25T23:59:59.109+07:00  WARN 316 --- [base_spring_boot] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-25T23:59:59.299+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.a.AdminAlbumController:
-	
-2025-07-25T23:59:59.303+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.a.AdminSongController:
-	
-2025-07-25T23:59:59.304+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AdvertisementController:
-	
-2025-07-25T23:59:59.304+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AlbumController:
-	
-2025-07-25T23:59:59.305+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.AuthController:
-	
-2025-07-25T23:59:59.305+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.BannerController:
-	
-2025-07-25T23:59:59.305+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.CommentController:
-	
-2025-07-25T23:59:59.305+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.CommentReportController:
-	
-2025-07-25T23:59:59.306+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.DownloadController:
-	
-2025-07-25T23:59:59.306+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.FollowController:
-	
-2025-07-25T23:59:59.306+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.GenreController:
-	
-2025-07-25T23:59:59.306+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestAlbumController:
-	
-2025-07-25T23:59:59.307+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestArtistController:
-	
-2025-07-25T23:59:59.307+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestGenreController:
-	
-2025-07-25T23:59:59.307+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestHomePageController:
-	
-2025-07-25T23:59:59.307+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.GuestSongController:
-	
-2025-07-25T23:59:59.308+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.g.SearchController:
-	
-2025-07-25T23:59:59.308+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.LoginController:
-	
-2025-07-25T23:59:59.308+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.MoodSongController:
-	
-2025-07-25T23:59:59.308+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.NotificationController:
-	
-2025-07-25T23:59:59.308+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.NotificationWebSocketController:
-	
-2025-07-25T23:59:59.309+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.PaymentController:
-	
-2025-07-25T23:59:59.309+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.PaypalController:
-	
-2025-07-25T23:59:59.309+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.VnpayController:
-	
-2025-07-25T23:59:59.310+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.P.ZalopayController:
-	
-2025-07-25T23:59:59.310+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.PlayController:
-	
-2025-07-25T23:59:59.310+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.PlaylistController:
-	
-2025-07-25T23:59:59.310+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.ProfileController:
-	
-2025-07-25T23:59:59.311+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.ReactionController:
-	
-2025-07-25T23:59:59.311+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.RoleController:
-	
-2025-07-25T23:59:59.311+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SongController:
-	
-2025-07-25T23:59:59.311+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SongHistoryController:
-	
-2025-07-25T23:59:59.312+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.StatisticController:
-	
-2025-07-25T23:59:59.312+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SubscriptionController:
-	
-2025-07-25T23:59:59.313+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.SubscriptionPlanController:
-	
-2025-07-25T23:59:59.313+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.UserController:
-	
-2025-07-25T23:59:59.313+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	c.r.b.c.WishlistController:
-	
-2025-07-25T23:59:59.320+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.b.a.w.s.e.BasicErrorController:
-	
-2025-07-25T23:59:59.322+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.a.MultipleOpenApiWebMvcResource:
-	
-2025-07-25T23:59:59.341+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.a.OpenApiWebMvcResource:
-	
-2025-07-25T23:59:59.342+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.u.SwaggerWelcomeWebMvc:
-	
-2025-07-25T23:59:59.343+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .WebSocketAnnotationMethodMessageHandler : 
-	o.s.w.u.SwaggerConfigResource:
-	
-2025-07-25T23:59:59.820+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : 212 mappings in 'requestMappingHandlerMapping'
-2025-07-26T00:00:00.563+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
-2025-07-26T00:00:01.567+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-26T00:00:01.636+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-26T00:00:02.069+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2025-07-26T00:00:02.070+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2025-07-26T00:00:02.070+07:00  INFO 316 --- [base_spring_boot] [Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2025-07-26T00:00:02.071+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@484794d6]
-2025-07-26T00:00:02.071+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@484794d6]
-2025-07-26T00:00:02.072+07:00  INFO 316 --- [base_spring_boot] [Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@484794d6]]
-2025-07-26T00:00:02.074+07:00  INFO 316 --- [base_spring_boot] [Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2025-07-26T00:00:02.074+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-26T00:00:02.074+07:00 DEBUG 316 --- [base_spring_boot] [Test worker] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-26T00:00:02.097+07:00  INFO 316 --- [base_spring_boot] [Test worker] c.r.b.BaseSpringBootApplicationTests     : Started BaseSpringBootApplicationTests in 29.238 seconds (process running for 32.1)
-2025-07-26T00:00:02.650+07:00 DEBUG 316 --- [base_spring_boot] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@4ce14f05, started on Fri Jul 25 23:59:33 ICT 2025
-2025-07-26T00:00:02.653+07:00 DEBUG 316 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2025-07-26T00:00:02.654+07:00 DEBUG 316 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2025-07-26T00:00:02.654+07:00  INFO 316 --- [base_spring_boot] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2025-07-26T00:00:02.654+07:00  INFO 316 --- [base_spring_boot] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@484794d6]]
-2025-07-26T00:00:02.654+07:00 DEBUG 316 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@484794d6]
-2025-07-26T00:00:02.654+07:00 DEBUG 316 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@484794d6]
-2025-07-26T00:00:02.654+07:00  INFO 316 --- [base_spring_boot] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2025-07-26T00:00:02.655+07:00 DEBUG 316 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-26T00:00:02.655+07:00 DEBUG 316 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-07-26T00:00:02.667+07:00  INFO 316 --- [base_spring_boot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-07-26T00:00:02.670+07:00  INFO 316 --- [base_spring_boot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-07-26T00:00:02.959+07:00  INFO 316 --- [base_spring_boot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-07-26T00:00:54.075+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 212 mappings in 'requestMappingHandlerMapping'
+2025-07-26T00:00:54.103+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-07-26T00:00:54.215+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-26T00:00:54.230+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-26T00:00:54.367+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-07-26T00:00:54.399+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-07-26T00:00:54.399+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2025-07-26T00:00:54.399+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2025-07-26T00:00:54.399+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2025-07-26T00:00:54.399+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@48f4ad48]
+2025-07-26T00:00:54.399+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@48f4ad48]
+2025-07-26T00:00:54.399+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@48f4ad48]]
+2025-07-26T00:00:54.399+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2025-07-26T00:00:54.399+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-07-26T00:00:54.399+07:00 DEBUG 16692 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-07-26T00:00:54.399+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Started BaseSpringBootApplication in 8.001 seconds (process running for 818.174)
+2025-07-26T00:00:54.399+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-07-26T00:01:54.393+07:00  INFO 16692 --- [base_spring_boot] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 1, completed tasks = 0]
