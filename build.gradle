@@ -35,6 +35,7 @@ dependencies {
     implementation 'com.paypal.sdk:rest-api-sdk:1.14.0'
     implementation 'org.json:json:20240303'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    // https://mvnrepository.com/artifact/com.alphacephei/vosk
     implementation("com.alphacephei:vosk:0.3.38")
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -47,7 +48,7 @@ dependencies {
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation 'org.jaudiotagger:jaudiotagger:2.0.3'
+    implementation("org:jaudiotagger:2.0.3")
     implementation 'com.sun.mail:jakarta.mail:2.0.1'
     implementation 'jakarta.mail:jakarta.mail-api'
     implementation 'org.eclipse.angus:jakarta.mail'
