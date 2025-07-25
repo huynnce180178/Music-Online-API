@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'temurin'  # hoặc 'microsoft' nếu bạn muốn
+          distribution: 'temurin'
 
       - name: Build with Gradle
         run: ./gradlew bootJar --no-daemon
