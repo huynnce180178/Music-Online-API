@@ -5,7 +5,7 @@ spring:
   application:
     name: base_spring_boot
   datasource:
-    url: jdbc:mysql://musicdb-musiconline.mysql.database.azure.com:3306/music_online?useSSL=false
+    url: jdbc:mysql://musicdb-musiconline.mysql.database.azure.com:3306/music_online?useSSL=true&requireSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true
     username: huynn@musicdb-musiconline
     password: MusicOnline@2025
     driver-class-name: com.mysql.cj.jdbc.Driver

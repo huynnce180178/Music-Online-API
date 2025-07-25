@@ -49,7 +49,9 @@ import jakarta.mail.internet.MimeMessage;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import com.ra.base_spring_boot.services.notification.NotificationService;
-
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
 @RequiredArgsConstructor
 @Service
 public class SongServiceImpl implements SongService {
@@ -609,13 +611,25 @@ public class SongServiceImpl implements SongService {
             file.transferTo(temp);
 
             try {
-                int duration = org.jaudiotagger.audio.AudioFileIO.read(temp).getAudioHeader().getTrackLength();
-                if (!temp.delete()) {
-                    System.err.println("Warning: Failed to delete temporary file: " + temp.getAbsolutePath());
+                if (ext.equals(".mp3")) {
+                    Mp3File mp3file = new Mp3File(temp);
+                    long durationInSeconds = mp3file.getLengthInSeconds();
+                    if (!temp.delete()) {
+                        System.err.println("Warning: Failed to delete temporary file: " + temp.getAbsolutePath());
+                    }
+                    return Duration.ofSeconds(durationInSeconds);
+                } else {
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(temp);
+                    AudioFormat format = ais.getFormat();
+                    long frames = ais.getFrameLength();
+                    double durationInSeconds = (frames + 0.0) / format.getFrameRate();
+                    if (!temp.delete()) {
+                        System.err.println("Warning: Failed to delete temporary file: " + temp.getAbsolutePath());
+                    }
+                    return Duration.ofSeconds((long) durationInSeconds);
                 }
-                return Duration.ofSeconds(duration);
             } catch (Exception e) {
-                System.out.println("JAudioTagger failed, trying javax.sound.sampled: " + e.getMessage());
+                System.out.println("Mp3agic failed, trying javax.sound.sampled: " + e.getMessage());
                 try {
                     AudioInputStream ais = AudioSystem.getAudioInputStream(temp);
                     AudioFormat format = ais.getFormat();
