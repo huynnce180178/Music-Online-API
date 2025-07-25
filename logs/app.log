@@ -181,3 +181,184 @@
 2025-07-26T00:00:54.399+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Started BaseSpringBootApplication in 8.001 seconds (process running for 818.174)
 2025-07-26T00:00:54.399+07:00  INFO 16692 --- [base_spring_boot] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
 2025-07-26T00:01:54.393+07:00  INFO 16692 --- [base_spring_boot] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 1, completed tasks = 0]
+2025-07-26T00:09:07.780+07:00  INFO 3088 --- [base_spring_boot] [main] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication v0.0.1-SNAPSHOT using Java 24.0.1 with PID 3088 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\libs\music-online-api.jar started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
+2025-07-26T00:09:07.784+07:00 DEBUG 3088 --- [base_spring_boot] [main] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
+2025-07-26T00:09:07.786+07:00  INFO 3088 --- [base_spring_boot] [main] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-07-26T00:09:10.846+07:00  INFO 3088 --- [base_spring_boot] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-26T00:09:11.101+07:00  INFO 3088 --- [base_spring_boot] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 238 ms. Found 24 JPA repository interfaces.
+2025-07-26T00:09:13.947+07:00  INFO 3088 --- [base_spring_boot] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-26T00:09:14.036+07:00  INFO 3088 --- [base_spring_boot] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-26T00:09:14.038+07:00  INFO 3088 --- [base_spring_boot] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2025-07-26T00:09:14.166+07:00  INFO 3088 --- [base_spring_boot] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-26T00:09:14.167+07:00  INFO 3088 --- [base_spring_boot] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6259 ms
+2025-07-26T00:09:14.764+07:00  INFO 3088 --- [base_spring_boot] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-26T00:09:14.873+07:00  INFO 3088 --- [base_spring_boot] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-07-26T00:09:14.960+07:00  INFO 3088 --- [base_spring_boot] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-26T00:09:15.444+07:00  INFO 3088 --- [base_spring_boot] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-26T00:09:15.514+07:00  INFO 3088 --- [base_spring_boot] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-07-26T00:09:16.596+07:00  INFO 3088 --- [base_spring_boot] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@57e57dc5
+2025-07-26T00:09:16.608+07:00  INFO 3088 --- [base_spring_boot] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-07-26T00:09:16.800+07:00  WARN 3088 --- [base_spring_boot] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-26T00:09:16.805+07:00  WARN 3088 --- [base_spring_boot] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-07-26T00:09:19.326+07:00  INFO 3088 --- [base_spring_boot] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-26T00:09:23.353+07:00  INFO 3088 --- [base_spring_boot] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-26T00:09:23.917+07:00  INFO 3088 --- [base_spring_boot] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-26T00:09:25.279+07:00 DEBUG 3088 --- [base_spring_boot] [main] c.r.b.security.jwt.JwtTokenFilter        : Filter 'jwtTokenFilter' configured for use
+2025-07-26T00:09:27.039+07:00  INFO 3088 --- [base_spring_boot] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-07-26T00:09:27.040+07:00  WARN 3088 --- [base_spring_boot] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-07-26T00:09:28.702+07:00 DEBUG 3088 --- [base_spring_boot] [main] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+2025-07-26T00:09:29.186+07:00  WARN 3088 --- [base_spring_boot] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-26T00:09:29.281+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.a.AdminAlbumController:
+	
+2025-07-26T00:09:29.283+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.a.AdminSongController:
+	
+2025-07-26T00:09:29.284+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.AdvertisementController:
+	
+2025-07-26T00:09:29.284+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.AlbumController:
+	
+2025-07-26T00:09:29.285+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.AuthController:
+	
+2025-07-26T00:09:29.286+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.BannerController:
+	
+2025-07-26T00:09:29.287+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.CommentController:
+	
+2025-07-26T00:09:29.287+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.CommentReportController:
+	
+2025-07-26T00:09:29.288+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.DownloadController:
+	
+2025-07-26T00:09:29.289+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.FollowController:
+	
+2025-07-26T00:09:29.290+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.GenreController:
+	
+2025-07-26T00:09:29.291+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.GuestAlbumController:
+	
+2025-07-26T00:09:29.292+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.GuestArtistController:
+	
+2025-07-26T00:09:29.292+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.GuestGenreController:
+	
+2025-07-26T00:09:29.293+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.GuestHomePageController:
+	
+2025-07-26T00:09:29.294+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.GuestSongController:
+	
+2025-07-26T00:09:29.294+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.SearchController:
+	
+2025-07-26T00:09:29.295+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.LoginController:
+	
+2025-07-26T00:09:29.295+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.MoodSongController:
+	
+2025-07-26T00:09:29.296+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.NotificationController:
+	
+2025-07-26T00:09:29.297+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.NotificationWebSocketController:
+	
+2025-07-26T00:09:29.297+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.P.PaymentController:
+	
+2025-07-26T00:09:29.298+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.P.PaypalController:
+	
+2025-07-26T00:09:29.298+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.P.VnpayController:
+	
+2025-07-26T00:09:29.298+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.P.ZalopayController:
+	
+2025-07-26T00:09:29.299+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.PlayController:
+	
+2025-07-26T00:09:29.299+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.PlaylistController:
+	
+2025-07-26T00:09:29.300+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.ProfileController:
+	
+2025-07-26T00:09:29.301+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.ReactionController:
+	
+2025-07-26T00:09:29.302+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.RoleController:
+	
+2025-07-26T00:09:29.302+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.SongController:
+	
+2025-07-26T00:09:29.303+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.SongHistoryController:
+	
+2025-07-26T00:09:29.303+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.StatisticController:
+	
+2025-07-26T00:09:29.304+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.SubscriptionController:
+	
+2025-07-26T00:09:29.304+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.SubscriptionPlanController:
+	
+2025-07-26T00:09:29.305+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.UserController:
+	
+2025-07-26T00:09:29.306+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.WishlistController:
+	
+2025-07-26T00:09:29.311+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2025-07-26T00:09:29.314+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.MultipleOpenApiWebMvcResource:
+	
+2025-07-26T00:09:29.324+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.OpenApiWebMvcResource:
+	
+2025-07-26T00:09:29.324+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	
+2025-07-26T00:09:29.325+07:00 DEBUG 3088 --- [base_spring_boot] [main] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerConfigResource:
+	
+2025-07-26T00:09:29.759+07:00 DEBUG 3088 --- [base_spring_boot] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 212 mappings in 'requestMappingHandlerMapping'
+2025-07-26T00:09:29.866+07:00 DEBUG 3088 --- [base_spring_boot] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-07-26T00:09:30.156+07:00 DEBUG 3088 --- [base_spring_boot] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-26T00:09:30.201+07:00 DEBUG 3088 --- [base_spring_boot] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-26T00:09:30.505+07:00  WARN 3088 --- [base_spring_boot] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-07-26T00:09:30.519+07:00  INFO 3088 --- [base_spring_boot] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-26T00:09:30.526+07:00  INFO 3088 --- [base_spring_boot] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-07-26T00:09:30.860+07:00  INFO 3088 --- [base_spring_boot] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-07-26T00:09:30.880+07:00  INFO 3088 --- [base_spring_boot] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-07-26T00:09:30.913+07:00 ERROR 3088 --- [base_spring_boot] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-07-26T00:09:37.412+07:00  INFO 21760 --- [base_spring_boot] [main] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication v0.0.1-SNAPSHOT using Java 24.0.1 with PID 21760 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\libs\music-online-api.jar started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
+2025-07-26T00:09:37.416+07:00 DEBUG 21760 --- [base_spring_boot] [main] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
+2025-07-26T00:09:37.418+07:00  INFO 21760 --- [base_spring_boot] [main] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
