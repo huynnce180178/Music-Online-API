@@ -26,7 +26,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build JAR file with Gradle
-        run: ./gradlew bootJar --no-daemon
+        run: ./gradlew clean bootJar --no-daemon
 
       - name: Show built files (debug)
         run: ls -R build/libs
@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: build/libs/base_spring_boot-0.0.1-SNAPSHOT.jar
+          path: build/libs/*.jar
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,8 +50,11 @@ jobs:
         with:
           name: java-app
 
+      - name: Show downloaded JAR
+        run: ls -la
+
       - name: Rename JAR for deployment
-        run: mv base_spring_boot-0.0.1-SNAPSHOT.jar app.jar
+        run: mv *.jar app.jar
 
       - name: Login to Azure
         uses: azure/login@v2
