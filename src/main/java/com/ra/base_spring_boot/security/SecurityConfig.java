@@ -43,7 +43,7 @@ public class SecurityConfig
                 .cors(cf -> cf.configurationSource(request ->
                 {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:5173")); // phụ thuộc vào port clents
+                    config.setAllowedOrigins(List.of("https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net")); // phụ thuộc vào port clents
                     config.setAllowedMethods(List.of("*"));
                     config.setAllowCredentials(true);
                     config.setAllowedHeaders(List.of("*"));
@@ -70,7 +70,7 @@ public class SecurityConfig
                             String uri = request.getRequestURI();
                             String provider = "google";
                             if (uri.contains("facebook")) provider = "facebook";
-                            response.sendRedirect("http://localhost:5173/oauth2/success.html?oauth2=true&provider=" + provider);
+                            response.sendRedirect("https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/oauth2/success.html?oauth2=true&provider=" + provider);
                         })
                 )
                 .authenticationProvider(authenticationProvider())

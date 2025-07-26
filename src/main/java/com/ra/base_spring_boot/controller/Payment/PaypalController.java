@@ -74,14 +74,14 @@ public class PaypalController {
             Payment payment = paypalService.executePayment(paypalId, payerId, userId, planId, paymentIdDB);
 
             // Redirect to FE success page
-            String redirectUrl = "http://localhost:5173/payment/success?paymentId=" + payment.getId();
+            String redirectUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/success?paymentId=" + payment.getId();
             response.sendRedirect(redirectUrl);
 
         } catch (PayPalRESTException e) {
             e.printStackTrace();
 
             // Redirect to FE fail page
-            String failUrl = "http://localhost:5173/payment/fail?message=" + e.getMessage();
+            String failUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=" + e.getMessage();
             response.sendRedirect(failUrl);
         }
     }
@@ -92,7 +92,7 @@ public class PaypalController {
         paymentService.updatePaymentStatus(paymentId, PaymentStatus.FAILED);
 
         // Redirect to FE fail page
-        String failUrl = "http://localhost:5173/payment/fail?message=Payment+was+canceled";
+        String failUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=Payment+was+canceled";
         response.sendRedirect(failUrl);
     }
 }

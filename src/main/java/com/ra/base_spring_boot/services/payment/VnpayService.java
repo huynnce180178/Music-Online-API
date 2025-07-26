@@ -134,12 +134,12 @@ public class VnpayService {
                                 "Subscription Confirmed"
                         )
                 );
-                String redirectUrl = "http://localhost:5173/payment/success?paymentId=" + paymentId;
+                String redirectUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/success?paymentId=" + paymentId;
                 response.sendRedirect(redirectUrl);
                 return ResponseEntity.ok("Payment successful!");
             } else {
                 updatePaymentStatus(paymentId, PaymentStatus.FAILED);
-                String failUrl = "http://localhost:5173/payment/fail?message=" + URLEncoder.encode("Error code: " + responseCode, StandardCharsets.UTF_8);
+                String failUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=" + URLEncoder.encode("Error code: " + responseCode, StandardCharsets.UTF_8);
                 response.sendRedirect(failUrl);
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment failed! Error code: " + responseCode);
             }
@@ -147,7 +147,7 @@ public class VnpayService {
             System.err.println("[ERROR] Exception during payment return handling: " + e.getMessage());
 
             try {
-                String errorUrl = "http://localhost:5173/payment/fail?message=" + URLEncoder.encode("System error: " + e.getMessage(), StandardCharsets.UTF_8);
+                String errorUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=" + URLEncoder.encode("System error: " + e.getMessage(), StandardCharsets.UTF_8);
                 response.sendRedirect(errorUrl);
             } catch (Exception ex) {
                 System.err.println("[ERROR] Failed to redirect after exception: " + ex.getMessage());
