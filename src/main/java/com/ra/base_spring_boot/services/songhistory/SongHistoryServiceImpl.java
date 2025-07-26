@@ -43,7 +43,7 @@ public class SongHistoryServiceImpl implements SongHistoryService {
     private Long getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {
-            throw new HttpUnAuthorized("User not authenticated");
+            throw new HttpUnAuthorized("Authentication required.");
         }
         String email = authentication.getName();
         return userRepository.findByEmail(email)

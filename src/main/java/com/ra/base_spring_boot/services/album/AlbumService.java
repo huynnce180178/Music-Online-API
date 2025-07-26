@@ -15,8 +15,8 @@ public interface AlbumService {
     // Artist operations
     List<AlbumResponseDTO> getAllAlbums();
     List<AlbumResponseDTO> getAlbumsByArtistId(Long artistId);
-    AlbumResponseDTO createAlbum(AlbumRequestDTO albumRequestDTO);
-    AlbumResponseDTO updateAlbum(Long id, AlbumRequestDTO albumRequestDTO);
+    AlbumResponseDTO createAlbum(AlbumRequestDTO albumRequestDTO, Authentication authentication);
+    AlbumResponseDTO updateAlbum(Long id, AlbumRequestDTO albumRequestDTO, Authentication authentication);
     void deleteAlbum(Long id);
     List<AlbumResponseDTO> getMyDeletedAlbums(Authentication authentication);
     List<AlbumResponseDTO> getMyRejectedAlbums(Authentication authentication);
@@ -42,6 +42,6 @@ public interface AlbumService {
     // Paged operations
     Page<AlbumResponseDTO> getPendingAlbumsPaged(Pageable pageable);
     Page<AlbumResponseDTO> getRejectedAlbumsPaged(Pageable pageable);
-    Page<AlbumResponseDTO> getDeletedByAdminAlbumsPaged(Pageable pageable);
     Page<AlbumResponseDTO> getMyRejectedAlbumsPaged(Authentication authentication, Pageable pageable);
+    Page<AlbumResponseDTO> getDeletedByAdminAlbumsPaged(Pageable pageable);
 }

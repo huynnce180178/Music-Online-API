@@ -31,7 +31,8 @@ public class AlbumController {
     @Operation(summary = "Thêm album", description = "Thêm một album mới (dành cho ARTIST)")
     @PostMapping("/artist/album/add")
     public ResponseEntity<?> createAlbum(@ModelAttribute AlbumRequestDTO albumRequestDTO) {
-        AlbumResponseDTO created = albumService.createAlbum(albumRequestDTO);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AlbumResponseDTO created = albumService.createAlbum(albumRequestDTO, authentication);
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 ResponseWrapper.builder()
                         .data(created)
@@ -48,7 +49,8 @@ public class AlbumController {
     })
     @PutMapping("/artist/album/update/{albumId}")
     public ResponseEntity<?> updateAlbum(@PathVariable Long albumId, @ModelAttribute AlbumRequestDTO albumRequestDTO) {
-        AlbumResponseDTO updated = albumService.updateAlbum(albumId, albumRequestDTO);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AlbumResponseDTO updated = albumService.updateAlbum(albumId, albumRequestDTO, authentication);
         return ResponseEntity.ok(
                 ResponseWrapper.builder()
                         .data(updated)

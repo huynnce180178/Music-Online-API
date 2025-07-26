@@ -1,6 +1,5 @@
 package com.ra.base_spring_boot.services.song;
 
-import com.ra.base_spring_boot.controller.FollowController;
 import com.ra.base_spring_boot.dto.req.NotificationRequest;
 import com.ra.base_spring_boot.dto.req.SongRequestDTO;
 import com.ra.base_spring_boot.dto.resp.AlbumResponseDTO;
@@ -31,7 +30,6 @@ import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
@@ -41,6 +39,7 @@ import com.ra.base_spring_boot.exception.HttpUnAuthorized;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+import com.mpatric.mp3agic.Mp3File;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -49,9 +48,9 @@ import jakarta.mail.internet.MimeMessage;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import com.ra.base_spring_boot.services.notification.NotificationService;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.UnsupportedTagException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RequiredArgsConstructor
 @Service
 public class SongServiceImpl implements SongService {
@@ -66,10 +65,17 @@ public class SongServiceImpl implements SongService {
     private final NotificationService notificationService;
     private final UserService userService;
 
+    private static final Logger logger = LoggerFactory.getLogger(SongServiceImpl.class);
+
     @Override
     @Transactional
-    public SongResponseDTO addSong(SongRequestDTO dto) {
-        User user = userRepository.findById(dto.getArtistId())
+    public SongResponseDTO addSong(SongRequestDTO dto, Authentication authentication) {
+        Long artistId = getUserIdFromAuthentication(authentication);
+        if (artistId == null) {
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
+        }
+        
+        User user = userRepository.findById(artistId)
                 .orElseThrow(() -> new HttpBadRequest("Artist not found"));
 
         if (dto.getGenreIds() == null || dto.getGenreIds().isEmpty()) {
@@ -108,11 +114,16 @@ public class SongServiceImpl implements SongService {
 
     @Override
     @Transactional
-    public SongResponseDTO updateSong(Long songId, SongRequestDTO dto) {
+    public SongResponseDTO updateSong(Long songId, SongRequestDTO dto, Authentication authentication) {
         Song song = songRepository.findById(songId)
                 .orElseThrow(() -> new HttpBadRequest("Song not found"));
 
-        User user = userRepository.findById(dto.getArtistId())
+        Long currentArtistId = getUserIdFromAuthentication(authentication);
+        if (!song.getUsers().getId().equals(currentArtistId)) {
+            throw new HttpBadRequest("Permission denied. Only song owner can update.");
+        }
+
+        User user = userRepository.findById(currentArtistId)
                 .orElseThrow(() -> new HttpBadRequest("Artist not found"));
 
         List<Genre> genres = genreRepository.findAllById(dto.getGenreIds());
@@ -124,8 +135,6 @@ public class SongServiceImpl implements SongService {
         song.setUsers(user);
         song.setGenres(genres);
         song.setUpdatedAt(LocalDateTime.now());
-        song.setDuration(convertDurationToTime(getDuration(dto.getFile())));
-        song.setFileUrl(cloudinaryService.uploadFile(dto.getFile(), "audio"));
         song.setProfilePicUrl(cloudinaryService.uploadFile(dto.getProfilePic(), "images"));
         song.setLyrics(dto.getLyrics());
 
@@ -138,18 +147,17 @@ public class SongServiceImpl implements SongService {
     public void deleteByArtist(Long songId) {
         Song song = songRepository.findById(songId)
                 .orElseThrow(() -> new HttpBadRequest("Song not found"));
+        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long currentUserId = getUserIdFromAuthentication(authentication);
+        
+        if (!song.getUsers().getId().equals(currentUserId)) {
+            throw new HttpBadRequest("Permission denied. Only song owner can delete.");
+        }
+        
         song.setStatus(ApprovalStatus.DELETED_BY_ARTIST);
         song.setUpdatedAt(LocalDateTime.now());
         songRepository.save(song);
-    }
-
-    @Override
-    public List<SongResponseDTO> getSongsByAlbum(Long albumId) {
-        List<Song> songs = songRepository.findByAlbums_Id(albumId);
-        return songs.stream()
-                .filter(song -> song.getStatus() == com.ra.base_spring_boot.model.constants.ApprovalStatus.APPROVED)
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
     }
 
     @Override
@@ -165,6 +173,14 @@ public class SongServiceImpl implements SongService {
     public void removeSongFromAlbum(Long songId) {
         Song song = songRepository.findById(songId)
                 .orElseThrow(() -> new HttpBadRequest("Song not found"));
+        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long currentUserId = getUserIdFromAuthentication(authentication);
+        
+        if (!song.getUsers().getId().equals(currentUserId)) {
+            throw new HttpBadRequest("Permission denied. Only song owner can remove from album.");
+        }
+        
         song.setAlbums(null);
         song.setUpdatedAt(LocalDateTime.now());
         songRepository.save(song);
@@ -175,6 +191,14 @@ public class SongServiceImpl implements SongService {
     public void addSongToAlbum(Long songId, Long albumId) {
         Song song = songRepository.findById(songId)
                 .orElseThrow(() -> new HttpBadRequest("Song not found"));
+        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long currentUserId = getUserIdFromAuthentication(authentication);
+        
+        if (!song.getUsers().getId().equals(currentUserId)) {
+            throw new HttpBadRequest("Permission denied. Only song owner can add to album.");
+        }
+        
         var album = albumRepository.findById(albumId)
                 .orElseThrow(() -> new HttpBadRequest("Album not found"));
         song.setAlbums(album);
@@ -187,7 +211,6 @@ public class SongServiceImpl implements SongService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getAuthorities().stream()
                 .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
-            // Admin sẽ thấy tất cả bài hát
             List<Song> songs = songRepository.findAll();
             return songs.stream()
                     .map(this::convertToDTO)
@@ -221,7 +244,7 @@ public class SongServiceImpl implements SongService {
     public List<SongResponseDTO> getMySongs(Authentication authentication) {
         Long userId = getUserIdFromAuthentication(authentication);
         if (userId == null) {
-            throw new HttpUnAuthorized("You do not have permission to view your songs (ROLE_ARTIST required)");
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
         return getSongsByUserId(userId);
     }
@@ -238,7 +261,7 @@ public class SongServiceImpl implements SongService {
     public List<SongResponseDTO> getMyRejectedSongs(Authentication authentication) {
         Long userId = getUserIdFromAuthentication(authentication);
         if (userId == null) {
-            throw new HttpUnAuthorized("You do not have permission to view your rejected songs (ROLE_ARTIST required)");
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
         List<Song> rejectedSongs = songRepository.findByUsers_IdAndStatus(userId, ApprovalStatus.REJECTED);
         return rejectedSongs.stream()
@@ -274,7 +297,7 @@ public class SongServiceImpl implements SongService {
         }
 
         if (userId == null || !isArtist) {
-            throw new HttpUnAuthorized("You do not have permission to view your self-deleted songs (ROLE_ARTIST required)");
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
 
         List<Song> deletedSongs = songRepository.findByUsers_IdAndStatus(userId, com.ra.base_spring_boot.model.constants.ApprovalStatus.DELETED_BY_ARTIST);
@@ -285,7 +308,7 @@ public class SongServiceImpl implements SongService {
     public List<SongResponseDTO> getMyDeletedByAdminSongs(Authentication authentication) {
         Long userId = getUserIdFromAuthentication(authentication);
         if (userId == null) {
-            throw new HttpUnAuthorized("You do not have permission to view your songs deleted by admin (ROLE_ARTIST required)");
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
 
         List<Song> deletedByAdminSongs = songRepository.findByUsers_IdAndStatus(userId, ApprovalStatus.DELETED_BY_ADMIN);
@@ -297,6 +320,13 @@ public class SongServiceImpl implements SongService {
     public void requestRestoreSong(Long songId) {
         Song song = songRepository.findById(songId)
                 .orElseThrow(() -> new HttpBadRequest("Song not found"));
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long currentUserId = getUserIdFromAuthentication(authentication);
+        
+        if (!song.getUsers().getId().equals(currentUserId)) {
+            throw new HttpBadRequest("Permission denied. Only song owner can request restoration.");
+        }
 
         if (song.getStatus() != ApprovalStatus.REJECTED &&
             song.getStatus() != ApprovalStatus.DELETED_BY_ADMIN &&
@@ -355,8 +385,6 @@ public class SongServiceImpl implements SongService {
         song.setStatus(ApprovalStatus.REJECTED);
         song.setUpdatedAt(LocalDateTime.now());
         songRepository.save(song);
-
-        // Gửi mail khi từ chối bài hát
         try {
             Context context = new Context();
             String artistName = song.getUsers().getFirstName() + " " + song.getUsers().getLastName();
@@ -379,9 +407,8 @@ public class SongServiceImpl implements SongService {
 
             mailSender.send(message);
         } catch (MessagingException e) {
-            e.printStackTrace();
+            logger.error("Error sending email: " + e.getMessage(), e);
         }
-        // Tạo thông báo cho artist
         String message = "Your song '" + song.getTitle() + "' was rejected. Reason: " + reason;
         notificationService.createNotification(new NotificationRequest(song.getUsers().getId(), message, "song_rejected"));
     }
@@ -416,7 +443,7 @@ public class SongServiceImpl implements SongService {
 
             mailSender.send(message);
         } catch (MessagingException e) {
-            e.printStackTrace();
+            logger.error("Error sending email: " + e.getMessage(), e);
         }
     }
 
@@ -451,7 +478,7 @@ public class SongServiceImpl implements SongService {
 
             mailSender.send(message);
         } catch (MessagingException e) {
-            e.printStackTrace();
+            logger.error("Error sending email: " + e.getMessage(), e);
         }
     }
 
@@ -516,9 +543,6 @@ public class SongServiceImpl implements SongService {
                     .build();
         }
 
-        // Lấy thông tin user hiện tại để xử lý context cá nhân hóa
-        Long currentUserId = getUserIdFromAuthentication(authentication);
-
         return SongDetailDTO.builder()
                 .song(songDTO)
                 .artist(convertToArtistResponseDTO(artist))
@@ -559,37 +583,21 @@ public class SongServiceImpl implements SongService {
                 .currentUserReaction(null)
                 .build();
     }
-
-    private Long getUserIdFromAuthentication(Authentication authentication) {
+    @Override
+    public Long getUserIdFromAuthentication(Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getPrincipal())) {
             Object principal = authentication.getPrincipal();
             if (principal instanceof UserDetails userDetails) {
                 String username = userDetails.getUsername();
                 User user = getUserByUsername(username);
                 if (user != null) {
-                    boolean isArtist = user.getRoles().stream().anyMatch(r ->
-                            r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ARTIST ||
-                                    r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN ||
-                                    r.getRoleName().name().equals("ARTIST") ||
-                                    r.getRoleName().name().equals("ADMIN")
-                    );
-                    if (isArtist) {
-                        return user.getId();
-                    }
-                }
-            } else if (principal instanceof User user) {
-                boolean isArtist = user.getRoles().stream().anyMatch(r ->
-                        r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ARTIST ||
-                                r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN ||
-                                r.getRoleName().name().equals("ARTIST") ||
-                                r.getRoleName().name().equals("ADMIN")
-                );
-                if (isArtist) {
                     return user.getId();
                 }
+            } else if (principal instanceof User user) {
+                return user.getId();
             }
         }
-        return null;
+        throw new HttpUnAuthorized("Authentication failed.");
     }
 
     private Time convertDurationToTime(Duration duration) {
@@ -655,7 +663,6 @@ public class SongServiceImpl implements SongService {
             throw new HttpBadRequest("Audio error: " + e.getMessage());
         }
     }
-
     private SongResponseDTO convertToDTO(Song song) {
         Long albumId = null;
         String albumName = null;
@@ -745,17 +752,12 @@ public class SongServiceImpl implements SongService {
         return songList.stream().map(this::convertToSongResponseDTO).collect(Collectors.toList());
     }
 
-    // Hàm giả lập lấy danh sách followerIds, bạn cần thay bằng logic thực tế
-    private List<Long> getFollowerIdsByArtistId(Long artistId) {
-        // TODO: Lấy danh sách followerIds từ repository hoặc service
-        return new ArrayList<>();
-    }
 
     @Override
     public List<SongResponseDTO> getMyPendingSongs(Authentication authentication) {
         Long userId = getUserIdFromAuthentication(authentication);
         if (userId == null) {
-            throw new HttpUnAuthorized("You do not have permission to view your pending songs (ROLE_ARTIST required)");
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
         List<Song> pendingSongs = songRepository.findByUsers_IdAndStatus(userId, ApprovalStatus.PENDING);
         return pendingSongs.stream().map(this::convertToDTO).collect(Collectors.toList());

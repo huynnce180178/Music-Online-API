@@ -11,15 +11,14 @@ import java.util.List;
 
 public interface SongService {
     // Artist operations
-    SongResponseDTO addSong(SongRequestDTO songRequestDTO);
-    SongResponseDTO updateSong(Long songId, SongRequestDTO songRequestDTO);
+    SongResponseDTO addSong(SongRequestDTO songRequestDTO, Authentication authentication);
+    SongResponseDTO updateSong(Long songId, SongRequestDTO songRequestDTO, Authentication authentication);
     void deleteByArtist(Long songId);
     List<SongResponseDTO> getMySongs(Authentication authentication);
     List<SongResponseDTO> getMyRejectedSongs(Authentication authentication);
     List<SongResponseDTO> getMySelfDeletedSongs(Authentication authentication);
     List<SongResponseDTO> getMyDeletedByAdminSongs(Authentication authentication);
     void requestRestoreSong(Long songId);
-    List<SongResponseDTO> getSongsByAlbum(Long albumId);
     List<SongResponseDTO> getApprovedSongsByAlbum(Long albumId);
     void removeSongFromAlbum(Long songId);
     void addSongToAlbum(Long songId, Long albumId);
@@ -42,4 +41,5 @@ public interface SongService {
     List<SongResponseDTO> getSongsByArtistId(Long artistId);
     List<SongResponseDTO> fullTextSearchSong(String keyword);
     List<SongResponseDTO> getMyPendingSongs(Authentication authentication);
+    Long getUserIdFromAuthentication(Authentication authentication);
 }

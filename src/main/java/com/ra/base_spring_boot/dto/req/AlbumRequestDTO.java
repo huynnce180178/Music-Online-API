@@ -16,7 +16,6 @@ public class AlbumRequestDTO {
     @NotBlank(message = "Album title cannot be empty")
     private String titleAlbum;
     private LocalDateTime releaseDate;
-    private Long artistId;
     private MultipartFile coverImageUrl;
     private AlbumType type = AlbumType.FREE;
 }

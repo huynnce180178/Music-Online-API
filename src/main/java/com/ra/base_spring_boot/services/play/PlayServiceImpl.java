@@ -171,7 +171,7 @@ public class PlayServiceImpl implements PlayService {
 
     private List<SongHistory> getHistoryList() {
         Long userId = getCurrentUserId();
-        if (userId == null) throw new HttpUnAuthorized("Unauthorized");
+        if (userId == null) throw new HttpUnAuthorized("Authentication required.");
         List<SongHistory> history = songHistoryRepository.findByUsers_IdOrderByPlayedAtAsc(userId);
         if (history.isEmpty()) throw new HttpBadRequest("No song history");
         return history;
@@ -193,7 +193,7 @@ public class PlayServiceImpl implements PlayService {
 
     private List<Song> getWishlistSongs() {
         Long userId = getCurrentUserId();
-        if (userId == null) throw new HttpUnAuthorized("Unauthorized");
+        if (userId == null) throw new HttpUnAuthorized("Authentication required.");
         List<Song> songs = wishlistRepository.findAllByUsers_Id(userId).stream()
                 .map(Wishlist::getSongs)
                 .filter(song -> song.getStatus() == com.ra.base_spring_boot.model.constants.ApprovalStatus.APPROVED)

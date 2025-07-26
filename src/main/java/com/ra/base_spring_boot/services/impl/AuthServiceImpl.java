@@ -48,7 +48,7 @@ public class AuthServiceImpl implements IAuthService {
         String profilePicUrl;
 
         if(userRepository.existsByEmail(formRegister.getEmail())) {
-            throw new HttpBadRequest(formRegister.getEmail()+"Email already exists");
+            throw new HttpBadRequest("Email already exists");
         }
         if (profilePic != null && !profilePic.isEmpty()) {
             profilePicUrl = cloudinaryService.uploadFile(profilePic, "images");
@@ -92,8 +92,7 @@ public class AuthServiceImpl implements IAuthService {
         if (userDetails.getUser().getStatus() == UserStatus.BLOCKED) {
             throw new HttpBadRequest("Your account is blocked");
         } else if (userDetails.getUser().getStatus() == UserStatus.VERIFY) {
-            throw new HttpBadRequest("Your account is not verified yet. Please check your email." +
-                    " If the verification email has expired, please click the button below to resend the verification email.");
+            throw new HttpBadRequest("Account not verified. Check email or resend verification.");
         }
         return JwtResponse.builder()
                 .accessToken(jwtProvider.generateToken(userDetails.getUsername()))
@@ -152,7 +151,7 @@ public class AuthServiceImpl implements IAuthService {
     public void getTokenRefresh(String userName) {
     User user = userRepository.getByEmail(userName);
     if (user == null) {
-        throw new HttpBadRequest("The email does not exist. Please check again or register a new account.");
+        throw new HttpBadRequest("Email not found. Please check or register.");
     }
         String token = emailVerificationService.generateToken(user);
         emailVerificationService.sendVerificationEmail(user, token);

@@ -51,7 +51,7 @@ public class VnpayService {
         try {
             amount = Math.round(paymentRequest.getAmount() * 100);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Số tiền không hợp lệ");
+            throw new IllegalArgumentException("Invalid amount");
         }
 
         String bankCode = "NCB";

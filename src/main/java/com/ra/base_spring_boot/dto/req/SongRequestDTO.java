@@ -14,7 +14,6 @@ import java.util.List;
 @Builder
 public class SongRequestDTO {
     private String title;
-    private Long artistId;
     private MultipartFile file;
     private MultipartFile profilePic;
     private List<Long> genreIds;

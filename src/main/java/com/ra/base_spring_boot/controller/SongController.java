@@ -33,14 +33,36 @@ public class SongController {
     })
     @PostMapping(path = "/artist/song/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> addSong(@ModelAttribute SongRequestDTO songRequestDTO) {
-        SongResponseDTO created = songService.addSong(songRequestDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                ResponseWrapper.builder()
-                        .data(created)
-                        .code(HttpStatus.CREATED.value())
-                        .status(HttpStatus.CREATED)
-                        .build()
-        );
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            
+            if (songRequestDTO.getTitle() == null || songRequestDTO.getTitle().isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        ResponseWrapper.builder()
+                                .data("Song title cannot be empty.")
+                                .code(HttpStatus.BAD_REQUEST.value())
+                                .status(HttpStatus.BAD_REQUEST)
+                                .build()
+                );
+            }
+
+            SongResponseDTO created = songService.addSong(songRequestDTO, authentication);
+            return ResponseEntity.status(HttpStatus.CREATED).body(
+                    ResponseWrapper.builder()
+                            .data(created)
+                            .code(HttpStatus.CREATED.value())
+                            .status(HttpStatus.CREATED)
+                            .build()
+            );
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    ResponseWrapper.builder()
+                            .data("Adding song failed: " + e.getMessage())
+                            .code(HttpStatus.BAD_REQUEST.value())
+                            .status(HttpStatus.BAD_REQUEST)
+                            .build()
+            );
+        }
     }
 
     @Operation(summary = "Cập nhật bài hát", description = "Cập nhật thông tin bài hát đã tồn tại")
@@ -49,15 +71,34 @@ public class SongController {
         @ApiResponse(responseCode = "404", description = "Song not found")
     })
     @PutMapping(path = "/artist/song/{songId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> updateSong(@PathVariable Long songId, @ModelAttribute SongRequestDTO songRequestDTO) {
-        SongResponseDTO updated = songService.updateSong(songId, songRequestDTO);
-        return ResponseEntity.ok(
-                ResponseWrapper.builder()
-                        .data(updated)
-                        .code(HttpStatus.OK.value())
-                        .status(HttpStatus.OK)
-                        .build()
-        );
+    public ResponseEntity<?> updateSong(@PathVariable Long songId, @ModelAttribute SongRequestDTO songRequestDTO, Authentication authentication) {
+        try {
+            if (songRequestDTO.getTitle() == null || songRequestDTO.getTitle().isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        ResponseWrapper.builder()
+                                .data("Song title cannot be empty.")
+                                .code(HttpStatus.BAD_REQUEST.value())
+                                .status(HttpStatus.BAD_REQUEST)
+                                .build()
+                );
+            }
+            SongResponseDTO updated = songService.updateSong(songId, songRequestDTO, authentication);
+            return ResponseEntity.ok(
+                    ResponseWrapper.builder()
+                            .data(updated)
+                            .code(HttpStatus.OK.value())
+                            .status(HttpStatus.OK)
+                            .build()
+            );
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    ResponseWrapper.builder()
+                            .data("Failed to update song: " + e.getMessage())
+                            .code(HttpStatus.BAD_REQUEST.value())
+                            .status(HttpStatus.BAD_REQUEST)
+                            .build()
+            );
+        }
     }
 
     @Operation(summary = "Xóa bài hát", description = "Chuyển trạng thái bài hát sang DELETED_BY_ARTIST")
@@ -71,19 +112,6 @@ public class SongController {
         return ResponseEntity.ok(
                 ResponseWrapper.builder()
                         .data("The song has been marked as deleted. Contact admin for recovery.")
-                        .code(HttpStatus.OK.value())
-                        .status(HttpStatus.OK)
-                        .build()
-        );
-    }
-
-    @Operation(summary = "Lấy danh sách bài hát trong album", description = "Lấy tất cả bài hát thuộc về một album cụ thể")
-    @GetMapping("/artist/song/album/{albumId}")
-    public ResponseEntity<?> getSongsByAlbum(@PathVariable Long albumId) {
-        List<SongResponseDTO> songs = songService.getSongsByAlbum(albumId);
-        return ResponseEntity.ok(
-                ResponseWrapper.builder()
-                        .data(songs)
                         .code(HttpStatus.OK.value())
                         .status(HttpStatus.OK)
                         .build()
@@ -115,7 +143,6 @@ public class SongController {
                         .build()
         );
     }
-
 
     @Operation(summary = "Lấy bài hát của tôi", description = "Lấy tất cả bài hát đã được tải lên bởi nghệ sĩ hiện tại")
     @ApiResponses(value = {

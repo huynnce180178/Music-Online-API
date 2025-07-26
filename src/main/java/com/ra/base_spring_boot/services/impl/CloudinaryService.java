@@ -31,7 +31,7 @@ public class CloudinaryService {
             Map uploadResult = cloudinary.uploader().upload(file.getBytes(), uploadParams);
             return uploadResult.get("url").toString();
         } catch (IOException e) {
-            throw new HttpBadRequest("Upload file failed: " + e.getMessage());
+            throw new HttpBadRequest("File upload failed");
         }
     }
 

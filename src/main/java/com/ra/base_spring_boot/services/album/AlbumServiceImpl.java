@@ -6,6 +6,7 @@ import com.ra.base_spring_boot.dto.req.NotificationRequest;
 import com.ra.base_spring_boot.dto.resp.AlbumResponseDTO;
 import com.ra.base_spring_boot.exception.HttpNotFound;
 import com.ra.base_spring_boot.exception.HttpUnAuthorized;
+import com.ra.base_spring_boot.exception.HttpBadRequest;
 import com.ra.base_spring_boot.model.Album;
 import com.ra.base_spring_boot.model.User;
 import com.ra.base_spring_boot.model.constants.ApprovalStatus;
@@ -77,12 +78,15 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public AlbumResponseDTO createAlbum(AlbumRequestDTO albumRequestDTO) {
-        Long artistId = Long.valueOf(albumRequestDTO.getArtistId());
+    public AlbumResponseDTO createAlbum(AlbumRequestDTO albumRequestDTO, Authentication authentication) {
+        Long artistId = getUserIdFromAuthentication(authentication);
+        if (artistId == null) {
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
+        }
+        
         var artistOptional = userRepository.findById(artistId);
-
         if (artistOptional.isEmpty()) {
-            throw new RuntimeException("Artist not found");
+            throw new HttpBadRequest("Artist not found");
         }
 
         String coverImageUrl = cloudinaryService.uploadFile(albumRequestDTO.getCoverImageUrl(), "images");
@@ -108,31 +112,33 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public AlbumResponseDTO updateAlbum(Long id, AlbumRequestDTO albumRequestDTO) {
-        var albumOptional = albumRepository.findById(id);
-        if (albumOptional.isPresent()) {
-            Album album = albumOptional.get();
+    public AlbumResponseDTO updateAlbum(Long id, AlbumRequestDTO albumRequestDTO, Authentication authentication) {
+        Album album = albumRepository.findById(id)
+                .orElseThrow(() -> new HttpBadRequest("Album not found"));
 
-            var artistOptional = userRepository.findById(Long.valueOf(albumRequestDTO.getArtistId()));
-            if (artistOptional.isEmpty()) {
-                throw new RuntimeException("Artist not found");
-            }
-
-            String coverImageUrl = cloudinaryService.uploadFile(albumRequestDTO.getCoverImageUrl(), "images");
-
-            album.setTitle(albumRequestDTO.getTitleAlbum());
-            album.setReleaseDate(
-                    albumRequestDTO.getReleaseDate() != null ? albumRequestDTO.getReleaseDate() : LocalDateTime.now()
-            );
-            album.setUsers(artistOptional.get());
-            album.setCoverImage(coverImageUrl);
-            album.setType(albumRequestDTO.getType());
-            album.setUpdatedAt(LocalDateTime.now());
-
-            Album updatedAlbum = albumRepository.save(album);
-            return convertToDTO(updatedAlbum);
+        Long currentArtistId = getUserIdFromAuthentication(authentication);
+        if (!album.getUsers().getId().equals(currentArtistId)) {
+            throw new HttpBadRequest("Permission denied. Only album owner can update.");
         }
-        return null;
+
+        var artistOptional = userRepository.findById(currentArtistId);
+        if (artistOptional.isEmpty()) {
+            throw new HttpBadRequest("Artist not found");
+        }
+
+        String coverImageUrl = cloudinaryService.uploadFile(albumRequestDTO.getCoverImageUrl(), "images");
+
+        album.setTitle(albumRequestDTO.getTitleAlbum());
+        album.setReleaseDate(
+                albumRequestDTO.getReleaseDate() != null ? albumRequestDTO.getReleaseDate() : LocalDateTime.now()
+        );
+        album.setUsers(artistOptional.get());
+        album.setCoverImage(coverImageUrl);
+        album.setType(albumRequestDTO.getType());
+        album.setUpdatedAt(LocalDateTime.now());
+
+        Album updatedAlbum = albumRepository.save(album);
+        return convertToDTO(updatedAlbum);
     }
 
     @Override
@@ -287,7 +293,7 @@ public class AlbumServiceImpl implements AlbumService {
     public List<AlbumResponseDTO> getMyRejectedAlbums(Authentication authentication) {
         Long userId = getUserIdFromAuthentication(authentication);
         if (userId == null) {
-            throw new HttpUnAuthorized("You do not have permission to view your rejected albums (ROLE_ARTIST required)");
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
         List<Album> rejectedAlbums = albumRepository.findByUsersIdAndStatus(userId, ApprovalStatus.REJECTED);
         return rejectedAlbums.stream()
@@ -299,7 +305,7 @@ public class AlbumServiceImpl implements AlbumService {
     public List<AlbumResponseDTO> getMyDeletedByAdminAlbums(Authentication authentication) {
         Long userId = getUserIdFromAuthentication(authentication);
         if (userId == null) {
-            throw new HttpUnAuthorized("You do not have permission to view your albums deleted by admin (ROLE_ARTIST required)");
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
         List<Album> deletedByAdminAlbums = albumRepository.findByUsersIdAndStatus(userId, ApprovalStatus.DELETED_BY_ADMIN);
         return deletedByAdminAlbums.stream()
@@ -311,7 +317,7 @@ public class AlbumServiceImpl implements AlbumService {
     public List<AlbumResponseDTO> getMyPendingAlbums(Authentication authentication) {
         Long userId = getUserIdFromAuthentication(authentication);
         if (userId == null) {
-            throw new HttpUnAuthorized("You do not have permission to view your pending albums (ROLE_ARTIST required)");
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
         List<Album> pendingAlbums = albumRepository.findByUsersIdAndStatus(userId, ApprovalStatus.PENDING);
         return pendingAlbums.stream()
@@ -406,7 +412,7 @@ public class AlbumServiceImpl implements AlbumService {
     public Page<AlbumResponseDTO> getMyRejectedAlbumsPaged(Authentication authentication, Pageable pageable) {
         Long userId = getUserIdFromAuthentication(authentication);
         if (userId == null) {
-            throw new HttpUnAuthorized("You do not have permission to view your rejected albums (ROLE_ARTIST required)");
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
 
         Page<Album> albumPage = albumRepository.findByUsersIdAndStatusPaged(
@@ -420,7 +426,7 @@ public class AlbumServiceImpl implements AlbumService {
     public List<AlbumResponseDTO> getMyDeletedAlbums(Authentication authentication) {
         Long userId = getUserIdFromAuthentication(authentication);
         if (userId == null) {
-            throw new HttpUnAuthorized("You do not have permission to view your deleted albums (ROLE_ARTIST required)");
+            throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
 
         List<Album> deletedAlbums = albumRepository.findByUsersIdAndStatus(userId,
@@ -460,9 +466,7 @@ public class AlbumServiceImpl implements AlbumService {
         return albumList.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    // Hàm giả lập lấy danh sách followerIds, bạn cần thay bằng logic thực tế
     private List<Long> getFollowerIdsByArtistId(Long artistId) {
-        // TODO: Lấy danh sách followerIds từ repository hoặc service
         return new java.util.ArrayList<>();
     }
 }
