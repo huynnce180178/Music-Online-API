@@ -734,3 +734,187 @@ You may wish to exclude one of them to ensure predictable runtime behavior
 2025-07-26T16:23:52.038+07:00  INFO 4168 --- [base_spring_boot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-07-26T16:23:52.042+07:00  INFO 4168 --- [base_spring_boot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-07-26T16:23:52.337+07:00  INFO 4168 --- [base_spring_boot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-07-26T22:08:45.614+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Starting BaseSpringBootApplication using Java 17.0.12 with PID 23532 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
+2025-07-26T22:08:45.621+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Running with Spring Boot v3.3.4, Spring v6.1.13
+2025-07-26T22:08:45.623+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-07-26T22:08:45.827+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-07-26T22:08:45.828+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-07-26T22:08:49.124+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-26T22:08:49.343+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 204 ms. Found 24 JPA repository interfaces.
+2025-07-26T22:08:50.331+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-26T22:08:50.347+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-26T22:08:50.348+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2025-07-26T22:08:50.433+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-26T22:08:50.434+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4602 ms
+2025-07-26T22:08:50.669+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-26T22:08:50.761+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-07-26T22:08:50.811+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-26T22:08:51.270+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-26T22:08:51.326+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-07-26T22:08:52.276+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61470eb2
+2025-07-26T22:08:52.279+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-07-26T22:08:52.397+07:00  WARN 23532 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-26T22:08:52.399+07:00  WARN 23532 --- [base_spring_boot] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-07-26T22:08:54.257+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-26T22:08:59.886+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-26T22:09:00.153+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-26T22:09:00.806+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] c.r.b.security.jwt.JwtTokenFilter        : Filter 'jwtTokenFilter' configured for use
+2025-07-26T22:09:02.420+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-07-26T22:09:02.421+07:00  WARN 23532 --- [base_spring_boot] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-07-26T22:09:04.697+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+2025-07-26T22:09:04.862+07:00  WARN 23532 --- [base_spring_boot] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-26T22:09:04.908+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.a.AdminAlbumController:
+	
+2025-07-26T22:09:04.908+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.a.AdminSongController:
+	
+2025-07-26T22:09:04.909+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.AdvertisementController:
+	
+2025-07-26T22:09:04.910+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.AlbumController:
+	
+2025-07-26T22:09:04.910+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.AuthController:
+	
+2025-07-26T22:09:04.910+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.BannerController:
+	
+2025-07-26T22:09:04.910+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.CommentController:
+	
+2025-07-26T22:09:04.911+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.CommentReportController:
+	
+2025-07-26T22:09:04.911+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.DownloadController:
+	
+2025-07-26T22:09:04.912+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.FollowController:
+	
+2025-07-26T22:09:04.912+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.GenreController:
+	
+2025-07-26T22:09:04.913+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.GuestAlbumController:
+	
+2025-07-26T22:09:04.913+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.GuestArtistController:
+	
+2025-07-26T22:09:04.914+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.GuestGenreController:
+	
+2025-07-26T22:09:04.914+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.GuestHomePageController:
+	
+2025-07-26T22:09:04.915+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.GuestSongController:
+	
+2025-07-26T22:09:04.915+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.g.SearchController:
+	
+2025-07-26T22:09:04.915+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.LoginController:
+	
+2025-07-26T22:09:04.915+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.MoodSongController:
+	
+2025-07-26T22:09:04.916+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.NotificationController:
+	
+2025-07-26T22:09:04.916+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.NotificationWebSocketController:
+	
+2025-07-26T22:09:04.916+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.P.PaymentController:
+	
+2025-07-26T22:09:04.916+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.P.PaypalController:
+	
+2025-07-26T22:09:04.916+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.P.VnpayController:
+	
+2025-07-26T22:09:04.916+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.P.ZalopayController:
+	
+2025-07-26T22:09:04.916+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.PlayController:
+	
+2025-07-26T22:09:04.916+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.PlaylistController:
+	
+2025-07-26T22:09:04.917+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.ProfileController:
+	
+2025-07-26T22:09:04.917+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.ReactionController:
+	
+2025-07-26T22:09:04.917+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.RoleController:
+	
+2025-07-26T22:09:04.917+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.SongController:
+	
+2025-07-26T22:09:04.917+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.SongHistoryController:
+	
+2025-07-26T22:09:04.917+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.StatisticController:
+	
+2025-07-26T22:09:04.917+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.SubscriptionController:
+	
+2025-07-26T22:09:04.917+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.SubscriptionPlanController:
+	
+2025-07-26T22:09:04.918+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.UserController:
+	
+2025-07-26T22:09:04.919+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	c.r.b.c.WishlistController:
+	
+2025-07-26T22:09:04.922+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+2025-07-26T22:09:04.924+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.MultipleOpenApiWebMvcResource:
+	
+2025-07-26T22:09:04.934+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.a.OpenApiWebMvcResource:
+	
+2025-07-26T22:09:04.934+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	
+2025-07-26T22:09:04.935+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .WebSocketAnnotationMethodMessageHandler : 
+	o.s.w.u.SwaggerConfigResource:
+	
+2025-07-26T22:09:05.224+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 211 mappings in 'requestMappingHandlerMapping'
+2025-07-26T22:09:05.300+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-07-26T22:09:05.508+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-26T22:09:05.553+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-26T22:09:05.833+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-07-26T22:09:05.887+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-07-26T22:09:05.889+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2025-07-26T22:09:05.889+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2025-07-26T22:09:05.890+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2025-07-26T22:09:05.890+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@35ac7127]
+2025-07-26T22:09:05.890+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@35ac7127]
+2025-07-26T22:09:05.890+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@35ac7127]]
+2025-07-26T22:09:05.891+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2025-07-26T22:09:05.891+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-07-26T22:09:05.891+07:00 DEBUG 23532 --- [base_spring_boot] [restartedMain] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-07-26T22:09:05.903+07:00  INFO 23532 --- [base_spring_boot] [restartedMain] c.r.b.BaseSpringBootApplication          : Started BaseSpringBootApplication in 21.764 seconds (process running for 23.329)
+2025-07-26T22:10:05.897+07:00  INFO 23532 --- [base_spring_boot] [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 1, completed tasks = 0]
+2025-07-26T22:12:36.272+07:00 DEBUG 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2025-07-26T22:12:36.272+07:00 DEBUG 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2025-07-26T22:12:36.272+07:00  INFO 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2025-07-26T22:12:36.272+07:00  INFO 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@35ac7127]]
+2025-07-26T22:12:36.272+07:00 DEBUG 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@35ac7127]
+2025-07-26T22:12:36.272+07:00 DEBUG 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@35ac7127]
+2025-07-26T22:12:36.272+07:00  INFO 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2025-07-26T22:12:36.273+07:00 DEBUG 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-07-26T22:12:36.273+07:00 DEBUG 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] org.springframework.web.SimpLogging      : brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-07-26T22:12:36.429+07:00  INFO 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-26T22:12:36.437+07:00  INFO 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-07-26T22:12:36.731+07:00  INFO 23532 --- [base_spring_boot] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
