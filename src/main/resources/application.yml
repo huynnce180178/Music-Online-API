@@ -66,8 +66,8 @@ open:
     title: Music Online API Documentation
     version: 1.0
     description: API Documentation
-    serverUrl: http://localhost:8080
-    serverName: Local Server
+    serverUrl: https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net
+    serverName: Azure Server
 cloudinary:
   cloud:
     name: dlnef19ub
