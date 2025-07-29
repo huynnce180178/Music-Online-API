@@ -60,7 +60,7 @@ jwt:
     key: Ascmkkqdnmsdfrtgsyuhidj21ue120938219321ndsad
   expired:
 
-    access: 864000000
+    access: 86400000
 open:
   api:
     title: Music Online API Documentation
@@ -91,3 +91,4 @@ vosk:
 server:
   servlet:
     session:
+      timeout: 30d
