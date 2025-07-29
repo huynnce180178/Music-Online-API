@@ -1,25 +1,27 @@
-server:
-  port: ${PORT:8080}
-
 spring:
   application:
     name: base_spring_boot
   datasource:
-    url: jdbc:mysql://musicdb-musiconline.mysql.database.azure.com:3306/music_online?useSSL=true&requireSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://musicdb-musiconline.mysql.database.azure.com:3306/music_online?useSSL=true&requireSSL=true&verifyServerCertificate=false&useUnicode=true&characterEncoding=utf-8&characterSetResults=utf8mb4
     username: huynn@musicdb-musiconline
     password: MusicOnline@2025
+    #    url: jdbc:mysql://localhost:3306/music_online?createDatabaseIfNotExist=true
+    #    username: root
+    #    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      ddl-auto: update
     properties:
       hibernate:
-        format_sql: true
-        show_sql: true
+        format_sql: false
+        show_sql: false
         dialect: org.hibernate.dialect.MySQL8Dialect
+  jooq:
+    sql-dialect: org.hibernate.dialect.MySQL8Dialect
   servlet:
     multipart:
       enabled: true
@@ -53,21 +55,19 @@ spring:
             token-uri: https://graph.facebook.com/v12.0/oauth/access_token
             user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
             user-name-attribute: id
-
 jwt:
   secret:
     key: Ascmkkqdnmsdfrtgsyuhidj21ue120938219321ndsad
   expired:
-    access: 864000000
 
+    access: 864000000
 open:
   api:
     title: Music Online API Documentation
     version: 1.0
     description: API Documentation
-    serverUrl: https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net
-    serverName: Azure Server
-
+    serverUrl: http://localhost:8080
+    serverName: Local Server
 cloudinary:
   cloud:
     name: dlnef19ub
@@ -84,16 +84,10 @@ paypal:
 gemini:
   api:
     key: AIzaSyBEx5h9rxQ4AVlhCc5-oozqs4Oc102DwAw
-
 vosk:
   model:
     vn: models/vosk-model-vn-0.4
     en: models/vosk-model-en-us-0.22-lgraph
-
-logging:
-  level:
-    root: INFO
-    com.ra: DEBUG
-    org.springframework.web: DEBUG
-  file:
-    name: logs/app.log
+server:
+  servlet:
+    session:

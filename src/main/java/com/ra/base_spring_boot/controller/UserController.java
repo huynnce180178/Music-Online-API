@@ -1,11 +1,8 @@
 package com.ra.base_spring_boot.controller;
 
 import com.ra.base_spring_boot.dto.ResponseWrapper;
-import com.ra.base_spring_boot.dto.resp.ArtistResponseDTO;
 import com.ra.base_spring_boot.dto.resp.UserResponseDTO;
 import com.ra.base_spring_boot.dto.resp.UserViewArtistResponseDTO;
-import com.ra.base_spring_boot.model.Role;
-import com.ra.base_spring_boot.model.User;
 import com.ra.base_spring_boot.model.constants.UserStatus;
 import com.ra.base_spring_boot.services.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,8 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Set;
 
 @Tag(name="User Controller")
 @RestController

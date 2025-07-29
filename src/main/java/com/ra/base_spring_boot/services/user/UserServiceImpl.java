@@ -1,5 +1,6 @@
 package com.ra.base_spring_boot.services.user;
 
+import com.ra.base_spring_boot.controller.NotificationWebSocketController;
 import com.ra.base_spring_boot.dto.req.UpdateProfileRequestDTO;
 import com.ra.base_spring_boot.dto.resp.*;
 import com.ra.base_spring_boot.model.Role;
@@ -31,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private CloudinaryService cloudinaryService;
+
+    @Autowired
+    private NotificationWebSocketController notificationWebSocketController;
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
@@ -113,11 +117,56 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDTO changeStatus(Long id, UserStatus status) {
         User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+
+        UserStatus oldStatus = user.getStatus();
         user.setStatus(status);
         user.setUpdatedAt(LocalDateTime.now());
         userRepository.save(user);
+
+        if (status == UserStatus.BLOCKED || (oldStatus == UserStatus.BLOCKED && status != UserStatus.BLOCKED)) {
+            sendUserStatusNotification(user, status, oldStatus);
+        }
+
         return mapToDTO(user);
     }
+
+    private void sendUserStatusNotification(User user, UserStatus newStatus, UserStatus oldStatus) {
+        String message;
+        String type;
+        boolean requireLogout = false;
+
+        if (newStatus == UserStatus.BLOCKED) {
+            message = "Your account has been locked by the administrator. Please contact support for more details.";
+            type = "ACCOUNT_BLOCKED";
+            requireLogout = true;
+        } else if (oldStatus == UserStatus.BLOCKED && (newStatus == UserStatus.ACTIVE || newStatus == UserStatus.VERIFY)) {
+            message = "Your account has been unlocked. You can continue using the service.";
+            type = "ACCOUNT_UNBLOCKED";
+            requireLogout = false;
+        } else {
+            return;
+        }
+
+        try {
+            UserBlockNotificationDTO notification = UserBlockNotificationDTO.builder()
+                    .userId(user.getId())
+                    .username(user.getFirstName() + " " + user.getLastName())
+                    .message(message)
+                    .type(type)
+                    .timestamp(LocalDateTime.now())
+                    .requireLogout(requireLogout)
+                    .build();
+
+            if (notificationWebSocketController != null) {
+                notificationWebSocketController.sendUserBlockNotification(user.getId(), notification);
+            }
+        } catch (Exception e) {
+        }
+    }
+
     @Override
     public StatisticUserResponseDTO getStatisticUserResponseDTO(LocalDateTime start, LocalDateTime end) {
         if(start == null && end == null){
