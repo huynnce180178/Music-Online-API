@@ -20,4 +20,5 @@ public interface AdvertisementService {
     List<AdvertisementResponse> getArtistApprovedAdvertisements(String artistEmail);
     List<AdvertisementResponse> getAllApprovedAdvertisements();
     List<AdvertisementResponse> getMyApprovedAdvertisements();
+    void deleteMyAdvertisement(Long adId);
 }

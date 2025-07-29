@@ -44,8 +44,6 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     @Autowired
     private CloudinaryService cloudinaryService;
 
-    @Autowired
-    private PlayerService playerService;
 
     @Autowired
     private NotificationService notificationService;
@@ -55,18 +53,24 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     public AdvertisementResponse createAdvertisement(AdvertisementRequest request, String creatorEmail) {
         User creator = userRepository.findByEmail(creatorEmail)
                 .orElseThrow(() -> new RuntimeException("No user found with email: " + creatorEmail));
+        long activeAds = advertisementRepository.findAll().stream()
+                .filter(ad -> ad.getCreatedBy() != null && ad.getCreatedBy().getId().equals(creator.getId()))
+                .filter(ad -> ad.getStatus() == ApprovalStatus.PENDING || ad.getStatus() == ApprovalStatus.APPROVED)
+                .count();
+        if (activeAds >= 4) {
+            throw new RuntimeException("You can only have a maximum of 4 active or pending ads!");        }
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusDays(30);
         String mediaUrl = saveMediaFile(request.getMediaFile());
-
         Advertisement ad = Advertisement.builder()
                 .adType(AdType.valueOf(request.getAdType().toUpperCase()))
                 .status(ApprovalStatus.PENDING)
-                .startDate(request.getStartDate())
-                .endDate(request.getEndDate())
+                .startDate(startDate)
+                .endDate(endDate)
                 .mediaUrl(mediaUrl)
                 .redirectUrl(request.getRedirectUrl())
                 .createdBy(creator)
                 .build();
-
         ad = advertisementRepository.save(ad);
         return convertToDTO(ad);
     }
@@ -91,9 +95,9 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         User currentUser = userRepository.findByEmail(currentUserEmail)
                 .orElseThrow(() -> new RuntimeException("No user found with email: " + currentUserEmail));
 
-        List<Advertisement> ads = advertisementRepository.findByStatus(ApprovalStatus.APPROVED)
-                .stream()
+        List<Advertisement> ads = advertisementRepository.findAll().stream()
                 .filter(ad -> ad.getCreatedBy() != null && ad.getCreatedBy().equals(currentUser))
+                .filter(ad -> ad.getStatus() == ApprovalStatus.APPROVED || ad.getStatus() == ApprovalStatus.PENDING)
                 .collect(Collectors.toList());
 
         return ads.stream().map(this::convertToDTO).collect(Collectors.toList());
@@ -246,6 +250,15 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         if (ad.getCreatedBy() == null || !ad.getCreatedBy().getEmail().equals(artistEmail)) {
             throw new RuntimeException("You do not have permission to renew this ad!");
         }
+        // Đếm số quảng cáo chưa hết hạn hoặc đang chờ duyệt/đã duyệt/đang chạy của user (không tính cái đang renew)
+        long activeAds = advertisementRepository.findAll().stream()
+                .filter(a -> a.getCreatedBy() != null && a.getCreatedBy().getId().equals(ad.getCreatedBy().getId()))
+                .filter(a -> a.getStatus() == ApprovalStatus.PENDING || a.getStatus() == ApprovalStatus.APPROVED)
+                .filter(a -> !a.getId().equals(adId))
+                .count();
+        if (activeAds >= 4) {
+            throw new RuntimeException("You can only have a maximum of 4 active or pending ads!");
+        }
         try {
             LocalDate newStart = LocalDate.parse(startDateStr);
             LocalDate newEnd = LocalDate.parse(endDateStr);
@@ -277,6 +290,24 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     public List<AdvertisementResponse> getAllApprovedAdvertisements() {
         List<Advertisement> ads = advertisementRepository.findByStatus(ApprovalStatus.APPROVED);
         return ads.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void deleteMyAdvertisement(Long adId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getPrincipal())) {
+            throw new RuntimeException("User not authenticated");
+        }
+        String currentUserEmail = authentication.getName();
+        User currentUser = userRepository.findByEmail(currentUserEmail)
+                .orElseThrow(() -> new RuntimeException("No user found with email: " + currentUserEmail));
+        Advertisement ad = advertisementRepository.findById(adId)
+                .orElseThrow(() -> new RuntimeException("Ad does not exist!"));
+        if (ad.getCreatedBy() == null || !ad.getCreatedBy().getId().equals(currentUser.getId())) {
+            throw new RuntimeException("You do not have permission to delete this advertisement");
+        }
+        advertisementRepository.delete(ad);
     }
 
     private String saveMediaFile(MultipartFile file) {
