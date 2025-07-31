@@ -11,4 +11,5 @@ public interface DownloadService {
     void deleteDownload(Long userId, Long songId);
     DownloadResponseDTO downloadSong(Long userId, DownloadRequestDTO requestDTO);
     void downloadSongFile(Long userId, Long songId);
+    void downloadSongFileWithUserAgent(Long userId, Long songId, String userAgent);
 }
