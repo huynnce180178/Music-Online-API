@@ -3,7 +3,6 @@ package com.ra.base_spring_boot.controller;
 import com.ra.base_spring_boot.dto.ResponseWrapper;
 import com.ra.base_spring_boot.exception.HttpNotFound;
 import com.ra.base_spring_boot.services.download.DownloadService;
-import com.ra.base_spring_boot.services.download.DownloadServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.ra.base_spring_boot.repository.IUserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Map;
 
@@ -32,48 +30,28 @@ public class DownloadController {
     private final DownloadService downloadService;
     private final IUserRepository userRepository;
 
-    @Operation(summary = "Download song", description = "Download a song automatically to user's device Downloads folder. Supports Windows, Mac, Android, iPhone with optimized format for each platform.")
+    @Operation(summary = "Download song", description = "Download a song automatically to user's Downloads folder")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully downloaded song"),
-            @ApiResponse(responseCode = "404", description = "Song not found"),
-            @ApiResponse(responseCode = "400", description = "Song not approved for download")
+            @ApiResponse(responseCode = "404", description = "Song not found")
     })
     @PostMapping("/user/downloads/{songId}")
-    public ResponseEntity<?> downloadSong(@PathVariable Long songId, HttpServletRequest request) {
+    public ResponseEntity<?> downloadSong(@PathVariable Long songId) {
         try {
             Long userId = getCurrentUserId();
-
-            String userAgent = request.getHeader("User-Agent");
-
-            // Cast to implementation to access the enhanced method
-            if (downloadService instanceof DownloadServiceImpl) {
-                ((DownloadServiceImpl) downloadService).downloadSongFileWithUserAgent(userId, songId, userAgent);
-            } else {
-                downloadService.downloadSongFile(userId, songId);
-            }
-
-            // Detect device type for response message
-            String deviceInfo = getDeviceInfo(userAgent);
+            downloadService.downloadSongFile(userId, songId);
 
             return ResponseEntity.ok(
                     ResponseWrapper.builder()
                             .data(Map.of(
-                                    "message", "File downloaded successfully to Downloads folder",
-                                    "deviceType", deviceInfo,
-                                    "note", "File format optimized for your device"
+                                    "message", "File downloaded successfully to Downloads folder"
                             ))
                             .code(HttpStatus.OK.value())
                             .status(HttpStatus.OK)
                             .build()
             );
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(
-                    ResponseWrapper.builder()
-                            .data(Map.of("error", e.getMessage()))
-                            .code(HttpStatus.BAD_REQUEST.value())
-                            .status(HttpStatus.BAD_REQUEST)
-                            .build()
-            );
+            throw new RuntimeException("Download failed: " + e.getMessage());
         }
     }
 
@@ -125,21 +103,5 @@ public class DownloadController {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new HttpNotFound("User not found"))
                 .getId();
-    }
-
-    private String getDeviceInfo(String userAgent) {
-        if (userAgent != null) {
-            userAgent = userAgent.toLowerCase();
-            if (userAgent.contains("android")) {
-                return "Android (MP3 format)";
-            } else if (userAgent.contains("iphone") || userAgent.contains("ipad")) {
-                return "iOS (M4A format)";
-            } else if (userAgent.contains("mac")) {
-                return "macOS (M4A format)";
-            } else if (userAgent.contains("windows")) {
-                return "Windows (MP3 format)";
-            }
-        }
-        return "Unknown device (MP3 format)";
     }
 }
