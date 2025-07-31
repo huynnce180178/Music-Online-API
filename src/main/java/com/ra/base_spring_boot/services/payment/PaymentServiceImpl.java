@@ -93,8 +93,8 @@ public class PaymentServiceImpl implements PaymentService {
             try {
                 approvalUrl = paypalService.createPayment(payment.getAmount(), "USD",
                         "Payment for Order",
-                        "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/api/v1/user/payment/paypal/cancel?paymentId="+payment.getId(),
-                        "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/api/v1/user/payment/paypal/success?userId="+userId + "&subscriptionPlanId="+paymentRequestDTO.getPlanId() +"&paymentIdDB=" + payment.getId());
+                        "https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net/api/v1/user/payment/paypal/cancel?paymentId="+payment.getId(),
+                        "https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net/api/v1/user/payment/paypal/success?userId="+userId + "&subscriptionPlanId="+paymentRequestDTO.getPlanId() +"&paymentIdDB=" + payment.getId());
                 emailVerificationService.sendMailPaymentPaypal(userRepository.getById(userId), approvalUrl, mapToDTO(payment));
                 return approvalUrl;
 
