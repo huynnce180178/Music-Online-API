@@ -19,40 +19,44 @@ import java.io.IOException;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class JwtTokenFilter extends OncePerRequestFilter
-{
+public class JwtTokenFilter extends OncePerRequestFilter {
     private final MyUserDetailsService userDetailsService;
     private final JwtProvider jwtProvider;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException
-    {
-        try
-        {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        try {
             String token = getTokenFromRequest(request);
-            if (token != null)
-            {
+            if (token != null) {
+                if (jwtProvider.isTokenExpired(token)) {
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.setContentType("application/json");
+                    response.getWriter().write("{\"code\":401,\"error\":\"Token expired\"}");
+                    return;
+                }
+
                 String username = jwtProvider.extractUsername(token);
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                if (jwtProvider.validateToken(token, userDetails) )
-                {
-                    Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                if (jwtProvider.validateToken(token, userDetails)) {
+                    Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
+                            userDetails.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             log.error("Un Authentication {}", e.getMessage());
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"code\":401,\"error\":\"Invalid token\"}");
+            return;
         }
         filterChain.doFilter(request, response);
     }
 
-    public String getTokenFromRequest(HttpServletRequest request)
-    {
+    public String getTokenFromRequest(HttpServletRequest request) {
         String header = request.getHeader("Authorization");
-        if (header != null && header.startsWith("Bearer "))
-        {
+        if (header != null && header.startsWith("Bearer ")) {
             return header.substring(7);
         }
         return null;
