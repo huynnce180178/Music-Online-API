@@ -14,7 +14,7 @@ public interface PaymentService {
     void updatePaymentStatus(Long paymentId, PaymentStatus status);
     void delete(Long id);
 
-    String createPaymentWithVnpay(Long id,PaymentRequestDTO paymentRequestDTO);
+    String createPaymentWithVnpay(Long id,PaymentRequestDTO paymentRequestDTO, HttpServletRequest request);
     String createPaymentWithZalopay(Long id,PaymentRequestDTO paymentRequestDTO);
 
 }

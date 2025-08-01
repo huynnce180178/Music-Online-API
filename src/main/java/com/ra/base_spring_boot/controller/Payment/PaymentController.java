@@ -29,7 +29,8 @@ public class PaymentController {
     @PostMapping()
     public ResponseEntity<?> createPayment(
             @AuthenticationPrincipal MyUserDetails userDetails,
-            @RequestBody PaymentRequestDTO paymentRequestDTO) {
+            @RequestBody PaymentRequestDTO paymentRequestDTO,
+            HttpServletRequest request) {
         String urlPayment;
         if(paymentRequestDTO.getPaymentMethod().equals(PaymentMethod.PAYPAL)) {
             urlPayment = paymentService.createPaymentWithPaypal(userDetails.getUser().getId(), paymentRequestDTO);

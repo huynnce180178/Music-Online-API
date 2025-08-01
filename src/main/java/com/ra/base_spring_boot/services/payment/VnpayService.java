@@ -42,7 +42,7 @@ public class VnpayService {
         paymentRepository.save(payment);
     }
 
-    public String createPayment(VnpayRequestDTO paymentRequest, Long userId, Long planId, Long paymentId) throws UnsupportedEncodingException {
+    public String createPayment(VnpayRequestDTO paymentRequest, Long userId, Long planId, Long paymentId, HttpServletRequest request) throws UnsupportedEncodingException {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
@@ -56,7 +56,8 @@ public class VnpayService {
 
         String bankCode = "NCB";
         String vnp_TxnRef = VnpayConfig.getRandomNumber(8);
-        String vnp_IpAddr = "127.0.0.1";
+        // String vnp_IpAddr = "127.0.0.1";
+        String vnp_IpAddr = VnpayConfig.getIpAddress(request); // lấy IP thật
         String vnp_TmnCode = VnpayConfig.vnp_TmnCode;
 
         Map<String, String> vnp_Params = new HashMap<>();

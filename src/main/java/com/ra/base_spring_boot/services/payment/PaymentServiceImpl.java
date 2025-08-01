@@ -120,7 +120,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 
     @Override
-    public String createPaymentWithVnpay(Long userId, PaymentRequestDTO paymentRequestDTO) {
+    public String createPaymentWithVnpay(Long userId, PaymentRequestDTO paymentRequestDTO, HttpServletRequest request) {
         Payment payment = mapToEntity(paymentRequestDTO);
         payment.setUsers(userRepository.getById(userId));
         payment.setPaymentDate(LocalDateTime.now());
