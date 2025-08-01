@@ -2,6 +2,7 @@ package com.ra.base_spring_boot.controller;
 
 import com.ra.base_spring_boot.dto.ResponseWrapper;
 import com.ra.base_spring_boot.dto.req.AlbumRequestDTO;
+import com.ra.base_spring_boot.dto.resp.AlbumDetailResponseDTO;
 import com.ra.base_spring_boot.dto.resp.AlbumResponseDTO;
 import com.ra.base_spring_boot.services.album.AlbumService;
 import com.ra.base_spring_boot.services.song.SongService;
@@ -219,5 +220,37 @@ public class AlbumController {
                         .status(HttpStatus.OK)
                         .build()
         );
+    }
+
+    @Operation(summary = "Lấy thông tin chi tiết album và chủ nhân",
+            description = "Lấy thông tin chi tiết album bao gồm thông tin chủ nhân album và các thống kê")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved album details"),
+            @ApiResponse(responseCode = "404", description = "Album not found")
+    })
+    @GetMapping("/albums/{albumId}/details")
+    public ResponseEntity<?> getAlbumDetailWithOwner(@PathVariable Long albumId) {
+        try {
+            AlbumDetailResponseDTO albumDetail = albumService.getAlbumDetailWithOwner(albumId);
+
+            return ResponseEntity.ok(
+                    ResponseWrapper.builder()
+                            .data(albumDetail)
+                            .code(HttpStatus.OK.value())
+                            .status(HttpStatus.OK)
+                            .message("Album details retrieved successfully")
+                            .build()
+            );
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    ResponseWrapper.builder()
+                            .data(null)
+                            .code(HttpStatus.NOT_FOUND.value())
+                            .status(HttpStatus.NOT_FOUND)
+                            .message("Album not found: " + e.getMessage())
+                            .build()
+            );
+        }
     }
 }

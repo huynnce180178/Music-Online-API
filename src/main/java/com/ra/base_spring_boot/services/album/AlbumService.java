@@ -2,13 +2,12 @@ package com.ra.base_spring_boot.services.album;
 
 import com.ra.base_spring_boot.dto.req.AlbumRequestDTO;
 import com.ra.base_spring_boot.dto.resp.AlbumResponseDTO;
-import com.ra.base_spring_boot.dto.resp.SongResponseDTO;
+import com.ra.base_spring_boot.dto.resp.AlbumDetailResponseDTO;
 import com.ra.base_spring_boot.model.Album;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.security.core.Authentication;
 
 public interface AlbumService {
@@ -38,10 +37,5 @@ public interface AlbumService {
     List<AlbumResponseDTO> fullTextSearchAlbums(String keyword);
     Long countAlbum(LocalDateTime start, LocalDateTime end);
     Album getAlbumWithArtist(Long albumId);
-
-    // Paged operations
-    Page<AlbumResponseDTO> getPendingAlbumsPaged(Pageable pageable);
-    Page<AlbumResponseDTO> getRejectedAlbumsPaged(Pageable pageable);
-    Page<AlbumResponseDTO> getMyRejectedAlbumsPaged(Authentication authentication, Pageable pageable);
-    Page<AlbumResponseDTO> getDeletedByAdminAlbumsPaged(Pageable pageable);
+    AlbumDetailResponseDTO getAlbumDetailWithOwner(Long albumId);
 }

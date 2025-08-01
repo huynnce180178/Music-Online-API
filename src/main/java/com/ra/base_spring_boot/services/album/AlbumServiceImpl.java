@@ -1,9 +1,10 @@
 package com.ra.base_spring_boot.services.album;
 
-import com.ra.base_spring_boot.controller.FollowController;
 import com.ra.base_spring_boot.dto.req.AlbumRequestDTO;
-import com.ra.base_spring_boot.dto.req.NotificationRequest;
 import com.ra.base_spring_boot.dto.resp.AlbumResponseDTO;
+import com.ra.base_spring_boot.dto.resp.AlbumDetailResponseDTO;
+import com.ra.base_spring_boot.dto.resp.AlbumOwnerInfo;
+import com.ra.base_spring_boot.dto.resp.AlbumStats;
 import com.ra.base_spring_boot.exception.HttpNotFound;
 import com.ra.base_spring_boot.exception.HttpUnAuthorized;
 import com.ra.base_spring_boot.exception.HttpBadRequest;
@@ -21,8 +22,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import jakarta.mail.MessagingException;
@@ -44,6 +43,9 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Autowired
     private IUserRepository userRepository;
+
+    @Autowired
+    private SongRepository songRepository;
 
     @Autowired
     private CloudinaryService cloudinaryService;
@@ -83,7 +85,7 @@ public class AlbumServiceImpl implements AlbumService {
         if (artistId == null) {
             throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
-        
+
         var artistOptional = userRepository.findById(artistId);
         if (artistOptional.isEmpty()) {
             throw new HttpBadRequest("Artist not found");
@@ -175,21 +177,6 @@ public class AlbumServiceImpl implements AlbumService {
                 .orElseThrow(() -> new HttpNotFound("Album not found"));
     }
 
-    @Override
-    public Page<AlbumResponseDTO> getPendingAlbumsPaged(Pageable pageable) {
-        Page<Album> albumPage = albumRepository.findByStatusPaged(
-                com.ra.base_spring_boot.model.constants.ApprovalStatus.PENDING,
-                pageable);
-        return albumPage.map(this::convertToDTO);
-    }
-
-    @Override
-    public Page<AlbumResponseDTO> getRejectedAlbumsPaged(Pageable pageable) {
-        Page<Album> albumPage = albumRepository.findByStatusPaged(
-                com.ra.base_spring_boot.model.constants.ApprovalStatus.REJECTED,
-                pageable);
-        return albumPage.map(this::convertToDTO);
-    }
 
     @Override
     public List<AlbumResponseDTO> getPendingAlbums() {
@@ -333,9 +320,9 @@ public class AlbumServiceImpl implements AlbumService {
                 if (user != null) {
                     boolean isArtist = user.getRoles().stream().anyMatch(r ->
                             r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ARTIST ||
-                            r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN ||
-                            r.getRoleName().name().equals("ARTIST") ||
-                            r.getRoleName().name().equals("ADMIN")
+                                    r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN ||
+                                    r.getRoleName().name().equals("ARTIST") ||
+                                    r.getRoleName().name().equals("ADMIN")
                     );
                     if (isArtist) {
                         return user.getId();
@@ -344,9 +331,9 @@ public class AlbumServiceImpl implements AlbumService {
             } else if (principal instanceof User user) {
                 boolean isArtist = user.getRoles().stream().anyMatch(r ->
                         r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ARTIST ||
-                        r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN ||
-                        r.getRoleName().name().equals("ARTIST") ||
-                        r.getRoleName().name().equals("ADMIN")
+                                r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN ||
+                                r.getRoleName().name().equals("ARTIST") ||
+                                r.getRoleName().name().equals("ADMIN")
                 );
                 if (isArtist) {
                     return user.getId();
@@ -408,19 +395,6 @@ public class AlbumServiceImpl implements AlbumService {
         }
     }
 
-    @Override
-    public Page<AlbumResponseDTO> getMyRejectedAlbumsPaged(Authentication authentication, Pageable pageable) {
-        Long userId = getUserIdFromAuthentication(authentication);
-        if (userId == null) {
-            throw new HttpUnAuthorized("Access denied. Artist role required.");
-        }
-
-        Page<Album> albumPage = albumRepository.findByUsersIdAndStatusPaged(
-                userId,
-                com.ra.base_spring_boot.model.constants.ApprovalStatus.REJECTED,
-                pageable);
-        return albumPage.map(this::convertToDTO);
-    }
 
     @Override
     public List<AlbumResponseDTO> getMyDeletedAlbums(Authentication authentication) {
@@ -430,18 +404,10 @@ public class AlbumServiceImpl implements AlbumService {
         }
 
         List<Album> deletedAlbums = albumRepository.findByUsersIdAndStatus(userId,
-            com.ra.base_spring_boot.model.constants.ApprovalStatus.DELETED_BY_ARTIST);
+                com.ra.base_spring_boot.model.constants.ApprovalStatus.DELETED_BY_ARTIST);
         return deletedAlbums.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public Page<AlbumResponseDTO> getDeletedByAdminAlbumsPaged(Pageable pageable) {
-        Page<Album> albumPage = albumRepository.findByStatusPaged(
-                com.ra.base_spring_boot.model.constants.ApprovalStatus.DELETED_BY_ADMIN,
-                pageable);
-        return albumPage.map(this::convertToDTO);
     }
 
     @Override
@@ -451,8 +417,8 @@ public class AlbumServiceImpl implements AlbumService {
                 .orElseThrow(() -> new HttpNotFound("Album not found"));
 
         if (album.getStatus() != com.ra.base_spring_boot.model.constants.ApprovalStatus.REJECTED &&
-            album.getStatus() != com.ra.base_spring_boot.model.constants.ApprovalStatus.DELETED_BY_ADMIN &&
-            album.getStatus() != com.ra.base_spring_boot.model.constants.ApprovalStatus.DELETED_BY_ARTIST) {
+                album.getStatus() != com.ra.base_spring_boot.model.constants.ApprovalStatus.DELETED_BY_ADMIN &&
+                album.getStatus() != com.ra.base_spring_boot.model.constants.ApprovalStatus.DELETED_BY_ARTIST) {
             throw new HttpNotFound("Only albums with Inappropriate Content or Deleted status can be requested for restoration");
         }
 
@@ -466,7 +432,136 @@ public class AlbumServiceImpl implements AlbumService {
         return albumList.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    private List<Long> getFollowerIdsByArtistId(Long artistId) {
-        return new java.util.ArrayList<>();
+    @Override
+    public AlbumDetailResponseDTO getAlbumDetailWithOwner(Long albumId) {
+        Album album = albumRepository.findById(albumId)
+                .orElseThrow(() -> new HttpNotFound("Album not found"));
+
+        User artist = album.getUsers();
+        if (artist == null) {
+            throw new HttpNotFound("Album owner not found");
+        }
+
+        AlbumOwnerInfo ownerInfo = buildAlbumOwnerInfo(artist);
+
+        AlbumStats stats = buildAlbumStats(albumId);
+
+        return AlbumDetailResponseDTO.builder()
+                .albumId(album.getId())
+                .title(album.getTitle())
+                .releaseDate(album.getReleaseDate())
+                .coverImage(album.getCoverImage())
+                .type(album.getType())
+                .status(album.getStatus())
+                .createdAt(album.getCreatedAt())
+                .updatedAt(album.getUpdatedAt())
+                .owner(ownerInfo)
+                .stats(stats)
+                .build();
     }
+
+    private AlbumOwnerInfo buildAlbumOwnerInfo(User artist) {
+        // Tính toán thống kê của artist
+        Integer totalAlbums = albumRepository.findByUsersId(artist.getId()).size();
+        Integer totalSongs = getTotalSongsByArtist(artist.getId());
+        Integer totalFollowers = getTotalFollowersByArtist(artist.getId());
+
+        return AlbumOwnerInfo.builder()
+                .userId(artist.getId())
+                .fullName(artist.getFirstName() + " " + artist.getLastName())
+                .firstName(artist.getFirstName())
+                .lastName(artist.getLastName())
+                .email(artist.getEmail())
+                .profileImage(artist.getProfileImage())
+                .bio(artist.getBio())
+                .age(artist.getAge())
+                .joinedDate(artist.getCreatedAt())
+                .totalAlbums(totalAlbums)
+                .totalSongs(totalSongs)
+                .totalFollowers(totalFollowers)
+                .build();
+    }
+
+    private AlbumStats buildAlbumStats(Long albumId) {
+        // Tính toán thống kê album
+        Integer totalSongs = getTotalSongsByAlbum(albumId);
+        Integer totalViews = getTotalViewsByAlbum(albumId);
+        Integer totalDownloads = getTotalDownloadsByAlbum(albumId);
+        String totalDuration = getTotalDurationByAlbum(albumId);
+
+        return AlbumStats.builder()
+                .totalSongs(totalSongs)
+                .totalViews(totalViews)
+                .totalDownloads(totalDownloads)
+                .totalDuration(totalDuration)
+                .build();
+    }
+
+    private Integer getTotalSongsByArtist(Long artistId) {
+        return songRepository.countByUsersIdAndStatus(artistId, ApprovalStatus.APPROVED);
+    }
+
+    private Integer getTotalFollowersByArtist(Long artistId) {
+        User artist = userRepository.findById(artistId).orElse(null);
+        return artist != null ? artist.getFollowers().size() : 0;
+    }
+
+    private Integer getTotalSongsByAlbum(Long albumId) {
+        return songRepository.countByAlbumsId(albumId);
+    }
+
+    private Integer getTotalViewsByAlbum(Long albumId) {
+        return songRepository.sumViewsByAlbumId(albumId);
+    }
+
+    private Integer getTotalDownloadsByAlbum(Long albumId) {
+        return songRepository.sumDownloadsByAlbumId(albumId);
+    }
+
+    private String getTotalDurationByAlbum(Long albumId) {
+        List<String> durations = songRepository.findDurationsByAlbumId(albumId);
+
+        if (durations.isEmpty()) {
+            return "00:00:00";
+        }
+
+        int totalSeconds = 0;
+        for (String duration : durations) {
+            if (duration != null && !duration.isEmpty()) {
+                totalSeconds += convertDurationToSeconds(duration);
+            }
+        }
+
+        return convertSecondsToFormat(totalSeconds);
+    }
+
+    private int convertDurationToSeconds(String duration) {
+        try {
+            String[] parts = duration.split(":");
+            int hours = 0, minutes = 0, seconds = 0;
+
+            if (parts.length == 3) {
+                hours = Integer.parseInt(parts[0]);
+                minutes = Integer.parseInt(parts[1]);
+                seconds = Integer.parseInt(parts[2]);
+            } else if (parts.length == 2) {
+                minutes = Integer.parseInt(parts[0]);
+                seconds = Integer.parseInt(parts[1]);
+            }
+
+            return hours * 3600 + minutes * 60 + seconds;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private String convertSecondsToFormat(int totalSeconds) {
+        int hours = totalSeconds / 3600;
+        int minutes = (totalSeconds % 3600) / 60;
+        int seconds = totalSeconds % 60;
+
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
+
 }

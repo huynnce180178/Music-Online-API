@@ -165,8 +165,7 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 
     @Query(value = """
                 SELECT s.*,
-                  (MATCH(s.title) AGAINST (?1 IN BOOLEAN MODE) * 10 +
-                    MATCH(s.lyrics) AGAINST (?1 IN BOOLEAN MODE) * 0.5 + 6 *
+                  (MATCH(s.title) AGAINST (?1 IN BOOLEAN MODE) * 10  + 6 *
                     MATCH(u.first_name, u.last_name) AGAINST (?1 IN BOOLEAN MODE)+
                     4 * MATCH(a.title) AGAINST (?1 IN BOOLEAN MODE) + 5 *
                     (CASE WHEN s.artist_id =(
@@ -179,6 +178,7 @@ public interface SongRepository extends JpaRepository<Song, Long> {
                                   )
                                   THEN 3 ELSE 0 END
                                 )
+                    + MATCH(s.lyrics) AGAINST (?1 IN BOOLEAN MODE) * 0.5
                     ) AS relevance
                 FROM songs s
                 JOIN users u ON s.artist_id = u.id
@@ -204,5 +204,20 @@ public interface SongRepository extends JpaRepository<Song, Long> {
             """, nativeQuery = true)
     List<Song> fullTextSearchSongs(String keyword);
 
+    // Methods cho album detail statistics
+    @Query("SELECT COUNT(s) FROM Song s WHERE s.albums.id = :albumId AND s.status = 'APPROVED'")
+    Integer countByAlbumsId(@Param("albumId") Long albumId);
 
+    @Query("SELECT COALESCE(SUM(s.views), 0) FROM Song s WHERE s.albums.id = :albumId AND s.status = 'APPROVED'")
+    Integer sumViewsByAlbumId(@Param("albumId") Long albumId);
+
+    @Query("SELECT COALESCE(COUNT(d), 0) FROM Download d JOIN d.songs s WHERE s.albums.id = :albumId AND s.status = 'APPROVED'")
+    Integer sumDownloadsByAlbumId(@Param("albumId") Long albumId);
+
+    @Query("SELECT s.duration FROM Song s WHERE s.albums.id = :albumId AND s.status = 'APPROVED'")
+    List<String> findDurationsByAlbumId(@Param("albumId") Long albumId);
+
+    // Methods cho artist statistics
+    @Query("SELECT COUNT(s) FROM Song s WHERE s.users.id = :userId AND s.status = :status")
+    Integer countByUsersIdAndStatus(@Param("userId") Long userId, @Param("status") com.ra.base_spring_boot.model.constants.ApprovalStatus status);
 }
