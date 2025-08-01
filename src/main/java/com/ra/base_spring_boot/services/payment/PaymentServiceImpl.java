@@ -14,6 +14,7 @@ import com.ra.base_spring_boot.repository.IUserRepository;
 import com.ra.base_spring_boot.repository.PaymentRepository;
 import com.ra.base_spring_boot.repository.SubscriptionPlanRepository;
 import com.ra.base_spring_boot.services.EmailVerificationService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -134,7 +135,7 @@ public class PaymentServiceImpl implements PaymentService {
         vnpayRequest.setAmount(totalAmount);
         String paymentUrl;
         try {
-            paymentUrl = vnpayService.createPayment(vnpayRequest, userId, paymentRequestDTO.getPlanId(), payment.getId());
+            paymentUrl = vnpayService.createPayment(vnpayRequest, userId, paymentRequestDTO.getPlanId(), payment.getId(),request );
             emailVerificationService.sendMailPaymentPaypal(userRepository.getById(userId), paymentUrl, mapToDTO(payment));
         } catch (Exception ex) {
             throw new RuntimeException("Unable to create VNPAY payment link", ex);

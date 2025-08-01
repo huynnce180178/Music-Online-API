@@ -8,6 +8,7 @@ import com.ra.base_spring_boot.model.constants.PaymentMethod;
 import com.ra.base_spring_boot.security.principle.MyUserDetails;
 import com.ra.base_spring_boot.services.payment.PaymentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class PaymentController {
         if(paymentRequestDTO.getPaymentMethod().equals(PaymentMethod.PAYPAL)) {
             urlPayment = paymentService.createPaymentWithPaypal(userDetails.getUser().getId(), paymentRequestDTO);
         }else if(paymentRequestDTO.getPaymentMethod().equals(PaymentMethod.VNPAY)) {
-            urlPayment = paymentService.createPaymentWithVnpay(userDetails.getUser().getId(), paymentRequestDTO);
+            urlPayment = paymentService.createPaymentWithVnpay(userDetails.getUser().getId(), paymentRequestDTO, request);
         }else if(paymentRequestDTO.getPaymentMethod().equals(PaymentMethod.ZALO_PAY)) {
             urlPayment = paymentService.createPaymentWithZalopay(userDetails.getUser().getId(), paymentRequestDTO);
         }else {
