@@ -228,7 +228,7 @@ public class AlbumController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved album details"),
             @ApiResponse(responseCode = "404", description = "Album not found")
     })
-    @GetMapping("/albums/{albumId}/details")
+    @GetMapping("/guest/albums/{albumId}/details")
     public ResponseEntity<?> getAlbumDetailWithOwner(@PathVariable Long albumId) {
         try {
             AlbumDetailResponseDTO albumDetail = albumService.getAlbumDetailWithOwner(albumId);
