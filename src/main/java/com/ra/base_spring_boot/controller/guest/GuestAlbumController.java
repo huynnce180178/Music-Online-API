@@ -2,7 +2,9 @@ package com.ra.base_spring_boot.controller.guest;
 
 
 import com.ra.base_spring_boot.dto.ResponseWrapper;
+import com.ra.base_spring_boot.dto.resp.AlbumInfoResponseDTO;
 import com.ra.base_spring_boot.dto.resp.SongResponseDTO;
+import com.ra.base_spring_boot.services.album.AlbumService;
 import com.ra.base_spring_boot.services.guest.GuestService;
 import com.ra.base_spring_boot.services.song.SongService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +29,8 @@ public class GuestAlbumController {
     @Autowired
     private GuestService guestService;
     @Autowired
-    private SongService songService;
+    private AlbumService albumService;
+
 
     @Operation(
             summary = "Lấy tất cả album",
@@ -66,11 +69,11 @@ public class GuestAlbumController {
     }
 
     @GetMapping("/{albumId}/songs")
-    public ResponseEntity<?> getSongsInAlbum(@PathVariable Long albumId) {
-        List<SongResponseDTO> songs = songService.getApprovedSongsByAlbum(albumId);
+    public ResponseEntity<?> getAlbumDetail(@PathVariable Long albumId) {
+        AlbumInfoResponseDTO albumInfo = albumService.getAlbumInfo(albumId);
         return ResponseEntity.ok(
                 ResponseWrapper.builder()
-                        .data(songs)
+                        .data(albumInfo)
                         .code(HttpStatus.OK.value())
                         .status(HttpStatus.OK)
                         .build()
