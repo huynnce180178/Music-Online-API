@@ -89,3 +89,7 @@ server:
   servlet:
     session:
       timeout: 30d
+
+domain:
+  frontend: https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net
+  backend: https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net

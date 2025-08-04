@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import com.ra.base_spring_boot.Configuration.DomainConfig;
+import jakarta.annotation.PostConstruct;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -32,6 +34,14 @@ public class VnpayService {
     private SubscriptionService subscriptionService;
     @Autowired
     private NotificationService notificationService;
+    
+    @Autowired
+    private DomainConfig domainConfig;
+
+    @PostConstruct
+    public void init() {
+        VnpayConfig.vnp_ReturnUrl = domainConfig.getBackendDomain() + "/api/v1/user/payment/vnpay/return";
+    }
 
     public void updatePaymentStatus(Long paymentId, PaymentStatus status) {
         Payment payment = paymentRepository.findById(paymentId).orElse(null);
@@ -135,12 +145,12 @@ public class VnpayService {
                                 "Subscription Confirmed"
                         )
                 );
-                String redirectUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/success?paymentId=" + paymentId;
+                String redirectUrl = domainConfig.getFrontendDomain() + "/payment/success?paymentId=" + paymentId;
                 response.sendRedirect(redirectUrl);
                 return ResponseEntity.ok("Payment successful!");
             } else {
                 updatePaymentStatus(paymentId, PaymentStatus.FAILED);
-                String failUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=" + URLEncoder.encode("Error code: " + responseCode, StandardCharsets.UTF_8);
+                String failUrl = domainConfig.getFrontendDomain() + "/payment/fail?message=" + URLEncoder.encode("Error code: " + responseCode, StandardCharsets.UTF_8);
                 response.sendRedirect(failUrl);
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment failed! Error code: " + responseCode);
             }
@@ -148,7 +158,7 @@ public class VnpayService {
             System.err.println("[ERROR] Exception during payment return handling: " + e.getMessage());
 
             try {
-                String errorUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=" + URLEncoder.encode("System error: " + e.getMessage(), StandardCharsets.UTF_8);
+                String errorUrl = domainConfig.getFrontendDomain() + "/payment/fail?message=" + URLEncoder.encode("System error: " + e.getMessage(), StandardCharsets.UTF_8);
                 response.sendRedirect(errorUrl);
             } catch (Exception ex) {
                 System.err.println("[ERROR] Failed to redirect after exception: " + ex.getMessage());

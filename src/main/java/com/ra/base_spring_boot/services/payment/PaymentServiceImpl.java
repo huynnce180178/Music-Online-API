@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 import org.springframework.stereotype.Service;
+import com.ra.base_spring_boot.Configuration.DomainConfig;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +44,9 @@ public class PaymentServiceImpl implements PaymentService {
     private ExchangeRateService exchangeRateService;
     @Autowired
     private ZalopayService zalopayService;
+    
+    @Autowired
+    private DomainConfig domainConfig;
 
     private PaymentResponseDTO mapToDTO(Payment payment) {
         return PaymentResponseDTO.builder()
@@ -94,8 +98,8 @@ public class PaymentServiceImpl implements PaymentService {
             try {
                 approvalUrl = paypalService.createPayment(payment.getAmount(), "USD",
                         "Payment for Order",
-                        "https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net/api/v1/user/payment/paypal/cancel?paymentId="+payment.getId(),
-                        "https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net/api/v1/user/payment/paypal/success?userId="+userId + "&subscriptionPlanId="+paymentRequestDTO.getPlanId() +"&paymentIdDB=" + payment.getId());
+                        domainConfig.getBackendDomain() + "/api/v1/user/payment/paypal/cancel?paymentId="+payment.getId(),
+                        domainConfig.getBackendDomain() + "/api/v1/user/payment/paypal/success?userId="+userId + "&subscriptionPlanId="+paymentRequestDTO.getPlanId() +"&paymentIdDB=" + payment.getId());
                 emailVerificationService.sendMailPaymentPaypal(userRepository.getById(userId), approvalUrl, mapToDTO(payment));
                 return approvalUrl;
 
