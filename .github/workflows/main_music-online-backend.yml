@@ -28,14 +28,14 @@ jobs:
       - name: Build JAR file with Gradle
         run: ./gradlew clean bootJar --no-daemon
 
-      - name: Show built files (debug)
-        run: ls -R build/libs
+      - name: Show built JAR files (debug)
+        run: ls -lh build/libs
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: build/libs/*.jar
+          path: build/libs/music-online-api.jar
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,12 +49,17 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
+          path: .
 
-      - name: Show downloaded JAR
-        run: ls -la
+      - name: Show downloaded files
+        run: ls -lh
 
-      - name: Rename JAR for deployment
-        run: mv *.jar app.jar
+      - name: Rename JAR to app.jar (nếu cần)
+        run: |
+          if [ ! -f "app.jar" ]; then
+            JAR_FILE=$(ls *.jar | head -n 1)
+            mv "$JAR_FILE" app.jar
+          fi
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -64,7 +69,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'music-online-backend'
+          app-name: 'music-online-backend' 
           slot-name: 'Production'
           package: 'app.jar'
-
