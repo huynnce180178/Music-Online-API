@@ -75,6 +75,10 @@ public class VnpayService {
         vnp_Params.put("vnp_Locale", "vn");
         vnp_Params.put("vnp_ReturnUrl", VnpayConfig.vnp_ReturnUrl + "?userId=" + userId + "&subscriptionPlanId=" + planId + "&paymentId=" + paymentId);
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
+//        // Thêm các tham số userId, subscriptionPlanId, paymentId vào vnp_Params
+//        vnp_Params.put("userId", String.valueOf(userId));
+//        vnp_Params.put("subscriptionPlanId", String.valueOf(planId));
+//        vnp_Params.put("paymentId", String.valueOf(paymentId));
 
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");

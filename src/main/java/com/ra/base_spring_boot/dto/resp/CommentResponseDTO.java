@@ -16,7 +16,6 @@ public class CommentResponseDTO {
     private Long id;
     private Long userId;
     private String username;
-    private String profileImage;
     private Long songId;
     private String content;
     private Long parentId;

@@ -209,7 +209,7 @@ public interface SongRepository extends JpaRepository<Song, Long> {
     Integer countByAlbumsId(@Param("albumId") Long albumId);
 
     @Query("SELECT COALESCE(SUM(s.views), 0) FROM Song s WHERE s.albums.id = :albumId AND s.status = 'APPROVED'")
-    Long sumViewsByAlbumId(@Param("albumId") Long albumId);
+    Integer sumViewsByAlbumId(@Param("albumId") Long albumId);
 
     @Query("SELECT COALESCE(COUNT(d), 0) FROM Download d JOIN d.songs s WHERE s.albums.id = :albumId AND s.status = 'APPROVED'")
     Integer sumDownloadsByAlbumId(@Param("albumId") Long albumId);

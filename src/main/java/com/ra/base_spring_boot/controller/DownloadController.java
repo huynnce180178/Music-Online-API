@@ -50,7 +50,7 @@ public class DownloadController {
                     .orElseThrow(() -> new HttpNotFound("Song not found"));
 
             byte[] fileData = downloadService.downloadSongFile(userId, songId);
-            
+
             HttpHeaders headers = downloadService.createDownloadHeaders(song);
 
             String userAgent = request.getHeader("User-Agent");
@@ -189,7 +189,7 @@ public class DownloadController {
 
             Song song = songRepository.findById(songId)
                     .orElseThrow(() -> new HttpNotFound("Song not found"));
-            
+
             if (song.getStatus() != com.ra.base_spring_boot.model.constants.ApprovalStatus.APPROVED) {
                 throw new RuntimeException("Only approved songs can be downloaded");
             }
@@ -204,7 +204,7 @@ public class DownloadController {
                                     "songTitle", song.getTitle(),
                                     "albumName", song.getAlbums() != null ? song.getAlbums().getTitle() : "",
                                     "artistName", song.getUsers() != null ?
-                                        (song.getUsers().getFirstName() + " " + song.getUsers().getLastName()).trim() : "",
+                                            (song.getUsers().getFirstName() + " " + song.getUsers().getLastName()).trim() : "",
                                     "duration", song.getDuration().toString(),
                                     "message", "Chọn nơi lưu file để tải xuống"
                             ))
@@ -236,7 +236,7 @@ public class DownloadController {
         if (fileName == null) return "song";
 
         return fileName.replaceAll("[<>:\"/\\\\|?*]", "_")
-                      .replaceAll("[\\x00-\\x1f\\x7f]", "")
-                      .trim();
+                .replaceAll("[\\x00-\\x1f\\x7f]", "")
+                .trim();
     }
 }

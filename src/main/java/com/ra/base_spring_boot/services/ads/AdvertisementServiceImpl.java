@@ -9,6 +9,7 @@ import com.ra.base_spring_boot.model.constants.ApprovalStatus;
 import com.ra.base_spring_boot.repository.AdvertisementRepository;
 import com.ra.base_spring_boot.repository.IUserRepository;
 import com.ra.base_spring_boot.services.impl.CloudinaryService;
+import com.ra.base_spring_boot.services.play.PlayerService;
 import com.ra.base_spring_boot.dto.req.NotificationRequest;
 import com.ra.base_spring_boot.services.notification.NotificationService;
 import lombok.RequiredArgsConstructor;
@@ -39,35 +40,31 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     private final IUserRepository userRepository;
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
-    private final CloudinaryService cloudinaryService;
-    private final NotificationService notificationService;
+
+    @Autowired
+    private CloudinaryService cloudinaryService;
+
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     @Transactional
     public AdvertisementResponse createAdvertisement(AdvertisementRequest request, String creatorEmail) {
         User creator = userRepository.findByEmail(creatorEmail)
                 .orElseThrow(() -> new RuntimeException("No user found with email: " + creatorEmail));
-
-        boolean isAdmin = creator.getRoles().stream()
-                .anyMatch(role -> role.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN);
-
-        if (!isAdmin) {
-            long activeAds = advertisementRepository.findAll().stream()
-                    .filter(ad -> ad.getCreatedBy() != null && ad.getCreatedBy().getId().equals(creator.getId()))
-                    .filter(ad -> ad.getStatus() == ApprovalStatus.PENDING || ad.getStatus() == ApprovalStatus.APPROVED)
-                    .count();
-            if (activeAds >= 4) {
-                throw new RuntimeException("You can only have a maximum of 4 active or pending ads!");
-            }
-        }
-
+        long activeAds = advertisementRepository.findAll().stream()
+                .filter(ad -> ad.getCreatedBy() != null && ad.getCreatedBy().getId().equals(creator.getId()))
+                .filter(ad -> ad.getStatus() == ApprovalStatus.PENDING || ad.getStatus() == ApprovalStatus.APPROVED)
+                .count();
+        if (activeAds >= 4) {
+            throw new RuntimeException("You can only have a maximum of 4 active or pending ads!");        }
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = startDate.plusDays(30);
         String mediaUrl = saveMediaFile(request.getMediaFile());
-
         Advertisement ad = Advertisement.builder()
                 .adType(AdType.valueOf(request.getAdType().toUpperCase()))
-                .status(isAdmin ? ApprovalStatus.APPROVED : ApprovalStatus.PENDING)
+                .status(ApprovalStatus.PENDING)
                 .startDate(startDate)
                 .endDate(endDate)
                 .mediaUrl(mediaUrl)

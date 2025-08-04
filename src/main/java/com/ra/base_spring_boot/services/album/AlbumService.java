@@ -1,7 +1,6 @@
 package com.ra.base_spring_boot.services.album;
 
 import com.ra.base_spring_boot.dto.req.AlbumRequestDTO;
-import com.ra.base_spring_boot.dto.resp.AlbumInfoResponseDTO;
 import com.ra.base_spring_boot.dto.resp.AlbumResponseDTO;
 import com.ra.base_spring_boot.dto.resp.AlbumDetailResponseDTO;
 import com.ra.base_spring_boot.model.Album;
@@ -39,6 +38,4 @@ public interface AlbumService {
     Long countAlbum(LocalDateTime start, LocalDateTime end);
     Album getAlbumWithArtist(Long albumId);
     AlbumDetailResponseDTO getAlbumDetailWithOwner(Long albumId);
-    AlbumInfoResponseDTO getAlbumInfo(Long albumId);
-
 }

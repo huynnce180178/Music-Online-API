@@ -101,13 +101,9 @@ public class PlaylistController {
     @GetMapping("/user/playlist")
     public ResponseEntity<ResponseWrapper<?>> getAllPlaylists() {
         List<PlaylistResponseDTO> playlists = playlistService.getAllPlaylists();
-
-        String message = null;
-
         return ResponseEntity.ok(
                 ResponseWrapper.builder()
                         .data(playlists)
-                        .message(message)
                         .code(HttpStatus.OK.value())
                         .status(HttpStatus.OK)
                         .build()
