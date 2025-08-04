@@ -11,6 +11,5 @@ import lombok.Setter;
 @Builder
 public class PaypalRequestDTO {
     private String total;
-    @Builder.Default
     private String currency = "USD";
 }

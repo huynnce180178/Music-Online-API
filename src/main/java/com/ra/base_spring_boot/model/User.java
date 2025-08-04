@@ -19,10 +19,11 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-public class User extends BaseObject {
+public class User extends BaseObject
+{
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
-    @Column(name = "last_name", nullable = false, length = 100)
+    @Column(name ="last_name",nullable = false, length = 100)
     private String lastName;
     @Column(name = "email", nullable = false)
     private String email;
@@ -54,15 +55,13 @@ public class User extends BaseObject {
     @ManyToMany
     @JoinTable(
             name = "user_following",
-            joinColumns = @JoinColumn(name = "follower_id"),
+            joinColumns = @JoinColumn(name= "follower_id"),
             inverseJoinColumns = @JoinColumn(name = "following_id")
     )
-    @Builder.Default
     private Set<User> followings = new HashSet<>();
 
     @ManyToMany(mappedBy = "followings")
-    @Builder.Default
-    private Set<User> followers = new HashSet<>();
+    private Set<User> followers= new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserMood> moods;
