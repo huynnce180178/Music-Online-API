@@ -49,12 +49,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
+          path: .
 
       - name: Show downloaded JAR
         run: ls -lh
 
-      - name: Rename JAR for deployment
-        run: mv music-online-api.jar app.jar
+      - name: Rename JAR for deployment (only if necessary)
+        run: |
+          if [ "$(ls *.jar | grep -v app.jar)" ]; then
+            mv *.jar app.jar
+          fi
 
       - name: Login to Azure
         uses: azure/login@v2
