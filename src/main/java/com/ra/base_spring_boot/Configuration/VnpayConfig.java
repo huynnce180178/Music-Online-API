@@ -13,7 +13,6 @@ import java.util.*;
 public class VnpayConfig {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    // vnp_ReturnUrl sẽ được set động từ DomainConfig
     public static String vnp_ReturnUrl;
     // #vnpay
     public static String vnp_TmnCode = "WXIRTBO2";
