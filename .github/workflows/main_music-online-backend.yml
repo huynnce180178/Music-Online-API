@@ -29,13 +29,13 @@ jobs:
         run: ./gradlew clean bootJar --no-daemon
 
       - name: Show built files (debug)
-        run: ls -la build/libs/
+        run: ls -R build/libs
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: build/libs/app.jar
+          path: build/libs/*.jar
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,19 +50,11 @@ jobs:
         with:
           name: java-app
 
-      - name: Show downloaded files
+      - name: Show downloaded JAR
         run: ls -la
 
-      - name: Verify app.jar exists
-        run: |
-          if [ -f "app.jar" ]; then
-            echo "app.jar exists and ready for deployment"
-            ls -la app.jar
-          else
-            echo "app.jar not found!"
-            ls -la
-            exit 1
-          fi
+      - name: Rename JAR for deployment
+        run: mv *.jar app.jar
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -75,3 +67,4 @@ jobs:
           app-name: 'music-online-backend'
           slot-name: 'Production'
           package: 'app.jar'
+
