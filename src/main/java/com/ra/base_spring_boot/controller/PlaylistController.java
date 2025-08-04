@@ -101,9 +101,13 @@ public class PlaylistController {
     @GetMapping("/user/playlist")
     public ResponseEntity<ResponseWrapper<?>> getAllPlaylists() {
         List<PlaylistResponseDTO> playlists = playlistService.getAllPlaylists();
+
+        String message = null;
+
         return ResponseEntity.ok(
                 ResponseWrapper.builder()
                         .data(playlists)
+                        .message(message)
                         .code(HttpStatus.OK.value())
                         .status(HttpStatus.OK)
                         .build()
@@ -284,8 +288,8 @@ public class PlaylistController {
 
     @Operation(summary = "Lấy playlist theo độ tuổi người dùng", description = "Lấy playlist phù hợp với độ tuổi của người dùng hiện tại")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Successfully retrieved playlist by age group"),
-        @ApiResponse(responseCode = "404", description = "No playlist found for user's age group")
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved playlist by age group"),
+            @ApiResponse(responseCode = "404", description = "No playlist found for user's age group")
     })
     @GetMapping("/user/playlist/age-group")
     public ResponseEntity<ResponseWrapper<?>> getPlaylistByCurrentUserAgeGroup() {

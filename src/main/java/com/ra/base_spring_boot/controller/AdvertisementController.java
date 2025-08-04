@@ -316,42 +316,6 @@ public class AdvertisementController {
         }
     }
 
-    @Operation(summary = "Admin thêm quảng cáo", description = "Admin tạo mới quảng cáo banner/audio không giới hạn số lượng")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Advertisement created successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid request")
-    })
-    @PostMapping("/admin/advertisements/create")
-    public ResponseEntity<ResponseWrapper<AdvertisementResponse>> createAdByAdmin(
-            @RequestParam("adType") String adType,
-            @RequestParam("redirectUrl") String redirectUrl,
-            @RequestParam(value = "mediaFile", required = false) MultipartFile mediaFile,
-            Authentication authentication) {
-        try {
-            AdvertisementRequest request = new AdvertisementRequest();
-            request.setAdType(adType);
-            request.setRedirectUrl(redirectUrl);
-            request.setMediaFile(mediaFile);
-            String adminEmail = authentication.getName();
-            AdvertisementResponse created = advertisementService.createAdvertisement(request, adminEmail);
-            return ResponseEntity.status(HttpStatus.CREATED).body(
-                    ResponseWrapper.<AdvertisementResponse>builder()
-                            .data(created)
-                            .code(HttpStatus.CREATED.value())
-                            .status(HttpStatus.CREATED)
-                            .build()
-            );
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    ResponseWrapper.<AdvertisementResponse>builder()
-                            .message(e.getMessage())
-                            .code(HttpStatus.BAD_REQUEST.value())
-                            .status(HttpStatus.BAD_REQUEST)
-                            .build()
-            );
-        }
-    }
-
     @Operation(summary = "Artist xóa quảng cáo của mình", description = "Artist tự xóa quảng cáo do mình tạo")
     @DeleteMapping("/artist/advertisements/{id}")
     public ResponseEntity<ResponseWrapper<Void>> deleteMyAd(@PathVariable Long id) {
