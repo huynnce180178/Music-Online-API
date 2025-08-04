@@ -19,7 +19,7 @@ jar {
 }
 
 bootJar {
-    archiveFileName = 'music-online-api.jar'
+    archiveFileName = 'app.jar'
     mainClass = 'com.ra.base_spring_boot.BaseSpringBootApplication'
 }
 
@@ -32,7 +32,6 @@ configurations {
 repositories {
     mavenCentral()
 }
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
