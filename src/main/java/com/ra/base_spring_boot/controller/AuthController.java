@@ -3,6 +3,8 @@ package com.ra.base_spring_boot.controller;
 import com.ra.base_spring_boot.dto.ResponseWrapper;
 import com.ra.base_spring_boot.dto.req.FormLogin;
 import com.ra.base_spring_boot.dto.req.FormRegister;
+import com.ra.base_spring_boot.model.EmailVerification;
+import com.ra.base_spring_boot.services.EmailVerificationService;
 import com.ra.base_spring_boot.services.IAuthService;
 import com.ra.base_spring_boot.services.impl.EmailVerificationServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 

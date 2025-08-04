@@ -67,4 +67,3 @@ jobs:
           app-name: 'music-online-backend'
           slot-name: 'Production'
           package: 'app.jar'
-

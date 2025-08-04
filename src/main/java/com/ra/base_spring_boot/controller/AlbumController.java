@@ -223,7 +223,7 @@ public class AlbumController {
     }
 
     @Operation(summary = "Lấy thông tin chi tiết album và chủ nhân",
-               description = "Lấy thông tin chi tiết album bao gồm thông tin chủ nhân album và các thống kê")
+            description = "Lấy thông tin chi tiết album bao gồm thông tin chủ nhân album và các thống kê")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved album details"),
             @ApiResponse(responseCode = "404", description = "Album not found")

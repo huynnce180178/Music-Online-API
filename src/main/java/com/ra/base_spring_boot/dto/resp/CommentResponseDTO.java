@@ -26,5 +26,4 @@ public class CommentResponseDTO {
     private List<CommentResponseDTO> replies;
     private List<ReactionCountDTO> reactionCounts;
     private String currentUserReaction;
-    private String profileImage;
 }

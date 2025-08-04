@@ -74,7 +74,7 @@ public class SongServiceImpl implements SongService {
         if (artistId == null) {
             throw new HttpUnAuthorized("Access denied. Artist role required.");
         }
-
+        
         User user = userRepository.findById(artistId)
                 .orElseThrow(() -> new HttpBadRequest("Artist not found"));
 
@@ -147,14 +147,14 @@ public class SongServiceImpl implements SongService {
     public void deleteByArtist(Long songId) {
         Song song = songRepository.findById(songId)
                 .orElseThrow(() -> new HttpBadRequest("Song not found"));
-
+        
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long currentUserId = getUserIdFromAuthentication(authentication);
-
+        
         if (!song.getUsers().getId().equals(currentUserId)) {
             throw new HttpBadRequest("Permission denied. Only song owner can delete.");
         }
-
+        
         song.setStatus(ApprovalStatus.DELETED_BY_ARTIST);
         song.setUpdatedAt(LocalDateTime.now());
         songRepository.save(song);
@@ -173,14 +173,14 @@ public class SongServiceImpl implements SongService {
     public void removeSongFromAlbum(Long songId) {
         Song song = songRepository.findById(songId)
                 .orElseThrow(() -> new HttpBadRequest("Song not found"));
-
+        
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long currentUserId = getUserIdFromAuthentication(authentication);
-
+        
         if (!song.getUsers().getId().equals(currentUserId)) {
             throw new HttpBadRequest("Permission denied. Only song owner can remove from album.");
         }
-
+        
         song.setAlbums(null);
         song.setUpdatedAt(LocalDateTime.now());
         songRepository.save(song);
@@ -191,14 +191,14 @@ public class SongServiceImpl implements SongService {
     public void addSongToAlbum(Long songId, Long albumId) {
         Song song = songRepository.findById(songId)
                 .orElseThrow(() -> new HttpBadRequest("Song not found"));
-
+        
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long currentUserId = getUserIdFromAuthentication(authentication);
-
+        
         if (!song.getUsers().getId().equals(currentUserId)) {
             throw new HttpBadRequest("Permission denied. Only song owner can add to album.");
         }
-
+        
         var album = albumRepository.findById(albumId)
                 .orElseThrow(() -> new HttpBadRequest("Album not found"));
         song.setAlbums(album);
@@ -281,17 +281,17 @@ public class SongServiceImpl implements SongService {
                 userId = user.getId();
                 isArtist = user.getRoles().stream().anyMatch(r ->
                         r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ARTIST ||
-                                r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN ||
-                                r.getRoleName().name().equals("ARTIST") ||
-                                r.getRoleName().name().equals("ADMIN")
+                        r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN ||
+                        r.getRoleName().name().equals("ARTIST") ||
+                        r.getRoleName().name().equals("ADMIN")
                 );
             } else if (principal instanceof User user) {
                 userId = user.getId();
                 isArtist = user.getRoles().stream().anyMatch(r ->
                         r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ARTIST ||
-                                r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN ||
-                                r.getRoleName().name().equals("ARTIST") ||
-                                r.getRoleName().name().equals("ADMIN")
+                        r.getRoleName() == com.ra.base_spring_boot.model.constants.RoleName.ROLE_ADMIN ||
+                        r.getRoleName().name().equals("ARTIST") ||
+                        r.getRoleName().name().equals("ADMIN")
                 );
             }
         }
@@ -323,14 +323,14 @@ public class SongServiceImpl implements SongService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long currentUserId = getUserIdFromAuthentication(authentication);
-
+        
         if (!song.getUsers().getId().equals(currentUserId)) {
             throw new HttpBadRequest("Permission denied. Only song owner can request restoration.");
         }
 
         if (song.getStatus() != ApprovalStatus.REJECTED &&
-                song.getStatus() != ApprovalStatus.DELETED_BY_ADMIN &&
-                song.getStatus() != ApprovalStatus.DELETED_BY_ARTIST) {
+            song.getStatus() != ApprovalStatus.DELETED_BY_ADMIN &&
+            song.getStatus() != ApprovalStatus.DELETED_BY_ARTIST) {
             throw new HttpBadRequest("Only songs with Inappropriate Content or Deleted status can be requested for restoration");
         }
 

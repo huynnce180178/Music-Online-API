@@ -6,6 +6,7 @@ import com.ra.base_spring_boot.dto.req.VnpayRequestDTO;
 import com.ra.base_spring_boot.dto.resp.SubscriptionResponseDTO;
 import com.ra.base_spring_boot.exception.HttpBadRequest;
 import com.ra.base_spring_boot.model.Payment;
+import com.ra.base_spring_boot.model.Subscription;
 import com.ra.base_spring_boot.model.constants.PaymentStatus;
 import com.ra.base_spring_boot.repository.PaymentRepository;
 import com.ra.base_spring_boot.services.notification.NotificationService;
