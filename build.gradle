@@ -19,7 +19,7 @@ jar {
 }
 
 bootJar {
-    archiveFileName = 'app.jar'
+    archiveFileName = 'music-online-api.jar'
     mainClass = 'com.ra.base_spring_boot.BaseSpringBootApplication'
 }
 

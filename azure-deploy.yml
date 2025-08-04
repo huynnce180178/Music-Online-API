@@ -54,10 +54,7 @@ jobs:
         run: ls -la
 
       - name: Rename JAR for deployment
-        run: |
-          rm -f app.jar
-          mv *.jar app.jar
-          ls -la app.jar
+        run: mv *.jar app.jar
 
       - name: Login to Azure
         uses: azure/login@v2

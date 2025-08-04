@@ -23,7 +23,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 import java.io.IOException;
-import com.ra.base_spring_boot.Configuration.DomainConfig;
 
 @Tag(name = "Payment paypal")
 @RestController
@@ -35,9 +34,6 @@ public class PaypalController {
     private PaypalService paypalService;
     @Autowired
     private PaymentService paymentService;
-    
-    @Autowired
-    private DomainConfig domainConfig;
 
 
 
@@ -78,14 +74,14 @@ public class PaypalController {
             Payment payment = paypalService.executePayment(paypalId, payerId, userId, planId, paymentIdDB);
 
             // Redirect to FE success page
-            String redirectUrl = domainConfig.getFrontendDomain() + "/payment/success?paymentId=" + payment.getId();
+            String redirectUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/success?paymentId=" + payment.getId();
             response.sendRedirect(redirectUrl);
 
         } catch (PayPalRESTException e) {
             e.printStackTrace();
 
             // Redirect to FE fail page
-            String failUrl = domainConfig.getFrontendDomain() + "/payment/fail?message=" + e.getMessage();
+            String failUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=" + e.getMessage();
             response.sendRedirect(failUrl);
         }
     }
@@ -96,7 +92,7 @@ public class PaypalController {
         paymentService.updatePaymentStatus(paymentId, PaymentStatus.FAILED);
 
         // Redirect to FE fail page
-        String failUrl = domainConfig.getFrontendDomain() + "/payment/fail?message=Payment+was+canceled";
+        String failUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=Payment+was+canceled";
         response.sendRedirect(failUrl);
     }
 }

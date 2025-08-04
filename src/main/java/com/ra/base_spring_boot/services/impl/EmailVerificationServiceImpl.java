@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import com.ra.base_spring_boot.Configuration.DomainConfig;
 
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -28,9 +27,6 @@ public class EmailVerificationServiceImpl implements EmailVerificationService {
     private IUserRepository userRepository;
     @Autowired
     private JavaMailSender mailSender;
-    @Autowired
-    private DomainConfig domainConfig;
-    
     @Autowired
     public EmailVerificationServiceImpl(JavaMailSender mailSender) {
         this.mailSender = mailSender;
@@ -51,7 +47,7 @@ public class EmailVerificationServiceImpl implements EmailVerificationService {
     @Override
     public void sendVerificationEmail(User user, String token) {
         String subject = "Active Your Account";
-        String activationUrl = domainConfig.getFrontendDomain() + "/auth/activate?token=" + token;
+        String activationUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/auth/activate?token=" + token;
         String body = "<p>Click the link below to activate your account:</p><p><a href=\"" + activationUrl + "\">Activate Now</a></p>";
 
         sendEmail(user.getEmail(), subject, body);
