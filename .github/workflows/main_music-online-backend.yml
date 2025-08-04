@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-    build:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -69,7 +69,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'music-online-backend' 
+          app-name: 'music-online-backend'
           slot-name: 'Production'
           package: 'app.jar'
-
