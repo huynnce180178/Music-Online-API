@@ -5,9 +5,6 @@ spring:
     url: jdbc:mysql://musicdb-musiconline.mysql.database.azure.com:3306/music_online?useSSL=true&requireSSL=true&verifyServerCertificate=false&useUnicode=true&characterEncoding=utf-8&characterSetResults=utf8mb4
     username: huynn@musicdb-musiconline
     password: MusicOnline@2025
-    #    url: jdbc:mysql://localhost:3306/music_online?createDatabaseIfNotExist=true
-    #    username: root
-    #    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

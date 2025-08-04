@@ -71,14 +71,6 @@ public class PaymentServiceImpl implements PaymentService {
         return dtos;
     }
 
-    @Override
-    public PaymentResponseDTO getById(Long id) {
-        Payment payment = paymentRepository.findById(id).orElse(null);
-        if (payment == null) {
-            throw new HttpBadRequest("Payment not found");
-        }
-        return mapToDTO(payment);
-    }
 
     @Override
     public String createPaymentWithPaypal(Long userId, PaymentRequestDTO paymentRequestDTO) {

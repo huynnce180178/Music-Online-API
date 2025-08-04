@@ -30,6 +30,7 @@ import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
@@ -663,6 +664,7 @@ public class SongServiceImpl implements SongService {
             throw new HttpBadRequest("Audio error: " + e.getMessage());
         }
     }
+
     private SongResponseDTO convertToDTO(Song song) {
         Long albumId = null;
         String albumName = null;

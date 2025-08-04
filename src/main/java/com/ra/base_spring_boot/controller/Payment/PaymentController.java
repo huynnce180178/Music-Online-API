@@ -2,8 +2,6 @@ package com.ra.base_spring_boot.controller.Payment;
 
 import com.ra.base_spring_boot.dto.ResponseWrapper;
 import com.ra.base_spring_boot.dto.req.PaymentRequestDTO;
-import com.ra.base_spring_boot.dto.resp.AdvertisementResponse;
-import com.ra.base_spring_boot.dto.resp.PaymentResponseDTO;
 import com.ra.base_spring_boot.model.constants.PaymentMethod;
 import com.ra.base_spring_boot.security.principle.MyUserDetails;
 import com.ra.base_spring_boot.services.payment.PaymentService;

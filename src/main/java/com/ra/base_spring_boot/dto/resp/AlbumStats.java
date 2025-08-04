@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AlbumStats {
     private Integer totalSongs;
-    private Integer totalViews;
+    private Long totalViews;
     private Integer totalDownloads;
     private String totalDuration;
 }

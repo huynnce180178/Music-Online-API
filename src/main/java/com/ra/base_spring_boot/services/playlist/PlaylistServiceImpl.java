@@ -134,7 +134,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 
         boolean exists = playlistSongRepository.findByPlaylists_IdAndSongs_Id(playlistId, songId).isPresent();
         if (exists) {
-            throw new HttpBadRequest("Song with ID: " + songId + " is already in playlist with ID: " + playlistId);
+            throw new HttpBadRequest("Song already in playlist");
         }
         PlaylistSong ps = PlaylistSong.builder()
                 .playlists(playlist)
@@ -152,7 +152,7 @@ public class PlaylistServiceImpl implements PlaylistService {
         Playlist playlist = playlistRepository.findById(playlistId)
                 .orElseThrow(() -> new HttpNotFound("Playlist not found with ID: " + playlistId));
         if (!playlist.getUser().getId().equals(userId)) {
-            throw new HttpUnAuthorized("Only the playlist owner can remove songs from this playlist");
+            throw new HttpUnAuthorized("Access denied. Playlist owner only.");
         }
         PlaylistSong playlistSong = playlistSongRepository.findByPlaylists_IdAndSongs_Id(playlistId, songId)
                 .orElseThrow(() -> new HttpNotFound("Song with ID: " + songId + " not found in playlist with ID: " + playlistId));
@@ -174,7 +174,7 @@ public class PlaylistServiceImpl implements PlaylistService {
             }
         }
         if (allPlaylists.isEmpty()) {
-            throw new HttpNotFound("No playlists found for user.");
+            return new ArrayList<>();
         }
         return allPlaylists.stream()
                 .map(p -> convertToPlaylistDTO(p, getSongsOfPlaylist(p)))
@@ -220,7 +220,7 @@ public class PlaylistServiceImpl implements PlaylistService {
         Playlist playlist = playlistRepository.findById(playlistId)
                 .orElseThrow(() -> new HttpNotFound("Playlist not found with ID: " + playlistId));
         if (!playlist.getUser().getId().equals(userId)) {
-            throw new HttpBadRequest("You do not have permission to delete this playlist.");
+            throw new HttpBadRequest("Permission denied. Playlist owner only.");
         }
         List<PlaylistSong> playlistSongs = playlistSongRepository.findByPlaylists_Id(playlistId);
         playlistSongRepository.deleteAll(playlistSongs);
@@ -233,7 +233,7 @@ public class PlaylistServiceImpl implements PlaylistService {
         Playlist playlist = playlistRepository.findById(playlistId)
                 .orElseThrow(() -> new HttpNotFound("Playlist not found with ID: " + playlistId));
         if (!playlist.getUser().getId().equals(currentUserId)) {
-            throw new HttpBadRequest("You do not have permission to share this playlist.");
+            throw new HttpBadRequest("Permission denied. Playlist owner only.");
         }
         if (playlist.isPublic()) {
             throw new HttpBadRequest("Public playlists do not need to be shared.");
@@ -280,7 +280,7 @@ public class PlaylistServiceImpl implements PlaylistService {
                 .orElseThrow(() -> new HttpNotFound("Playlist not found with ID: " + playlistId));
         Long userId = getCurrentUserId();
         if (originalPlaylist.getUser().getId().equals(userId)) {
-            throw new HttpBadRequest("You already own this playlist");
+            throw new HttpBadRequest("Already own this playlist");
         }
         String ownerName = originalPlaylist.getUser().getFirstName() != null ? originalPlaylist.getUser().getFirstName() : "";
         if (originalPlaylist.getUser().getLastName() != null) {
