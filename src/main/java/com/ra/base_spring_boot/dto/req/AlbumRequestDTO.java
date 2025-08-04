@@ -17,5 +17,6 @@ public class AlbumRequestDTO {
     private String titleAlbum;
     private LocalDateTime releaseDate;
     private MultipartFile coverImageUrl;
+    @Builder.Default
     private AlbumType type = AlbumType.FREE;
 }

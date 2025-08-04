@@ -22,6 +22,7 @@ public class Playlist extends BaseObject {
     private User user;
 
     @Column(name = "is_public")
+    @Builder.Default
     private boolean isPublic = false;
 
     @Column(name = "created_at")
