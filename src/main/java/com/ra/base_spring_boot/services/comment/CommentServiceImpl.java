@@ -93,15 +93,15 @@ public class CommentServiceImpl implements CommentService {
             User parentUser = comment.getParentComment().getUsers();
             if (parentUser != null && !parentUser.getId().equals(currentUser.getId())) {
                 String message = String.format(
-                        "Someone replied to your comment on the song '%s'.",
-                        song.getTitle()
+                    "Someone replied to your comment on the song '%s'.",
+                    song.getTitle()
                 );
                 notificationService.createNotification(
-                        new NotificationRequest(
-                                parentUser.getId(),
-                                message,
-                                "reply_comment"
-                        )
+                    new NotificationRequest(
+                        parentUser.getId(),
+                        message,
+                        "reply_comment"
+                    )
                 );
             }
         }
@@ -149,6 +149,7 @@ public class CommentServiceImpl implements CommentService {
                 .id(comment.getId())
                 .userId(comment.getUsers().getId())
                 .username(comment.getUsers().getFirstName() + " " + comment.getUsers().getLastName())
+                .profileImage(comment.getUsers().getProfileImage())
                 .songId(comment.getSongs().getId())
                 .content(comment.getContent())
                 .parentId(comment.getParentComment() != null ? comment.getParentComment().getId() : null)
@@ -175,8 +176,7 @@ public class CommentServiceImpl implements CommentService {
     private void deleteRepliesRecursively(Long commentId) {
         List<Comment> directReplies = commentRepository.findByParentCommentIdOrderByCreatedAtAsc(commentId);
         for (Comment reply : directReplies) {
-            deleteRepliesRecursively(reply.getId()); // Đệ quy xóa replies của replies
-            commentRepository.delete(reply);
+            deleteRepliesRecursively(reply.getId());
         }
     }
 

@@ -158,7 +158,7 @@ public class DownloadServiceImpl implements DownloadService {
 
             // Hỗ trợ tất cả trình duyệt và thiết bị
             headers.add(HttpHeaders.CONTENT_DISPOSITION,
-                    "attachment; filename=\"" + fileName + "\"; filename*=UTF-8''" + encodedFileName);
+                "attachment; filename=\"" + fileName + "\"; filename*=UTF-8''" + encodedFileName);
 
             // Content-Type cho audio
             headers.setContentType(MediaType.parseMediaType("audio/mpeg"));
@@ -188,8 +188,8 @@ public class DownloadServiceImpl implements DownloadService {
         if (fileName == null) return "song";
 
         return fileName.replaceAll("[<>:\"/\\\\|?*]", "_")
-                .replaceAll("[\\x00-\\x1f\\x7f]", "")
-                .trim();
+                      .replaceAll("[\\x00-\\x1f\\x7f]", "")
+                      .trim();
     }
 
     private byte[] downloadFileData(String fileUrl) throws Exception {
@@ -226,7 +226,7 @@ public class DownloadServiceImpl implements DownloadService {
         connection.setReadTimeout(120000);
 
         connection.setRequestProperty("User-Agent",
-                "Mozilla/5.0 (compatible; MusicApp/1.0; +http://musicapp.com/bot)");
+            "Mozilla/5.0 (compatible; MusicApp/1.0; +http://musicapp.com/bot)");
         connection.setRequestProperty("Accept", "*/*");
         connection.setRequestProperty("Accept-Encoding", "identity");
         connection.setRequestProperty("Connection", "keep-alive");
@@ -239,7 +239,7 @@ public class DownloadServiceImpl implements DownloadService {
 
         try (InputStream inputStream = connection.getInputStream();
              ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-
+            
             byte[] buffer = new byte[8192];
             int bytesRead;
             long totalBytes = 0;
@@ -248,7 +248,7 @@ public class DownloadServiceImpl implements DownloadService {
                 outputStream.write(buffer, 0, bytesRead);
                 totalBytes += bytesRead;
             }
-
+            
             log.debug("Downloaded {} bytes from {}", totalBytes, fileUrl);
             return outputStream.toByteArray();
         } finally {

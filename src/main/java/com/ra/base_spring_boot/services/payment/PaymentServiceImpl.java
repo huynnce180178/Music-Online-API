@@ -135,8 +135,7 @@ public class PaymentServiceImpl implements PaymentService {
         vnpayRequest.setAmount(totalAmount);
         String paymentUrl;
         try {
-            paymentUrl = vnpayService.createPayment(vnpayRequest, userId, paymentRequestDTO.getPlanId(), payment.getId(),request );
-            emailVerificationService.sendMailPaymentPaypal(userRepository.getById(userId), paymentUrl, mapToDTO(payment));
+            paymentUrl = vnpayService.createPayment(vnpayRequest, userId, paymentRequestDTO.getPlanId(), payment.getId());            emailVerificationService.sendMailPaymentPaypal(userRepository.getById(userId), paymentUrl, mapToDTO(payment));
         } catch (Exception ex) {
             throw new RuntimeException("Unable to create VNPAY payment link", ex);
         }
