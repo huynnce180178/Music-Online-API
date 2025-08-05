@@ -1,5 +1,6 @@
 package com.ra.base_spring_boot.services.payment;
 
+import com.ra.base_spring_boot.Configuration.DomainConfig;
 import com.ra.base_spring_boot.Configuration.VnpayConfig;
 import com.ra.base_spring_boot.dto.req.NotificationRequest;
 import com.ra.base_spring_boot.dto.req.VnpayRequestDTO;
@@ -31,6 +32,8 @@ public class VnpayService {
     private SubscriptionService subscriptionService;
     @Autowired
     private NotificationService notificationService;
+    @Autowired
+    private DomainConfig domainConfig;
 
     public void updatePaymentStatus(Long paymentId, PaymentStatus status) {
         Payment payment = paymentRepository.findById(paymentId).orElse(null);
@@ -70,7 +73,7 @@ public class VnpayService {
         vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
         vnp_Params.put("vnp_OrderType", orderType);
         vnp_Params.put("vnp_Locale", "vn");
-        vnp_Params.put("vnp_ReturnUrl", VnpayConfig.vnp_ReturnUrl + "?userId=" + userId + "&subscriptionPlanId=" + planId + "&paymentId=" + paymentId);
+        vnp_Params.put("vnp_ReturnUrl", VnpayConfig.getVnpReturnUrl() + "?userId=" + userId + "&subscriptionPlanId=" + planId + "&paymentId=" + paymentId);
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 //        // Thêm các tham số userId, subscriptionPlanId, paymentId vào vnp_Params
 //        vnp_Params.put("userId", String.valueOf(userId));
@@ -133,12 +136,12 @@ public class VnpayService {
                                 "Subscription Confirmed"
                         )
                 );
-                String redirectUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/success?paymentId=" + paymentId;
+                String redirectUrl = domainConfig.getFrontend() + "/payment/success?paymentId=" + paymentId;
                 response.sendRedirect(redirectUrl);
                 return ResponseEntity.ok("Payment successful!");
             } else {
                 updatePaymentStatus(paymentId, PaymentStatus.FAILED);
-                String failUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=" + URLEncoder.encode("Error code: " + responseCode, StandardCharsets.UTF_8);
+                String failUrl = domainConfig.getFrontend() + "/payment/fail?message=" + URLEncoder.encode("Error code: " + responseCode, StandardCharsets.UTF_8);
                 response.sendRedirect(failUrl);
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment failed! Error code: " + responseCode);
             }
@@ -146,7 +149,7 @@ public class VnpayService {
             System.err.println("[ERROR] Exception during payment return handling: " + e.getMessage());
 
             try {
-                String errorUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=" + URLEncoder.encode("System error: " + e.getMessage(), StandardCharsets.UTF_8);
+                String errorUrl = domainConfig.getFrontend() + "/payment/fail?message=" + URLEncoder.encode("System error: " + e.getMessage(), StandardCharsets.UTF_8);
                 response.sendRedirect(errorUrl);
             } catch (Exception ex) {
                 System.err.println("[ERROR] Failed to redirect after exception: " + ex.getMessage());

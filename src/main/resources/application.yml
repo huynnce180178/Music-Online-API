@@ -5,9 +5,6 @@ spring:
     url: jdbc:mysql://musicdb-musiconline.mysql.database.azure.com:3306/music_online?useSSL=true&requireSSL=true&verifyServerCertificate=false&useUnicode=true&characterEncoding=utf-8&characterSetResults=utf8mb4
     username: huynn@musicdb-musiconline
     password: MusicOnline@2025
-#    url: jdbc:mysql://localhost:3306/music_online?createDatabaseIfNotExist=true
-#    username: root
-#    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -66,7 +63,7 @@ open:
     title: Music Online API Documentation
     version: 1.0
     description: API Documentation
-    serverUrl: https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net
+    serverUrl: ${domain.frontend}
     serverName: Azure Server
 cloudinary:
   cloud:
@@ -106,3 +103,6 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
   file:
     name: logs/application.log
+domain:
+  frontend: https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net
+  backend: http://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net

@@ -1,5 +1,6 @@
 package com.ra.base_spring_boot.security;
 
+import com.ra.base_spring_boot.Configuration.DomainConfig;
 import com.ra.base_spring_boot.model.constants.RoleName;
 import com.ra.base_spring_boot.security.exception.AccessDenied;
 import com.ra.base_spring_boot.security.exception.JwtEntryPoint;
@@ -35,6 +36,7 @@ public class SecurityConfig
     private final JwtEntryPoint jwtEntryPoint;
     private final AccessDenied accessDenied;
     private final JwtTokenFilter jwtTokenFilter;
+    private final DomainConfig domainConfig;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
@@ -43,7 +45,7 @@ public class SecurityConfig
                 .cors(cf -> cf.configurationSource(request ->
                 {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net")); // phụ thuộc vào port clents
+                    config.setAllowedOrigins(List.of(domainConfig.getFrontend()));
                     config.setAllowedMethods(List.of("*"));
                     config.setAllowCredentials(true);
                     config.setAllowedHeaders(List.of("*"));
@@ -70,7 +72,7 @@ public class SecurityConfig
                             String uri = request.getRequestURI();
                             String provider = "google";
                             if (uri.contains("facebook")) provider = "facebook";
-                            response.sendRedirect("https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/oauth2/success.html?oauth2=true&provider=" + provider);
+                            response.sendRedirect(domainConfig.getFrontend() + "/oauth2/success.html?oauth2=true&provider=" + provider);
                         })
                 )
                 .authenticationProvider(authenticationProvider())

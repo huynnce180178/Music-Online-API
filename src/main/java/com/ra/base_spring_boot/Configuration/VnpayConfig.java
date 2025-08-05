@@ -1,6 +1,9 @@
 package com.ra.base_spring_boot.Configuration;
 
+import com.ra.base_spring_boot.Configuration.DomainConfig;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -10,14 +13,28 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
+@Component
 public class VnpayConfig {
 
+    private static DomainConfig domainConfig;
+
+    @Autowired
+    public void setDomainConfig(DomainConfig domainConfig) {
+        VnpayConfig.domainConfig = domainConfig;
+    }
+
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "http://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net/api/v1/user/payment/vnpay/return";
     // #vnpay
     public static String vnp_TmnCode = "WXIRTBO2";
     public static String secretKey = "MZ5SRNUZNV79U8KXHDNO6D6R8UCAT63K";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
+
+    public static String getVnpReturnUrl() {
+        if (domainConfig == null) {
+            throw new IllegalStateException("DomainConfig not initialized");
+        }
+        return domainConfig.getBackend() + "/api/v1/user/payment/vnpay/return";
+    }
 
     public static String md5(String message) {
         String digest = null;
