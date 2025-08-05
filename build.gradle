@@ -71,15 +71,8 @@ dependencies {
         exclude group: 'commons-logging', module: 'commons-logging'
     }
     
-    // Đảm bảo sử dụng đúng version của Logback
-    implementation('org.springframework.boot:spring-boot-starter-logging') {
-        exclude group: 'ch.qos.logback', module: 'logback-classic'
-        exclude group: 'ch.qos.logback', module: 'logback-core'
-    }
-    
-    // Thêm explicit Logback dependencies với version tương thích
-    implementation 'ch.qos.logback:logback-classic:1.4.11'
-    implementation 'ch.qos.logback:logback-core:1.4.11'
+    // Spring Boot starter logging (includes Logback by default)
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
 }
 
 tasks.named('test') {
