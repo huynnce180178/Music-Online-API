@@ -15,11 +15,9 @@ import com.ra.base_spring_boot.repository.PaymentRepository;
 import com.ra.base_spring_boot.repository.SubscriptionPlanRepository;
 import com.ra.base_spring_boot.services.EmailVerificationService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,7 +52,10 @@ public class PaymentServiceImpl implements PaymentService {
                 .paymentStatus(payment.getPaymentStatus())
                 .transitionId(payment.getTransactionId())
                 .build();
-    };
+    }
+
+    ;
+
     private Payment mapToEntity(PaymentRequestDTO paymentRequestDTO) {
         return Payment.builder()
                 .subscription_plan(subscriptionPlanRepository.getById(paymentRequestDTO.getPlanId()))
@@ -90,12 +91,12 @@ public class PaymentServiceImpl implements PaymentService {
         payment.setPaymentStatus(PaymentStatus.PENDING);
         paymentRepository.save(payment);
         String approvalUrl = null;
-        if (payment.getPaymentMethod()!=null && payment.getPaymentMethod() == PaymentMethod.PAYPAL) {
+        if (payment.getPaymentMethod() != null && payment.getPaymentMethod() == PaymentMethod.PAYPAL) {
             try {
                 approvalUrl = paypalService.createPayment(payment.getAmount(), "USD",
                         "Payment for Order",
-                        "https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net/api/v1/user/payment/paypal/cancel?paymentId="+payment.getId(),
-                        "https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net/api/v1/user/payment/paypal/success?userId="+userId + "&subscriptionPlanId="+paymentRequestDTO.getPlanId() +"&paymentIdDB=" + payment.getId());
+                        "https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net/api/v1/user/payment/paypal/cancel?paymentId=" + payment.getId(),
+                        "https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net/api/v1/user/payment/paypal/success?userId=" + userId + "&subscriptionPlanId=" + paymentRequestDTO.getPlanId() + "&paymentIdDB=" + payment.getId());
                 emailVerificationService.sendMailPaymentPaypal(userRepository.getById(userId), approvalUrl, mapToDTO(payment));
                 return approvalUrl;
 
@@ -105,10 +106,12 @@ public class PaymentServiceImpl implements PaymentService {
         }
         return approvalUrl;
     }
+
     @Override
     public void delete(Long id) {
         Payment payment = paymentRepository.findById(id).orElse(null);
     }
+
     @Override
     public void updatePaymentStatus(Long paymentId, PaymentStatus status) {
         Payment payment = paymentRepository.findById(paymentId).orElse(null);
@@ -135,13 +138,15 @@ public class PaymentServiceImpl implements PaymentService {
         vnpayRequest.setAmount(totalAmount);
         String paymentUrl;
         try {
-            paymentUrl = vnpayService.createPayment(vnpayRequest, userId, paymentRequestDTO.getPlanId(), payment.getId());            emailVerificationService.sendMailPaymentPaypal(userRepository.getById(userId), paymentUrl, mapToDTO(payment));
+            paymentUrl = vnpayService.createPayment(vnpayRequest, userId, paymentRequestDTO.getPlanId(), payment.getId());
+            emailVerificationService.sendMailPaymentPaypal(userRepository.getById(userId), paymentUrl, mapToDTO(payment));
         } catch (Exception ex) {
             throw new RuntimeException("Unable to create VNPAY payment link", ex);
         }
 
         return paymentUrl;
     }
+
     @Override
     public String createPaymentWithZalopay(Long id, PaymentRequestDTO paymentRequestDTO) {
         Payment payment = mapToEntity(paymentRequestDTO);
@@ -154,7 +159,7 @@ public class PaymentServiceImpl implements PaymentService {
         Double totalAmount = payment.getAmount() * exchangeRateService.getUSDtoVND();
         String paymentUrl;
         try {
-            String jsonString  = zalopayService.createOrder(id,totalAmount);
+            String jsonString = zalopayService.createOrder(id, totalAmount);
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(jsonString);
 

@@ -6,7 +6,6 @@ import com.ra.base_spring_boot.dto.req.VnpayRequestDTO;
 import com.ra.base_spring_boot.dto.resp.SubscriptionResponseDTO;
 import com.ra.base_spring_boot.exception.HttpBadRequest;
 import com.ra.base_spring_boot.model.Payment;
-import com.ra.base_spring_boot.model.Subscription;
 import com.ra.base_spring_boot.model.constants.PaymentStatus;
 import com.ra.base_spring_boot.repository.PaymentRepository;
 import com.ra.base_spring_boot.services.notification.NotificationService;
@@ -120,7 +119,7 @@ public class VnpayService {
 
             if ("00".equals(responseCode)) {
                 updatePaymentStatus(paymentId, PaymentStatus.COMPLETED);
-                SubscriptionResponseDTO subscription = subscriptionService.subscribe(userId,planId);
+                SubscriptionResponseDTO subscription = subscriptionService.subscribe(userId, planId);
                 String ownerMessage = String.format(
                         "You have successfully subscribed to the '%s' plan. Your subscription will expire in %d days.",
                         subscription.getPlan(),
@@ -134,12 +133,12 @@ public class VnpayService {
                                 "Subscription Confirmed"
                         )
                 );
-                String redirectUrl = "http://localhost:5173/payment/success?paymentId=" + paymentId;
+                String redirectUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/success?paymentId=" + paymentId;
                 response.sendRedirect(redirectUrl);
                 return ResponseEntity.ok("Payment successful!");
             } else {
                 updatePaymentStatus(paymentId, PaymentStatus.FAILED);
-                String failUrl = "http://localhost:5173/payment/fail?message=" + URLEncoder.encode("Error code: " + responseCode, StandardCharsets.UTF_8);
+                String failUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=" + URLEncoder.encode("Error code: " + responseCode, StandardCharsets.UTF_8);
                 response.sendRedirect(failUrl);
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment failed! Error code: " + responseCode);
             }
@@ -147,7 +146,7 @@ public class VnpayService {
             System.err.println("[ERROR] Exception during payment return handling: " + e.getMessage());
 
             try {
-                String errorUrl = "http://localhost:5173/payment/fail?message=" + URLEncoder.encode("System error: " + e.getMessage(), StandardCharsets.UTF_8);
+                String errorUrl = "https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net/payment/fail?message=" + URLEncoder.encode("System error: " + e.getMessage(), StandardCharsets.UTF_8);
                 response.sendRedirect(errorUrl);
             } catch (Exception ex) {
                 System.err.println("[ERROR] Failed to redirect after exception: " + ex.getMessage());
