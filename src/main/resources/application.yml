@@ -34,13 +34,14 @@ spring:
             scope:
               - email
               - profile
+            redirect-uri: "${domain.backend}/login/oauth2/code/google"
           facebook:
             client-id: 1123138156342530
             client-secret: 01f45764aa898bb33fd3c794d0434687
             scope:
               - email
               - public_profile
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            redirect-uri: "${domain.backend}/login/oauth2/code/facebook"
         provider:
           google:
             authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
@@ -104,5 +105,5 @@ logging:
   file:
     name: logs/application.log
 domain:
-  frontend: https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net
+  frontend: https://melozy.io.vn
   backend: https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net
