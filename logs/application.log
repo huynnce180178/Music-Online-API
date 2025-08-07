@@ -791,3 +791,54 @@ Caused by: java.lang.ClassNotFoundException: com.ra.base_spring_boot.advice.Glob
 2025-08-07 17:04:27.311 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
 2025-08-07 17:04:28.201 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
 2025-08-07 17:04:28.201 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-07 17:04:39.548 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-07 17:04:39.749 [restartedMain] DEBUG c.r.b.security.jwt.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-08-07 17:04:40.833 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'selfCheckScheduleTask': Unsatisfied dependency expressed through field 'subscriptionService': Error creating bean with name 'subscriptionServiceImpl': Unsatisfied dependency expressed through field 'notificationService': Error creating bean with name 'notificationServiceImpl': Unsatisfied dependency expressed through field 'userService': Error creating bean with name 'userServiceImpl': Unsatisfied dependency expressed through field 'passwordEncoder': No qualifying bean of type 'org.springframework.security.crypto.password.PasswordEncoder' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2025-08-07 17:04:40.833 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-07 17:04:41.263 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-08-07 17:04:41.287 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-08-07 17:04:41.324 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field passwordEncoder in com.ra.base_spring_boot.services.user.UserServiceImpl required a bean of type 'org.springframework.security.crypto.password.PasswordEncoder' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.security.crypto.password.PasswordEncoder' in your configuration.
+
+2025-08-07 17:22:52.642 [restartedMain] INFO  c.r.b.BaseSpringBootApplication - Starting BaseSpringBootApplication using Java 17.0.12 with PID 26592 (D:\OJT\MusicOnlineDeploy\Music-Online-API\build\classes\java\main started by HuyNguyen in D:\OJT\MusicOnlineDeploy\Music-Online-API)
+2025-08-07 17:22:52.643 [restartedMain] DEBUG c.r.b.BaseSpringBootApplication - Running with Spring Boot v3.3.4, Spring v6.1.13
+2025-08-07 17:22:52.643 [restartedMain] INFO  c.r.b.BaseSpringBootApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-07 17:22:53.804 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-07 17:22:53.903 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 98 ms. Found 24 JPA repository interfaces.
+2025-08-07 17:22:54.124 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-08-07 17:22:54.125 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-07 17:22:54.126 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2025-08-07 17:22:54.151 [restartedMain] INFO  o.a.c.c.C.[Tomcat-3].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-07 17:22:54.151 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1499 ms
+2025-08-07 17:22:54.223 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-07 17:22:55.116 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-07 17:22:55.116 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-07 17:23:04.758 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-07 17:23:04.886 [restartedMain] DEBUG c.r.b.security.jwt.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+2025-08-07 17:23:06.428 [restartedMain] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-08-07 17:23:11.372 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-07 17:23:11.912 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-07 17:23:11.942 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-08-07 17:23:11.943 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+2025-08-07 17:23:11.943 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@321805c1]]
+2025-08-07 17:23:11.943 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+2025-08-07 17:23:11.945 [restartedMain] INFO  c.r.b.BaseSpringBootApplication - Started BaseSpringBootApplication in 19.368 seconds (process running for 2086.255)
+2025-08-07 17:23:11.945 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2025-08-07 17:24:11.939 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 1, completed tasks = 0]

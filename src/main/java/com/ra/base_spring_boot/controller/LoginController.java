@@ -170,8 +170,28 @@ public class LoginController {
                             .data("Facebook user not found")
                             .build());
                 }
+                // Đối với Facebook, không cần kiểm tra email match vì có thể là email giả
+            } else if (email.endsWith("@facebook.temp")) {
+                // Trường hợp frontend gửi email Facebook giả, tìm user theo facebookId từ email
+                String facebookId = email.replace("@facebook.temp", "");
+                user = loginRepository.findByFacebookId(facebookId).orElse(null);
+                if (user == null) {
+                    return ResponseEntity.ok(ResponseWrapper.builder()
+                            .status(HttpStatus.NOT_FOUND)
+                            .code(404)
+                            .data("Facebook user not found")
+                            .build());
+                }
+                // Verify token subject phải khớp với facebook ID
+                if (!emailFromToken.equals("facebook_" + facebookId)) {
+                    return ResponseEntity.ok(ResponseWrapper.builder()
+                            .status(HttpStatus.UNAUTHORIZED)
+                            .code(401)
+                            .data("Facebook token mismatch")
+                            .build());
+                }
             } else {
-                // Google user hoặc user có email
+                // Google user hoặc user có email thật
                 if (emailFromToken == null || !email.equals(emailFromToken)) {
                     return ResponseEntity.ok(ResponseWrapper.builder()
                             .status(HttpStatus.UNAUTHORIZED)
