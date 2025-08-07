@@ -90,9 +90,21 @@ public class SecurityConfig
                                 String name = oauth2User.getAttribute("name");
                                 String provider = request.getRequestURI().contains("google") ? "google" : "facebook";
 
+                                // Debug log để kiểm tra attributes
+                                System.out.println("OAuth2 Provider: " + provider);
+                                System.out.println("Email: " + email);
+                                System.out.println("Facebook ID: " + facebookId);
+                                System.out.println("Name: " + name);
+                                System.out.println("All attributes: " + oauth2User.getAttributes());
+
+                                // Với Facebook, nếu không có email, tạo email giả
+                                if (provider.equals("facebook") && email == null && facebookId != null) {
+                                    email = facebookId + "@facebook.temp";
+                                }
+
                                 // Tìm hoặc tạo user
                                 com.ra.base_spring_boot.model.User user = null;
-                                if (email != null) {
+                                if (email != null && !email.endsWith("@facebook.temp")) {
                                     user = userRepository.findByEmail(email).orElse(null);
                                 }
                                 if (user == null && facebookId != null) {
@@ -100,11 +112,12 @@ public class SecurityConfig
                                 }
 
                                 if (user == null) {
+                                    // Tạo user mới
                                     com.ra.base_spring_boot.model.Role defaultRole = roleRepository.findById(3L)
                                             .orElseThrow(() -> new RuntimeException("Default role not found"));
 
                                     user = com.ra.base_spring_boot.model.User.builder()
-                                            .email(email != null ? email : (facebookId + "@facebook.com"))
+                                            .email(email != null ? email : (facebookId + "@facebook.temp"))
                                             .facebookId(facebookId)
                                             .firstName(name != null ? name : "")
                                             .lastName("")
@@ -117,17 +130,21 @@ public class SecurityConfig
                                     user = userRepository.save(user);
                                 }
 
-                                // Tạo JWT token
-                                String accessToken = jwtProvider.generateToken(user.getEmail());
+                                // Tạo JWT token - sử dụng email hoặc facebookId
+                                String tokenSubject = user.getEmail();
+                                if (tokenSubject == null || tokenSubject.endsWith("@facebook.temp")) {
+                                    tokenSubject = "facebook_" + user.getFacebookId();
+                                }
+                                String accessToken = jwtProvider.generateToken(tokenSubject);
 
                                 // Tạo URL redirect với thông tin user
                                 String redirectUrl = domainConfig.getFrontend() + "/oauth/callback?oauth2=true&provider=" + provider
-                                    + "&accessToken=" + java.net.URLEncoder.encode(accessToken, "UTF-8")
-                                    + "&userId=" + user.getId()
-                                    + "&userName=" + java.net.URLEncoder.encode(user.getFirstName() != null ? user.getFirstName() : "", "UTF-8")
-                                    + "&email=" + java.net.URLEncoder.encode(email != null ? email : "", "UTF-8")
-                                    + "&facebookId=" + (facebookId != null ? facebookId : "")
-                                    + "&needCompleteProfile=" + (user.getFirstName() == null || user.getFirstName().isEmpty());
+                                        + "&accessToken=" + java.net.URLEncoder.encode(accessToken, "UTF-8")
+                                        + "&userId=" + user.getId()
+                                        + "&userName=" + java.net.URLEncoder.encode(user.getFirstName() != null ? user.getFirstName() : "", "UTF-8")
+                                        + "&email=" + java.net.URLEncoder.encode(email != null ? email : "", "UTF-8")
+                                        + "&facebookId=" + (facebookId != null ? facebookId : "")
+                                        + "&needCompleteProfile=" + (user.getFirstName() == null || user.getFirstName().isEmpty());
 
                                 response.sendRedirect(redirectUrl);
                             } catch (Exception e) {

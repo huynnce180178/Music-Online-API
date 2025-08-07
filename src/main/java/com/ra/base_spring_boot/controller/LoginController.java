@@ -128,6 +128,7 @@ public class LoginController {
                         .build());
             }
 
+            // Extract email from token để verify
             String emailFromToken;
             try {
                 emailFromToken = jwtProvider.extractUsername(accessToken);
@@ -139,6 +140,7 @@ public class LoginController {
                         .build());
             }
 
+            // Verify token expiration
             try {
                 if (jwtProvider.isTokenExpired(accessToken)) {
                     return ResponseEntity.ok(ResponseWrapper.builder()
@@ -155,23 +157,38 @@ public class LoginController {
                         .build());
             }
 
-            // Verify email match
-            if (emailFromToken == null || !email.equals(emailFromToken)) {
-                return ResponseEntity.ok(ResponseWrapper.builder()
-                        .status(HttpStatus.UNAUTHORIZED)
-                        .code(401)
-                        .data("Token email mismatch")
-                        .build());
-            }
+            // Verify email/token match - handle Facebook case
+            User user = null;
+            if (emailFromToken.startsWith("facebook_")) {
+                // Facebook user với token subject = "facebook_facebookId"
+                String facebookId = emailFromToken.replace("facebook_", "");
+                user = loginRepository.findByFacebookId(facebookId).orElse(null);
+                if (user == null) {
+                    return ResponseEntity.ok(ResponseWrapper.builder()
+                            .status(HttpStatus.NOT_FOUND)
+                            .code(404)
+                            .data("Facebook user not found")
+                            .build());
+                }
+            } else {
+                // Google user hoặc user có email
+                if (emailFromToken == null || !email.equals(emailFromToken)) {
+                    return ResponseEntity.ok(ResponseWrapper.builder()
+                            .status(HttpStatus.UNAUTHORIZED)
+                            .code(401)
+                            .data("Token email mismatch")
+                            .build());
+                }
 
-            // Tìm user trong database
-            User user = loginRepository.findByEmail(email).orElse(null);
-            if (user == null) {
-                return ResponseEntity.ok(ResponseWrapper.builder()
-                        .status(HttpStatus.NOT_FOUND)
-                        .code(404)
-                        .data("User not found")
-                        .build());
+                // Tìm user trong database
+                user = loginRepository.findByEmail(email).orElse(null);
+                if (user == null) {
+                    return ResponseEntity.ok(ResponseWrapper.builder()
+                            .status(HttpStatus.NOT_FOUND)
+                            .code(404)
+                            .data("User not found")
+                            .build());
+                }
             }
 
             // Kiểm tra user status
