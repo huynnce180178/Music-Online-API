@@ -3,7 +3,7 @@ spring:
     name: base_spring_boot
   datasource:
     url: jdbc:mysql://musicdb-musiconline.mysql.database.azure.com:3306/music_online?useSSL=true&requireSSL=true&verifyServerCertificate=false&useUnicode=true&characterEncoding=utf-8&characterSetResults=utf8mb4
-    username: huynn@musicdb-musiconline
+    username: huynn
     password: MusicOnline@2025
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
@@ -105,4 +105,4 @@ logging:
     name: logs/application.log
 domain:
   frontend: https://music-online-client-gcfmcqhfbzakh5ac.southeastasia-01.azurewebsites.net
-  backend: http://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net
+  backend: https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net

@@ -170,7 +170,7 @@ public class GuestServiceImpl implements GuestService {
                         .Views(song.getViews())
                         .fileUrl(song.getFileUrl())
                         .profile_pic_url(song.getProfilePicUrl())
-                        .artistName(song.getUsers().getFirstName()+song.getUsers().getLastName())
+                        .artistName(song.getUsers().getFirstName())
                         .build()).toList();
 
     }
