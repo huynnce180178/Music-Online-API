@@ -141,28 +141,98 @@ public class SecurityConfig
 
     public static class CustomAuthorizationRequestRepository implements AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
         private static final String OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME = "oauth2_auth_request";
+        private static final String REDIRECT_URI_PARAM_COOKIE_NAME = "redirect_uri";
+        private static final int COOKIE_EXPIRE_SECONDS = 180;
 
         @Override
         public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest request) {
-            return (OAuth2AuthorizationRequest) request.getSession().getAttribute(OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
+            return getCookie(request, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME)
+                    .map(this::deserialize)
+                    .orElse(null);
         }
 
         @Override
         public void saveAuthorizationRequest(OAuth2AuthorizationRequest authorizationRequest, HttpServletRequest request, HttpServletResponse response) {
             if (authorizationRequest == null) {
-                request.getSession().removeAttribute(OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
+                deleteCookie(request, response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
+                deleteCookie(request, response, REDIRECT_URI_PARAM_COOKIE_NAME);
                 return;
             }
-            request.getSession().setAttribute(OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, authorizationRequest);
+
+            addCookie(response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, serialize(authorizationRequest), COOKIE_EXPIRE_SECONDS);
+            String redirectUriAfterLogin = request.getParameter(REDIRECT_URI_PARAM_COOKIE_NAME);
+            if (redirectUriAfterLogin != null && !redirectUriAfterLogin.isBlank()) {
+                addCookie(response, REDIRECT_URI_PARAM_COOKIE_NAME, redirectUriAfterLogin, COOKIE_EXPIRE_SECONDS);
+            }
         }
 
         @Override
         public OAuth2AuthorizationRequest removeAuthorizationRequest(HttpServletRequest request, HttpServletResponse response) {
             OAuth2AuthorizationRequest authorizationRequest = loadAuthorizationRequest(request);
             if (authorizationRequest != null) {
-                request.getSession().removeAttribute(OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
+                deleteCookie(request, response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
+                deleteCookie(request, response, REDIRECT_URI_PARAM_COOKIE_NAME);
             }
             return authorizationRequest;
+        }
+
+        private java.util.Optional<String> getCookie(HttpServletRequest request, String name) {
+            jakarta.servlet.http.Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (jakarta.servlet.http.Cookie cookie : cookies) {
+                    if (name.equals(cookie.getName())) {
+                        return java.util.Optional.of(cookie.getValue());
+                    }
+                }
+            }
+            return java.util.Optional.empty();
+        }
+
+        private void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
+            jakarta.servlet.http.Cookie cookie = new jakarta.servlet.http.Cookie(name, value);
+            cookie.setPath("/");
+            cookie.setHttpOnly(true);
+            cookie.setMaxAge(maxAge);
+            cookie.setSecure(true); // HTTPS only for production
+            cookie.setAttribute("SameSite", "Lax");
+            response.addCookie(cookie);
+        }
+
+        private void deleteCookie(HttpServletRequest request, HttpServletResponse response, String name) {
+            jakarta.servlet.http.Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (jakarta.servlet.http.Cookie cookie : cookies) {
+                    if (name.equals(cookie.getName())) {
+                        cookie.setValue("");
+                        cookie.setPath("/");
+                        cookie.setMaxAge(0);
+                        response.addCookie(cookie);
+                    }
+                }
+            }
+        }
+
+        private String serialize(OAuth2AuthorizationRequest authorizationRequest) {
+            try {
+                java.io.ByteArrayOutputStream bos = new java.io.ByteArrayOutputStream();
+                try (java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(bos)) {
+                    oos.writeObject(authorizationRequest);
+                }
+                return java.util.Base64.getEncoder().encodeToString(bos.toByteArray());
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to serialize OAuth2AuthorizationRequest", e);
+            }
+        }
+
+        private OAuth2AuthorizationRequest deserialize(String serialized) {
+            try {
+                byte[] data = java.util.Base64.getDecoder().decode(serialized);
+                try (java.io.ObjectInputStream ois = new java.io.ObjectInputStream(new java.io.ByteArrayInputStream(data))) {
+                    return (OAuth2AuthorizationRequest) ois.readObject();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to deserialize OAuth2AuthorizationRequest", e);
+            }
         }
     }
 }
