@@ -104,7 +104,7 @@ public class SecurityConfig
 
                                 // Tìm hoặc tạo user
                                 com.ra.base_spring_boot.model.User user = null;
-                                if (email != null && !email.endsWith("@facebook.temp")) {
+                                if (email != null && !email.endsWith("@facebook.temp") && !email.endsWith("@facebook.com")) {
                                     user = userRepository.findByEmail(email).orElse(null);
                                 }
                                 if (user == null && facebookId != null) {
@@ -130,11 +130,16 @@ public class SecurityConfig
                                     user = userRepository.save(user);
                                 }
 
-                                // Tạo JWT token - sử dụng email hoặc facebookId
-                                String tokenSubject = user.getEmail();
-                                if (tokenSubject == null || tokenSubject.endsWith("@facebook.temp")) {
+                                // Tạo JWT token - LUÔN dùng facebook_facebookId cho Facebook users
+                                String tokenSubject;
+                                if (provider.equals("facebook")) {
                                     tokenSubject = "facebook_" + user.getFacebookId();
+                                } else {
+                                    tokenSubject = user.getEmail();
                                 }
+
+                                // Debug log cho JWT token
+                                System.out.println("Creating JWT token with subject: " + tokenSubject);
                                 String accessToken = jwtProvider.generateToken(tokenSubject);
 
                                 // Tạo URL redirect với thông tin user
