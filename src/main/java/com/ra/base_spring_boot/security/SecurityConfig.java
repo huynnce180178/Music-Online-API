@@ -2,8 +2,11 @@ package com.ra.base_spring_boot.security;
 
 import com.ra.base_spring_boot.Configuration.DomainConfig;
 import com.ra.base_spring_boot.model.constants.RoleName;
+import com.ra.base_spring_boot.repository.IRoleRepository;
+import com.ra.base_spring_boot.repository.LoginRepository;
 import com.ra.base_spring_boot.security.exception.AccessDenied;
 import com.ra.base_spring_boot.security.exception.JwtEntryPoint;
+import com.ra.base_spring_boot.security.jwt.JwtProvider;
 import com.ra.base_spring_boot.security.jwt.JwtTokenFilter;
 import com.ra.base_spring_boot.security.principle.MyUserDetailsService;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +44,9 @@ public class SecurityConfig
     private final AccessDenied accessDenied;
     private final JwtTokenFilter jwtTokenFilter;
     private final DomainConfig domainConfig;
+    private final LoginRepository userRepository;
+    private final IRoleRepository roleRepository;
+    private final JwtProvider jwtProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
@@ -74,20 +80,58 @@ public class SecurityConfig
                         .authorizationEndpoint(authorization ->
                                 authorization.authorizationRequestRepository(customAuthorizationRequestRepository()))
                         .successHandler((request, response, authentication) -> {
-                            // Tạo JWT token và chuyển hướng về frontend với token
+                            // Tạo JWT token và user data ngay tại đây
                             try {
-                                String email = authentication.getName();
-                                if (authentication.getPrincipal() instanceof org.springframework.security.oauth2.core.user.OAuth2User) {
-                                    org.springframework.security.oauth2.core.user.OAuth2User oauth2User =
-                                            (org.springframework.security.oauth2.core.user.OAuth2User) authentication.getPrincipal();
-                                    email = oauth2User.getAttribute("email");
+                                org.springframework.security.oauth2.core.user.OAuth2User oauth2User =
+                                        (org.springframework.security.oauth2.core.user.OAuth2User) authentication.getPrincipal();
+
+                                String email = oauth2User.getAttribute("email");
+                                String facebookId = oauth2User.getAttribute("id");
+                                String name = oauth2User.getAttribute("name");
+                                String provider = request.getRequestURI().contains("google") ? "google" : "facebook";
+
+                                // Tìm hoặc tạo user
+                                com.ra.base_spring_boot.model.User user = null;
+                                if (email != null) {
+                                    user = userRepository.findByEmail(email).orElse(null);
+                                }
+                                if (user == null && facebookId != null) {
+                                    user = userRepository.findByFacebookId(facebookId).orElse(null);
                                 }
 
-                                String provider = request.getRequestURI().contains("google") ? "google" : "facebook";
-                                String redirectUrl = domainConfig.getFrontend() + "/oauth/callback?oauth2=true&provider=" + provider + "&email=" + email;
+                                if (user == null) {
+                                    com.ra.base_spring_boot.model.Role defaultRole = roleRepository.findById(3L)
+                                            .orElseThrow(() -> new RuntimeException("Default role not found"));
+
+                                    user = com.ra.base_spring_boot.model.User.builder()
+                                            .email(email != null ? email : (facebookId + "@facebook.com"))
+                                            .facebookId(facebookId)
+                                            .firstName(name != null ? name : "")
+                                            .lastName("")
+                                            .password("")
+                                            .status(com.ra.base_spring_boot.model.constants.UserStatus.ACTIVE)
+                                            .createdAt(java.time.LocalDateTime.now())
+                                            .updatedAt(java.time.LocalDateTime.now())
+                                            .roles(java.util.Set.of(defaultRole))
+                                            .build();
+                                    user = userRepository.save(user);
+                                }
+
+                                // Tạo JWT token
+                                String accessToken = jwtProvider.generateToken(user.getEmail());
+
+                                // Tạo URL redirect với thông tin user
+                                String redirectUrl = domainConfig.getFrontend() + "/oauth/callback?oauth2=true&provider=" + provider
+                                    + "&accessToken=" + java.net.URLEncoder.encode(accessToken, "UTF-8")
+                                    + "&userId=" + user.getId()
+                                    + "&userName=" + java.net.URLEncoder.encode(user.getFirstName() != null ? user.getFirstName() : "", "UTF-8")
+                                    + "&email=" + java.net.URLEncoder.encode(email != null ? email : "", "UTF-8")
+                                    + "&facebookId=" + (facebookId != null ? facebookId : "")
+                                    + "&needCompleteProfile=" + (user.getFirstName() == null || user.getFirstName().isEmpty());
 
                                 response.sendRedirect(redirectUrl);
                             } catch (Exception e) {
+                                e.printStackTrace();
                                 response.sendRedirect(domainConfig.getFrontend() + "/oauth/callback?oauth2=false&error=" + e.getMessage());
                             }
                         })
