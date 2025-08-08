@@ -234,20 +234,37 @@ public class GuestServiceImpl implements GuestService {
         }).toList();
     }
 
-    @Override
+   @Override
     public List<Top15AlbumsResponseDTO> getTop15Albums() {
-        List<Album> albums = albumRepository.findTop15Albums();
-        return albums.stream().map(a -> {
-            List<Song> songs = songRepository.findApprovedSongsByAlbumId(a.getId());
-            long totalViews = songs.stream().mapToLong(Song::getViews).sum();
-            return Top15AlbumsResponseDTO.builder()
-                    .id(a.getId())
-                    .title(a.getTitle())
-                    .coverUrl(a.getCoverImage())
-                    .artistName(getArtistFullNameFromAlbum(a))
-                    .totalViews(totalViews)
-                    .build();
-        }).toList();
+        List<Album> albums = Optional.ofNullable(albumRepository.findTop15Albums())
+                .orElseGet(Collections::emptyList);
+
+        return albums.stream()
+                .filter(Objects::nonNull)
+                .map(a -> {
+                    List<Song> songs = Optional.ofNullable(songRepository.findApprovedSongsByAlbumId(a.getId()))
+                            .orElseGet(Collections::emptyList);
+
+                    long totalViews = songs.stream()
+                            .filter(Objects::nonNull)
+                            .mapToLong(s -> {
+                                Long v = s.getViews();
+                                return v != null ? v : 0L;
+                            })
+                            .sum();
+
+                    String artistName = Optional.ofNullable(getArtistFullNameFromAlbum(a))
+                            .orElse("Unknown");
+
+                    return Top15AlbumsResponseDTO.builder()
+                            .id(a.getId())
+                            .title(a.getTitle())
+                            .coverUrl(a.getCoverImage())
+                            .artistName(artistName)
+                            .totalViews(totalViews)
+                            .build();
+                })
+                .toList();
     }
 
     @Override
