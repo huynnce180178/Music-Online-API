@@ -50,6 +50,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import com.ra.base_spring_boot.services.notification.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.ra.base_spring_boot.dto.resp.GenreResponseDTO;
 
 @RequiredArgsConstructor
 @Service
@@ -123,21 +124,25 @@ public class SongServiceImpl implements SongService {
             throw new HttpBadRequest("Permission denied. Only song owner can update.");
         }
 
-        User user = userRepository.findById(currentArtistId)
-                .orElseThrow(() -> new HttpBadRequest("Artist not found"));
-
-        List<Genre> genres = genreRepository.findAllById(dto.getGenreIds());
-        if (genres.isEmpty()) {
-            throw new HttpBadRequest("Genres not found");
+        // Update từng trường nếu có truyền lên
+        if (dto.getTitle() != null && !dto.getTitle().isEmpty()) {
+            song.setTitle(dto.getTitle());
         }
-
-        song.setTitle(dto.getTitle());
-        song.setUsers(user);
-        song.setGenres(genres);
+        if (dto.getGenreIds() != null && !dto.getGenreIds().isEmpty()) {
+            List<Genre> genres = genreRepository.findAllById(dto.getGenreIds());
+            if (genres.isEmpty()) {
+                throw new HttpBadRequest("Genres not found");
+            }
+            song.setGenres(genres);
+        }
+        if (dto.getProfilePic() != null && !dto.getProfilePic().isEmpty()) {
+            song.setProfilePicUrl(cloudinaryService.uploadFile(dto.getProfilePic(), "images"));
+        }
+        if (dto.getLyrics() != null) {
+            song.setLyrics(dto.getLyrics());
+        }
+        // Không update user (artist) khi update
         song.setUpdatedAt(LocalDateTime.now());
-        song.setProfilePicUrl(cloudinaryService.uploadFile(dto.getProfilePic(), "images"));
-        song.setLyrics(dto.getLyrics());
-
         return convertToDTO(songRepository.save(song));
     }
 
@@ -682,6 +687,14 @@ public class SongServiceImpl implements SongService {
         String createdAtStr = song.getCreatedAt() != null ? song.getCreatedAt().format(formatter) : null;
         String updatedAtStr = song.getUpdatedAt() != null ? song.getUpdatedAt().format(formatter) : null;
 
+        // Map genres sang GenreResponseDTO
+        List<GenreResponseDTO> genres = null;
+        if (song.getGenres() != null) {
+            genres = song.getGenres().stream()
+                    .map(g -> new GenreResponseDTO(g.getId(), g.getGenreName(), g.getGenreImage()))
+                    .collect(Collectors.toList());
+        }
+
         return SongResponseDTO.builder()
                 .id(song.getId())
                 .title(song.getTitle())
@@ -696,6 +709,7 @@ public class SongServiceImpl implements SongService {
                 .status(song.getStatus() != null ? song.getStatus().name() : null)
                 .createdAtStr(createdAtStr)
                 .updatedAtStr(updatedAtStr)
+                .genres(genres)
                 .build();
     }
 

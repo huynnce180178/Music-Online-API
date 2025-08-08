@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,4 +31,7 @@ public class SongResponseDTO {
     private String createdAtStr;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String updatedAtStr;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<GenreResponseDTO> genres;
 }

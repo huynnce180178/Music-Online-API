@@ -64,7 +64,7 @@ open:
     title: Music Online API Documentation
     version: 1.0
     description: API Documentation
-    serverUrl: ${domain.frontend}
+    serverUrl: ${domain.backend}
     serverName: Azure Server
 cloudinary:
   cloud:
@@ -105,5 +105,5 @@ logging:
   file:
     name: logs/application.log
 domain:
-  frontend: https://melozy.io.vn
+  frontend: http://localhost:5173
   backend: https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net
