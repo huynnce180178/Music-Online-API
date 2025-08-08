@@ -16,9 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.format.DateTimeFormatter;
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static io.jsonwebtoken.lang.Strings.startsWithIgnoreCase;
 
@@ -170,7 +169,7 @@ public class GuestServiceImpl implements GuestService {
                         .Views(song.getViews())
                         .fileUrl(song.getFileUrl())
                         .profile_pic_url(song.getProfilePicUrl())
-                        .artistName(song.getUsers().getFirstName())
+                        .artistName(song.getUsers().getFirstName()+song.getUsers().getLastName())
                         .build()).toList();
 
     }
@@ -218,9 +217,13 @@ public class GuestServiceImpl implements GuestService {
     @Override
     public List<FeaturedAlbumResponseDTO> getFeaturedAlbums() {
         List<Album> albums = albumRepository.findFeaturedAlbums();
+        albums = albums.stream().filter(Objects::nonNull).collect(Collectors.toList());
         return albums.stream().map(a -> {
-            List<Song> songs = songRepository.findApprovedSongsByAlbumId(a.getId());
-            long totalViews = songs.stream().mapToLong(Song::getViews).sum();
+            List<Song> songs = Optional.ofNullable(songRepository.findApprovedSongsByAlbumId(a.getId()))
+                    .orElse(Collections.emptyList());
+            long totalViews = songs.stream()
+                    .mapToLong(song -> song.getViews() == null ? 0L : song.getViews())
+                    .sum();
             return FeaturedAlbumResponseDTO.builder()
                     .id(a.getId())
                     .title(a.getTitle())

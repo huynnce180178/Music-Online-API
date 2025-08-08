@@ -46,14 +46,54 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 
     //top 10 album nổi bật nhất tính theo tổng view của cả album đó - chỉ tính album và bài hát APPROVED
     @Query(value = """
-                SELECT a.id, a.title AS albumName, a.cover_image AS albumImage, SUM(s.views) AS totalViews
-                FROM albums a
-                JOIN songs s ON s.album_id = a.id
-                WHERE a.status = 'APPROVED' AND s.status = 'APPROVED'
-                GROUP BY a.id
-                ORDER BY totalViews DESC
-                LIMIT 10
-            """, nativeQuery = true)
+    (
+        SELECT a.id, a.title AS albumName, a.cover_image AS albumImage, SUM(s.views) AS totalViews, 1 as priority
+        FROM albums a
+        JOIN songs s ON s.album_id = a.id
+        WHERE a.status = 'APPROVED'
+          AND s.status = 'APPROVED'
+          AND MONTH(s.created_at) = MONTH(NOW())
+          AND YEAR(s.created_at) = YEAR(NOW())
+        GROUP BY a.id
+        ORDER BY totalViews DESC
+        LIMIT 10
+    )
+    UNION ALL
+    (
+        SELECT a.id, a.title AS albumName, a.cover_image AS albumImage, SUM(s.views) AS totalViews, 2 as priority
+        FROM albums a
+        JOIN songs s ON s.album_id = a.id
+        WHERE a.status = 'APPROVED'
+          AND s.status = 'APPROVED'
+          AND (
+            (MONTH(s.created_at) = MONTH(DATE_SUB(NOW(), INTERVAL 1 MONTH))
+             AND YEAR(s.created_at) = YEAR(DATE_SUB(NOW(), INTERVAL 1 MONTH)))
+          )
+        GROUP BY a.id
+        ORDER BY totalViews DESC
+        LIMIT 10
+    )
+    UNION ALL
+    (
+        SELECT a.id, a.title AS albumName, a.cover_image AS albumImage, SUM(s.views) AS totalViews, 3 as priority
+        FROM albums a
+        JOIN songs s ON s.album_id = a.id
+        WHERE a.status = 'APPROVED'
+          AND s.status = 'APPROVED'
+          AND (
+                (YEAR(s.created_at) < YEAR(DATE_SUB(NOW(), INTERVAL 1 MONTH)))
+          OR
+                (YEAR(s.created_at) = YEAR(DATE_SUB(NOW(), INTERVAL 1 MONTH))
+         AND MONTH(s.created_at) < MONTH(DATE_SUB(NOW(), INTERVAL 1 MONTH))
+            )
+         )
+        GROUP BY a.id
+        ORDER BY totalViews DESC
+        LIMIT 10
+    )
+    ORDER BY priority ASC, totalViews DESC
+    LIMIT 10
+""", nativeQuery = true)
     List<Object[]> findTop10AlbumsBySongViews();
 
 
@@ -62,16 +102,26 @@ public interface SongRepository extends JpaRepository<Song, Long> {
                 (SELECT s.*, 1 as priority
                  FROM songs s
                  WHERE s.status = 'APPROVED' 
-                 AND s.updated_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+                 AND s.created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
                  ORDER BY s.views DESC
                  LIMIT 15)
                 UNION ALL
                 (SELECT s.*, 2 as priority
                  FROM songs s
                  WHERE s.status = 'APPROVED' 
-                 AND s.updated_at < DATE_SUB(NOW(), INTERVAL 7 DAY)
+                 AND s.created_at < DATE_SUB(NOW(), INTERVAL 30 DAY)
+                 AND s.created_at < DATE_SUB(NOW(), INTERVAL 7 DAY)
                  ORDER BY s.views DESC
                  LIMIT 15)
+                UNION ALL
+                    (
+                        SELECT s.*, 3 as priority
+                        FROM songs s
+                        WHERE s.status = 'APPROVED'
+                          AND s.created_at < DATE_SUB(NOW(), INTERVAL 30 DAY)
+                        ORDER BY s.views DESC
+                        LIMIT 15
+                    )
                 ORDER BY priority ASC, views DESC
                 LIMIT 15
             """, nativeQuery = true)
@@ -117,7 +167,7 @@ public interface SongRepository extends JpaRepository<Song, Long> {
     @Query(value = """
                 SELECT s.*
                 FROM songs s
-                WHERE s.updated_at >= DATE_SUB(NOW(), INTERVAL 30 DAY) AND s.status = 'APPROVED'
+                WHERE s.created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY) AND s.status = 'APPROVED'
                 ORDER BY s.views DESC
                 LIMIT 12
             """, nativeQuery = true)

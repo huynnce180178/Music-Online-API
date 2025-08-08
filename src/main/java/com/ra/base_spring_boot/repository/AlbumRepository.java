@@ -21,22 +21,68 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
 
     // Featured albums list (assuming featured means most viewed) - only APPROVED albums
     @Query(value = """
-                SELECT a.* FROM albums a
+            SELECT sub.* FROM(    
+            (SELECT a.*, 1 as priority FROM albums a
                 JOIN songs s ON s.album_id = a.id
                 WHERE a.status = 'APPROVED' AND s.status = 'APPROVED'
+                AND a.created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
                 GROUP BY a.id
                 ORDER BY SUM(s.views) DESC
-                LIMIT 10
+                LIMIT 10)
+            UNION ALL
+                (SELECT a.*, 2 as priority FROM albums a
+                JOIN songs s ON s.album_id = a.id
+                WHERE a.status = 'APPROVED' AND s.status = 'APPROVED'
+                AND a.created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+                 AND a.created_at < DATE_SUB(NOW(), INTERVAL 7 DAY)
+                GROUP BY a.id
+                ORDER BY SUM(s.views) DESC
+                LIMIT 10)
+            UNION ALL
+                (SELECT a.*, 3 as priority FROM albums a
+                JOIN songs s ON s.album_id = a.id
+                WHERE a.status = 'APPROVED' AND s.status = 'APPROVED'
+                AND a.created_at < DATE_SUB(NOW(), INTERVAL 30 DAY)
+                GROUP BY a.id
+                ORDER BY SUM(s.views) DESC
+                LIMIT 10)
+                ) AS sub
+                ORDER BY priority ASC
+                LIMIT 15
+                
             """, nativeQuery = true)
     List<Album> findFeaturedAlbums();
 
     // Top 15 albums by total views - only APPROVED albums
     @Query(value = """
-                SELECT a.* FROM albums a
+                SELECT sub.* FROM(
+                (SELECT a.*, 1 as priority FROM albums a
                 JOIN songs s ON s.album_id = a.id
                 WHERE a.status = 'APPROVED' AND s.status = 'APPROVED'
+                AND a.created_at >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
                 GROUP BY a.id
                 ORDER BY SUM(s.views) DESC
+                LIMIT 15)
+            UNION ALL
+                (SELECT a.*, 2 as priority FROM albums a
+                JOIN songs s ON s.album_id = a.id
+                WHERE a.status = 'APPROVED' AND s.status = 'APPROVED'
+                AND a.created_at < DATE_SUB(NOW(), INTERVAL 6 MONTH)
+                AND a.created_at >= DATE_SUB(NOW(), INTERVAL 12 MONTH)
+                GROUP BY a.id
+                ORDER BY SUM(s.views) DESC
+                LIMIT 15)
+            UNION ALL
+                (SELECT a.*, 3 as priority FROM albums a
+                JOIN songs s ON s.album_id = a.id
+                WHERE a.status = 'APPROVED' AND s.status = 'APPROVED'
+                AND s.created_at < DATE_SUB(NOW(), INTERVAL 12 MONTH)
+                GROUP BY a.id
+                ORDER BY SUM(s.views) DESC
+                LIMIT 15)
+                            )
+                AS sub
+                ORDER BY priority ASC
                 LIMIT 15
             """, nativeQuery = true)
     List<Album> findTop15Albums();
