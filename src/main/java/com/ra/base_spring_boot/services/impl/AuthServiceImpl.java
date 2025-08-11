@@ -98,6 +98,8 @@ public class AuthServiceImpl implements IAuthService {
                 .accessToken(jwtProvider.generateToken(userDetails.getUsername()))
                 .userId(userDetails.getUser().getId())
                 .userName(userDetails.getUsername())
+                .fullName(userDetails.getUser().getFirstName() + " " + userDetails.getUser().getLastName())
+                .profileImage(userDetails.getUser().getProfileImage())
                 .roles(userDetails.getAuthorities()
                         .stream()
                         .map(GrantedAuthority::getAuthority)

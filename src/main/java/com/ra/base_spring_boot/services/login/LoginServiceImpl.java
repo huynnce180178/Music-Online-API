@@ -86,6 +86,7 @@ public class LoginServiceImpl implements LoginService {
                     put("type", "Bearer");
                     put("userId", finalUser.getId());
                     put("userName", finalUser.getFirstName());
+                    put("fullName", finalUser.getFirstName() + " " + finalUser.getLastName());
                     put("facebookId", finalUser.getFacebookId());
                     put("name", name);
                     put("email", email);

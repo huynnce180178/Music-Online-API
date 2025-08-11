@@ -21,5 +21,7 @@ public class JwtResponse
     @JsonIgnoreProperties({"roles","password"})
     private Long userId;
     private String userName;
+    private String fullName;
+    private String profileImage;
     private Set<String> roles;
 }
