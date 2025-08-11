@@ -50,7 +50,6 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import com.ra.base_spring_boot.services.notification.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ra.base_spring_boot.dto.resp.GenreResponseDTO;
 
 @RequiredArgsConstructor
 @Service
@@ -124,25 +123,21 @@ public class SongServiceImpl implements SongService {
             throw new HttpBadRequest("Permission denied. Only song owner can update.");
         }
 
-        // Update từng trường nếu có truyền lên
-        if (dto.getTitle() != null && !dto.getTitle().isEmpty()) {
-            song.setTitle(dto.getTitle());
+        User user = userRepository.findById(currentArtistId)
+                .orElseThrow(() -> new HttpBadRequest("Artist not found"));
+
+        List<Genre> genres = genreRepository.findAllById(dto.getGenreIds());
+        if (genres.isEmpty()) {
+            throw new HttpBadRequest("Genres not found");
         }
-        if (dto.getGenreIds() != null && !dto.getGenreIds().isEmpty()) {
-            List<Genre> genres = genreRepository.findAllById(dto.getGenreIds());
-            if (genres.isEmpty()) {
-                throw new HttpBadRequest("Genres not found");
-            }
-            song.setGenres(genres);
-        }
-        if (dto.getProfilePic() != null && !dto.getProfilePic().isEmpty()) {
-            song.setProfilePicUrl(cloudinaryService.uploadFile(dto.getProfilePic(), "images"));
-        }
-        if (dto.getLyrics() != null) {
-            song.setLyrics(dto.getLyrics());
-        }
-        // Không update user (artist) khi update
+
+        song.setTitle(dto.getTitle());
+        song.setUsers(user);
+        song.setGenres(genres);
         song.setUpdatedAt(LocalDateTime.now());
+        song.setProfilePicUrl(cloudinaryService.uploadFile(dto.getProfilePic(), "images"));
+        song.setLyrics(dto.getLyrics());
+
         return convertToDTO(songRepository.save(song));
     }
 
@@ -687,14 +682,6 @@ public class SongServiceImpl implements SongService {
         String createdAtStr = song.getCreatedAt() != null ? song.getCreatedAt().format(formatter) : null;
         String updatedAtStr = song.getUpdatedAt() != null ? song.getUpdatedAt().format(formatter) : null;
 
-        // Map genres sang GenreResponseDTO
-        List<GenreResponseDTO> genres = null;
-        if (song.getGenres() != null) {
-            genres = song.getGenres().stream()
-                    .map(g -> new GenreResponseDTO(g.getId(), g.getGenreName(), g.getGenreImage()))
-                    .collect(Collectors.toList());
-        }
-
         return SongResponseDTO.builder()
                 .id(song.getId())
                 .title(song.getTitle())
@@ -709,7 +696,6 @@ public class SongServiceImpl implements SongService {
                 .status(song.getStatus() != null ? song.getStatus().name() : null)
                 .createdAtStr(createdAtStr)
                 .updatedAtStr(updatedAtStr)
-                .genres(genres)
                 .build();
     }
 
@@ -760,11 +746,77 @@ public class SongServiceImpl implements SongService {
                 .updatedAtStr(updatedAtStr)
                 .build();
     }
+    private static final int MIN_FT_TOKEN = 4;
+// Nếu bạn đã set innodb_ft_min_token_size=1 và REBUILD index => đổi thành 1.
+
     @Override
     public List<SongResponseDTO> fullTextSearchSong(String keyword) {
-        List<Song> songList = songRepository.fullTextSearchSongs(keyword);
+        String booleanKw  = toBooleanQuerySafe(keyword, MIN_FT_TOKEN);
+        String likePattern = toLikePattern(keyword); // thay cho rawKw
+
+        List<Song> songList = songRepository.fullTextSearchSongs(booleanKw, likePattern);
         return songList.stream().map(this::convertToSongResponseDTO).collect(Collectors.toList());
     }
+
+    private static String normalizeBasic(String s) {
+        if (s == null) return "";
+        s = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFKC);
+        return s.replace('“','"').replace('”','"').replace('’','\'')
+                .replace('-', ' ') // bỏ NOT
+                .replace('(', ' ').replace(')', ' ')
+                .trim();
+    }
+
+    /** Boolean Mode an toàn:
+     *  - Token >= minLen -> "+token*"
+     *  - Token <  minLen -> "token*" (không bắt buộc) để không loại kết quả
+     *  - Giữ "exact phrase" nếu user gõ trong dấu "
+     */
+    private static String toBooleanQuerySafe(String raw, int minLen) {
+        String s = normalizeBasic(raw);
+
+        // Lấy phrase trong "..."
+        java.util.List<String> phrases = new java.util.ArrayList<>();
+        java.util.regex.Matcher m = java.util.regex.Pattern.compile("\"([^\"]+)\"").matcher(s);
+        while (m.find()) {
+            String ph = m.group(1).trim().replaceAll("\\s+", " ");
+            if (!ph.isEmpty()) phrases.add("\"" + ph + "\"");
+        }
+        // Bỏ phrase để xử lý token lẻ
+        String stripped = s.replaceAll("\"([^\"]+)\"", " ");
+
+        java.util.List<String> parts = new java.util.ArrayList<>();
+        for (String t : stripped.split("\\s+")) {
+            t = t.replaceAll("[^\\p{L}\\p{N}]", "");
+            if (t.isBlank()) continue;
+            int len = t.codePointCount(0, t.length());
+            if (len >= minLen) parts.add("+" + t + "*"); // bắt buộc
+            else parts.add(t + "*");                     // tùy chọn (đừng loại kết quả)
+        }
+        parts.addAll(phrases);
+
+        if (parts.isEmpty()) return "\"" + normalizeBasic(raw) + "\"";
+        return String.join(" ", parts);
+    }
+
+    /** LIKE pattern: nối các token bằng % để vượt qua dấu câu.
+     *  "Rồng Thiêng - Tiến Đạt (From "Dragon Ball")"
+     *   -> "Rồng%Thiêng%Tiến%Đạt%Dragon%Ball"
+     */
+    private static String toLikePattern(String raw) {
+        String s = normalizeBasic(raw);
+        // tách "..." thành token thường luôn cho đơn giản
+        s = s.replaceAll("\"([^\"]+)\"", " $1 ");
+        java.util.List<String> tokens = new java.util.ArrayList<>();
+        for (String t : s.split("\\s+")) {
+            t = t.replaceAll("[^\\p{L}\\p{N}]", "");
+            if (!t.isBlank()) tokens.add(t);
+        }
+        if (tokens.isEmpty()) return normalizeBasic(raw);
+        return String.join("%", tokens);
+    }
+
+
 
 
     @Override

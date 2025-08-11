@@ -214,45 +214,100 @@ public interface SongRepository extends JpaRepository<Song, Long> {
     List<Song> findByLyricsContainingIgnoreCase(@Param("keykeyword") String keykeyword);
 
     @Query(value = """
-                SELECT s.*,
-                  (MATCH(s.title) AGAINST (?1 IN BOOLEAN MODE) * 10  + 6 *
-                    MATCH(u.first_name, u.last_name) AGAINST (?1 IN BOOLEAN MODE)+
-                    4 * MATCH(a.title) AGAINST (?1 IN BOOLEAN MODE) + 5 *
-                    (CASE WHEN s.artist_id =(
-                                  SELECT s2.artist_id
-                                  FROM songs s2
-                                  WHERE MATCH(s2.title) AGAINST (?1 IN BOOLEAN MODE)
-                                  AND s2.status = 'APPROVED'
-                                  ORDER BY MATCH(s2.title) AGAINST (?1 IN BOOLEAN MODE) DESC
-                                  LIMIT 1
-                                  )
-                                  THEN 3 ELSE 0 END
-                                )
-                    + MATCH(s.lyrics) AGAINST (?1 IN BOOLEAN MODE) * 0.5
-                    ) AS relevance
-                FROM songs s
-                JOIN users u ON s.artist_id = u.id
-                JOIN albums a ON s.album_id = a.id
-                JOIN user_role ur ON u.id = ur.user_id
-                JOIN roles r ON ur.role_id = r.id
-                WHERE (
-                      MATCH(s.title, s.lyrics) AGAINST (?1 IN BOOLEAN MODE)
-                      OR MATCH(u.first_name, u.last_name) AGAINST (?1 IN BOOLEAN MODE)
-                      OR MATCH(a.title) AGAINST (?1 IN BOOLEAN MODE)
-                      OR s.artist_id =(
-                                  SELECT s2.artist_id
-                                  FROM songs s2
-                                  WHERE MATCH(s2.title) AGAINST (?1 IN BOOLEAN MODE)
-                                  AND s2.status = 'APPROVED'
-                                  ORDER BY MATCH(s2.title) AGAINST (?1 IN BOOLEAN MODE) DESC
-                                  LIMIT 1
-                                  )
-                    )
-                    AND r.roleName = 'ROLE_ARTIST'
-                    AND s.status = 'APPROVED'
-                ORDER BY relevance DESC
-            """, nativeQuery = true)
-    List<Song> fullTextSearchSongs(String keyword);
+SELECT s.*
+FROM (
+  SELECT t.s_id, MAX(t.relevance) AS relevance
+  FROM (
+    -- (1) FULLTEXT
+    SELECT s.id AS s_id,
+           ( MATCH(s.title)  AGAINST (:booleanKw IN BOOLEAN MODE) * 10
+           + MATCH(s.lyrics) AGAINST (:booleanKw IN BOOLEAN MODE) * 0.5
+           + 6 * MATCH(u.first_name, u.last_name) AGAINST (:booleanKw IN BOOLEAN MODE)
+           + 4 * MATCH(a.title) AGAINST (:booleanKw IN BOOLEAN MODE)
+           ) AS relevance
+    FROM songs s
+    JOIN users u      ON s.artist_id = u.id
+    JOIN albums a     ON s.album_id  = a.id
+    JOIN user_role ur ON u.id        = ur.user_id
+    JOIN roles r      ON ur.role_id  = r.id
+    WHERE r.roleName = 'ROLE_ARTIST'
+      AND s.status   = 'APPROVED'
+      AND (
+            MATCH(s.title, s.lyrics)         AGAINST (:booleanKw IN BOOLEAN MODE)
+         OR MATCH(u.first_name, u.last_name) AGAINST (:booleanKw IN BOOLEAN MODE)
+         OR MATCH(a.title)                   AGAINST (:booleanKw IN BOOLEAN MODE)
+      )
+
+    UNION ALL
+
+    -- (2) LIKE fallback
+    SELECT s.id AS s_id,
+           0 AS relevance
+    FROM songs s
+    WHERE s.status = 'APPROVED'
+      AND EXISTS (
+        SELECT 1
+        FROM users u
+        JOIN user_role ur ON u.id = ur.user_id
+        JOIN roles r      ON ur.role_id = r.id
+        WHERE u.id = s.artist_id AND r.roleName = 'ROLE_ARTIST'
+      )
+      AND (
+            s.title  COLLATE utf8mb4_0900_ai_ci LIKE CONCAT('%', :likePattern, '%')
+         OR s.lyrics COLLATE utf8mb4_0900_ai_ci LIKE CONCAT('%', :likePattern, '%')
+      )
+
+    UNION ALL
+
+    -- (3) Same-artist expansion (dùng derived table để ORDER BY/LIMIT)
+    SELECT s.id AS s_id,
+           2.0 AS relevance
+    FROM songs s
+    JOIN (
+      SELECT s3.id
+      FROM songs s3
+      WHERE s3.status = 'APPROVED'
+        AND s3.artist_id = (
+          SELECT s2.artist_id
+          FROM songs s2
+          JOIN users u2       ON s2.artist_id = u2.id
+          JOIN user_role ur2  ON u2.id = ur2.user_id
+          JOIN roles r2       ON ur2.role_id = r2.id
+          LEFT JOIN albums a2 ON a2.id = s2.album_id
+          WHERE s2.status='APPROVED' AND r2.roleName='ROLE_ARTIST'
+            AND (
+                 MATCH(s2.title, s2.lyrics)        AGAINST (:booleanKw IN BOOLEAN MODE)
+              OR MATCH(u2.first_name, u2.last_name) AGAINST (:booleanKw IN BOOLEAN MODE)
+              OR MATCH(a2.title)                    AGAINST (:booleanKw IN BOOLEAN MODE)
+            )
+          ORDER BY MATCH(s2.title) AGAINST (:booleanKw IN BOOLEAN MODE) DESC
+          LIMIT 1
+        )
+      ORDER BY s3.views DESC
+      LIMIT 20
+    ) best ON best.id = s.id
+    WHERE s.status = 'APPROVED'
+      AND EXISTS (
+        SELECT 1
+        FROM users u
+        JOIN user_role ur ON u.id = ur.user_id
+        JOIN roles r      ON ur.role_id = r.id
+        WHERE u.id = s.artist_id AND r.roleName = 'ROLE_ARTIST'
+      )
+  ) AS t
+  GROUP BY t.s_id
+) AS r
+JOIN songs s ON s.id = r.s_id
+ORDER BY r.relevance DESC, s.views DESC, s.created_at DESC
+LIMIT 50
+""", nativeQuery = true)
+    List<Song> fullTextSearchSongs(@Param("booleanKw") String booleanKw,
+                                   @Param("likePattern") String likePattern);
+
+
+
+
+
 
     // Methods cho album detail statistics
     @Query("SELECT COUNT(s) FROM Song s WHERE s.albums.id = :albumId AND s.status = 'APPROVED'")
