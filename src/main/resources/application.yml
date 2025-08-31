@@ -34,14 +34,14 @@ spring:
             scope:
               - email
               - profile
-            redirect-uri: "${domain.backend}/login/oauth2/code/google"
+            redirect-uri: "https://music-online-api-production.up.railway.app/login/oauth2/code/google"
           facebook:
             client-id: 1123138156342530
             client-secret: 01f45764aa898bb33fd3c794d0434687
             scope:
               - email
               - public_profile
-            redirect-uri: "${domain.backend}/login/oauth2/code/facebook"
+            redirect-uri: "https://music-online-api-production.up.railway.app/login/oauth2/code/facebook"
         provider:
           google:
             authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
@@ -53,19 +53,21 @@ spring:
             token-uri: https://graph.facebook.com/v12.0/oauth/access_token
             user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
             user-name-attribute: id
+
 jwt:
   secret:
     key: Ascmkkqdnmsdfrtgsyuhidj21ue120938219321ndsad
   expired:
-
     access: 86400000
+
 open:
   api:
     title: Music Online API Documentation
     version: 1.0
     description: API Documentation
-    serverUrl: ${domain.backend}
-    serverName: Azure Server
+    serverUrl: https://music-online-api-production.up.railway.app
+    serverName: Railway Production
+
 cloudinary:
   cloud:
     name: dlnef19ub
@@ -82,16 +84,18 @@ paypal:
 gemini:
   api:
     key: AIzaSyBEx5h9rxQ4AVlhCc5-oozqs4Oc102DwAw
+
 vosk:
   model:
     vn: models/vosk-model-vn-0.4
     en: models/vosk-model-en-us-0.22-lgraph
+
 server:
+  port: ${PORT:8080}
   servlet:
     session:
       timeout: 30d
 
-# Cấu hình logging
 logging:
   level:
     root: INFO
@@ -104,6 +108,7 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
   file:
     name: logs/application.log
+
 domain:
   frontend: https://melozy.io.vn
-  backend: https://music-online-backend-fjgha0e2bvevfah8.southeastasia-01.azurewebsites.net
+  backend: https://music-online-api-production.up.railway.app
